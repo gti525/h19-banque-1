@@ -1,7 +1,6 @@
 <template>
     <div id="app" class="container-fluid">
         <div class="site-info">
-            <h1>grokonez</h1>
             <h3>Vue SpringBoot example</h3>
         </div>
         <nav>
