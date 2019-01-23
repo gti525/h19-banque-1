@@ -6,7 +6,27 @@
 </div>
   <div class="login-container">
       <div class="main-header">
-    <h2>Create User</h2></div>
+    <h2>Création de l'utilisateur</h2></div>
+      <div class="form-group">
+          <label for="firstname">Prénom</label>
+          <input
+                  type="text"
+                  v-model="firstname"
+                  name="firstname"
+                  class="form-control"
+                  :class="{ 'is-invalid': submitted && !username }"
+          >
+      </div>
+      <div class="form-group">
+          <label for="lastname">Nom</label>
+          <input
+                  type="text"
+                  v-model="lastname"
+                  name="lastname"
+                  class="form-control"
+                  :class="{ 'is-invalid': submitted && !username }"
+          >
+      </div>
     <div class="form-group">
       <label for="username">Username</label>
       <input
@@ -18,7 +38,7 @@
       >
     </div>
     <div class="form-group">
-      <label for="username">Password</label>
+      <label for="password">Password</label>
       <input
         type="password"
         v-model="username"
@@ -31,7 +51,7 @@
       <label for="mmn">Mothers Maiden Name</label>
       <input
         type="text"
-        v-model="mmn"
+        v-model="test"
         name="mmn"
         class="form-control"
       >
@@ -48,7 +68,7 @@
     <div class="form-group">
       <label for="home-phone">Home Phone</label>
       <input
-        type="text"
+        type="tel"
         v-model="homePhone"
         name="home-phone"
         class="form-control"
@@ -57,7 +77,7 @@
     <div class="form-group">
       <label for="mobile">Mobile Phone</label>
       <input
-        type="text"
+        type="tel"
         v-model="mobile"
         name="mobile"
         class="form-control"
@@ -66,7 +86,7 @@
     <div class="form-group">
       <label for="email">Email</label>
       <input
-        type="text"
+        type="email"
         v-model="email"
         name="email"
         class="form-control"
@@ -100,7 +120,7 @@
     </div>
       </div>
     </div>
-    
+
 
 <div class="panel-section">
       <div class="panel-title">Credit Account</div>
@@ -127,7 +147,7 @@
       </div>
     </div>
     <div class="form-group clearfix">
-      <button class="btn btn-primary btn-common float-right ">Login</button>
+      <button class="btn btn-primary btn-common float-right ">Confirmer</button>
     </div>
   </div></div></div>
 </template>
@@ -146,19 +166,19 @@ export default {
 @import "../scss/common.scss";
 
 .app-title{
-        margin-top: 20%;
+        margin-top: 6%;
     text-align: center;
     font-size: 40px;
     font-weight: 600;
     color:#002ec3;
     font-family: 'Hind Siliguri', sans-serif;
-    
+
 }
 .login-container {
   border: 1px solid #e8e8e8;
   box-shadow: 0px 0px 20px #e6e6e6;
   padding: 20px 40px;
-  border-radius: 10px;    
+  border-radius: 10px;
   margin-top: 6%;
   margin-bottom: 60px;
 }

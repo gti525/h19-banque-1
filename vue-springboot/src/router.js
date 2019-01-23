@@ -17,7 +17,7 @@ export default new Router({
   mode: "history",
   routes: [
     {
-      path: "/",
+      path: "/h",
       name: "customers",
       alias: "/customer",
       component: CustomersList,
@@ -41,7 +41,7 @@ export default new Router({
       component: SearchCustomers
     },
     {
-      path: "/login",
+      path: "/",
       name: "login",
       component: Login
     },

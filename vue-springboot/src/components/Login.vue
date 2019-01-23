@@ -40,19 +40,19 @@ export default {
 @import "../scss/common.scss";
 
 .app-title{
-        margin-top: 20%;
+        margin-top: 5%;
     text-align: center;
     font-size: 40px;
-    font-weight: 600;
+    font-weight: 300;
     color:#002ec3;
     font-family: 'Hind Siliguri', sans-serif;
-    
+
 }
 .login-container {
   border: 1px solid #e8e8e8;
   box-shadow: 0px 0px 20px #e6e6e6;
   padding: 20px 40px;
-  border-radius: 10px;    
+  border-radius: 10px;
   margin-top: 6%;
 }
 
