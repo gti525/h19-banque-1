@@ -46,8 +46,8 @@ export default new Router({
       component: Login
     },
     {
-      path: "/verify",
-      name: "verify",
+      path: "/verifylogin",
+      name: "verifylogin",
       component: VerifyLogin
     },
     {

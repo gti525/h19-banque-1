@@ -6,7 +6,7 @@
 </div>
   <div class="login-container">
       <div class="main-header">
-    <h2>Création de l'utilisateur</h2></div>
+    <h2>Créer un utilisateur</h2></div>
       <div class="form-group">
           <label for="firstname">Prénom</label>
           <input
@@ -28,7 +28,7 @@
           >
       </div>
     <div class="form-group">
-      <label for="username">Username</label>
+      <label for="username">Nom d'utilisateur</label>
       <input
         type="text"
         v-model="username"
@@ -38,7 +38,7 @@
       >
     </div>
     <div class="form-group">
-      <label for="password">Password</label>
+      <label for="password">Mot de Passe</label>
       <input
         type="password"
         v-model="username"
@@ -57,7 +57,7 @@
       >
     </div>
     <div class="form-group">
-      <label for="address">Full Address</label>
+      <label for="address">Adresse complète</label>
       <input
         type="text"
         v-model="address"
@@ -66,7 +66,7 @@
       >
     </div>
     <div class="form-group">
-      <label for="home-phone">Home Phone</label>
+      <label for="home-phone">Téléphone fixe</label>
       <input
         type="tel"
         v-model="homePhone"
@@ -75,7 +75,7 @@
       >
     </div>
     <div class="form-group">
-      <label for="mobile">Mobile Phone</label>
+      <label for="mobile">Téléphone mobile</label>
       <input
         type="tel"
         v-model="mobile"
@@ -84,7 +84,7 @@
       >
     </div>
     <div class="form-group">
-      <label for="email">Email</label>
+      <label for="email">Courriel</label>
       <input
         type="email"
         v-model="email"
@@ -93,10 +93,10 @@
       >
     </div>
     <div class="panel-section">
-      <div class="panel-title">Banking Account</div>
+      <div class="panel-title">Compte bancaire</div>
       <div class="panel-content">
  <div class="form-group">
-      <label for="type-of-acc">Type of Account</label>
+      <label for="type-of-acc">Type de compte</label>
       <div>
       <div class="form-check-inline">
   <label class="form-check-label">
@@ -110,7 +110,7 @@
 </div></div>
     </div>
     <div class="form-group">
-      <label for="amount-avail">Amount of Money Available</label>
+      <label for="amount-avail">Montant d'argent disponible</label>
       <input
         type="text"
         v-model="amountAvail"
@@ -123,11 +123,11 @@
 
 
 <div class="panel-section">
-      <div class="panel-title">Credit Account</div>
+      <div class="panel-title">Compte crédit</div>
       <div class="panel-content">
 
     <div class="form-group">
-      <label for="amount-avail">Amount of Money Available</label>
+      <label for="amount-avail">Montant d'argent disponible</label>
       <input
         type="text"
         v-model="AmountOfMoneyAvail"
@@ -136,7 +136,7 @@
       >
     </div>
     <div class="form-group">
-      <label for="amount-owed">Amount Owed</label>
+      <label for="amount-owed">Solde</label>
       <input
         type="text"
         v-model="amountOwed"
@@ -147,7 +147,7 @@
       </div>
     </div>
     <div class="form-group clearfix">
-      <button class="btn btn-primary btn-common float-right ">Confirmer</button>
+      <button class="btn btn-primary btn-common float-right ">Créer</button>
     </div>
   </div></div></div>
 </template>
