@@ -9,10 +9,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/createUser">Création de l'utilisateur</a>
+            <a class="nav-link" href="/createUser">Créer un utilisateur</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/verify">Verifier</a>
+            <a class="nav-link" href="#">Menu</a>
           </li>
         </ul>
       </div>

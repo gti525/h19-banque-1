@@ -1,13 +1,11 @@
 <template>
-    <div>
-        <nav-bar></nav-bar>
         <div class="container">
             <div class="app-title">
                 Banquo Uno
             </div>
             <div class="login-container">
                 <div class="main-header">
-                    <h2>Verify Login</h2></div>
+                    <h2>Véification de l'accès</h2></div>
                 <div class="form-group">
                     <label for="username">What is your mother's maiden name?</label>
                     <input
@@ -20,7 +18,7 @@
                 </div>
 
                 <div class="form-group clearfix">
-                    <button class="btn btn-primary btn-common float-right">Verify</button>
+                    <button class="btn btn-primary btn-common float-right">Vérifier</button>
                 </div>
             </div>
         </div>
