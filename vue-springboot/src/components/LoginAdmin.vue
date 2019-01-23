@@ -6,9 +6,9 @@
 
   <div class="login-container">
       <div class="main-header">
-    <h2>Login</h2></div>
+    <h2>Se connecter</h2></div>
     <div class="form-group">
-      <label for="username">Username</label>
+      <label for="username">Nom d'utilisateur</label>
       <input
         type="text"
         v-model="username"
@@ -18,7 +18,7 @@
       >
     </div>
     <div class="form-group">
-      <label for="username">Password</label>
+      <label for="username">Mot de passe</label>
       <input
         type="password"
         v-model="username"
@@ -28,7 +28,7 @@
       >
     </div>
     <div class="form-group clearfix">
-      <button class="btn btn-primary btn-common float-right ">Login</button>
+      <button class="btn btn-primary btn-common float-right ">Connexion</button>
     </div>
   </div></div>
 </template>

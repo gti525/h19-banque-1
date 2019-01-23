@@ -1,18 +1,18 @@
 <template>
   <div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" href="#">Banquo Uno</a>
+      <a class="navbar-brand" href="/homeAdmin">Banquo Uno</a>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Profile
+            <a class="nav-link" href="/homeAdmin">Compte
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Create User</a>
+            <a class="nav-link" href="/createUser">Créer un utilisateur</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Search User</a>
+            <a class="nav-link" href="#">Menu</a>
           </li>
         </ul>
       </div>

@@ -4,9 +4,9 @@
 </div>
   <div class="login-container">
       <div class="main-header">
-    <h2>Login</h2></div>
+    <h2>Se connecter</h2></div>
     <div class="form-group">
-      <label for="username">Username</label>
+      <label for="username">Nom d'utilisateur</label>
       <input
         type="text"
         v-model="username"
@@ -16,7 +16,7 @@
       >
     </div>
     <div class="form-group">
-      <label for="username">Password</label>
+      <label for="username">Mot de Passe</label>
       <input
         type="password"
         v-model="username"
@@ -26,7 +26,7 @@
       >
     </div>
     <div class="form-group clearfix">
-      <button class="btn btn-primary btn-common float-right ">Login</button>
+      <button class="btn btn-primary btn-common float-right ">Connexion</button>
     </div>
   </div></div>
 </template>
@@ -40,19 +40,19 @@ export default {
 @import "../scss/common.scss";
 
 .app-title{
-        margin-top: 20%;
+        margin-top: 5%;
     text-align: center;
     font-size: 40px;
-    font-weight: 600;
+    font-weight: 300;
     color:#002ec3;
     font-family: 'Hind Siliguri', sans-serif;
-    
+
 }
 .login-container {
   border: 1px solid #e8e8e8;
   box-shadow: 0px 0px 20px #e6e6e6;
   padding: 20px 40px;
-  border-radius: 10px;    
+  border-radius: 10px;
   margin-top: 6%;
 }
 

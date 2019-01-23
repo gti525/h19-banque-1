@@ -6,9 +6,29 @@
 </div>
   <div class="login-container">
       <div class="main-header">
-    <h2>Create User</h2></div>
+    <h2>Créer un utilisateur</h2></div>
+      <div class="form-group">
+          <label for="firstname">Prénom</label>
+          <input
+                  type="text"
+                  v-model="firstname"
+                  name="firstname"
+                  class="form-control"
+                  :class="{ 'is-invalid': submitted && !username }"
+          >
+      </div>
+      <div class="form-group">
+          <label for="lastname">Nom</label>
+          <input
+                  type="text"
+                  v-model="lastname"
+                  name="lastname"
+                  class="form-control"
+                  :class="{ 'is-invalid': submitted && !username }"
+          >
+      </div>
     <div class="form-group">
-      <label for="username">Username</label>
+      <label for="username">Nom d'utilisateur</label>
       <input
         type="text"
         v-model="username"
@@ -18,7 +38,7 @@
       >
     </div>
     <div class="form-group">
-      <label for="username">Password</label>
+      <label for="password">Mot de Passe</label>
       <input
         type="password"
         v-model="username"
@@ -31,13 +51,13 @@
       <label for="mmn">Mothers Maiden Name</label>
       <input
         type="text"
-        v-model="mmn"
+        v-model="test"
         name="mmn"
         class="form-control"
       >
     </div>
     <div class="form-group">
-      <label for="address">Full Address</label>
+      <label for="address">Adresse complète</label>
       <input
         type="text"
         v-model="address"
@@ -46,37 +66,37 @@
       >
     </div>
     <div class="form-group">
-      <label for="home-phone">Home Phone</label>
+      <label for="home-phone">Téléphone fixe</label>
       <input
-        type="text"
+        type="tel"
         v-model="homePhone"
         name="home-phone"
         class="form-control"
       >
     </div>
     <div class="form-group">
-      <label for="mobile">Mobile Phone</label>
+      <label for="mobile">Téléphone mobile</label>
       <input
-        type="text"
+        type="tel"
         v-model="mobile"
         name="mobile"
         class="form-control"
       >
     </div>
     <div class="form-group">
-      <label for="email">Email</label>
+      <label for="email">Courriel</label>
       <input
-        type="text"
+        type="email"
         v-model="email"
         name="email"
         class="form-control"
       >
     </div>
     <div class="panel-section">
-      <div class="panel-title">Banking Account</div>
+      <div class="panel-title">Compte bancaire</div>
       <div class="panel-content">
  <div class="form-group">
-      <label for="type-of-acc">Type of Account</label>
+      <label for="type-of-acc">Type de compte</label>
       <div>
       <div class="form-check-inline">
   <label class="form-check-label">
@@ -90,7 +110,7 @@
 </div></div>
     </div>
     <div class="form-group">
-      <label for="amount-avail">Amount of Money Available</label>
+      <label for="amount-avail">Montant d'argent disponible</label>
       <input
         type="text"
         v-model="amountAvail"
@@ -100,14 +120,14 @@
     </div>
       </div>
     </div>
-    
+
 
 <div class="panel-section">
-      <div class="panel-title">Credit Account</div>
+      <div class="panel-title">Compte crédit</div>
       <div class="panel-content">
 
     <div class="form-group">
-      <label for="amount-avail">Amount of Money Available</label>
+      <label for="amount-avail">Montant d'argent disponible</label>
       <input
         type="text"
         v-model="AmountOfMoneyAvail"
@@ -116,7 +136,7 @@
       >
     </div>
     <div class="form-group">
-      <label for="amount-owed">Amount Owed</label>
+      <label for="amount-owed">Solde</label>
       <input
         type="text"
         v-model="amountOwed"
@@ -127,7 +147,7 @@
       </div>
     </div>
     <div class="form-group clearfix">
-      <button class="btn btn-primary btn-common float-right ">Login</button>
+      <button class="btn btn-primary btn-common float-right ">Créer</button>
     </div>
   </div></div></div>
 </template>
@@ -146,19 +166,19 @@ export default {
 @import "../scss/common.scss";
 
 .app-title{
-        margin-top: 20%;
+        margin-top: 6%;
     text-align: center;
     font-size: 40px;
     font-weight: 600;
     color:#002ec3;
     font-family: 'Hind Siliguri', sans-serif;
-    
+
 }
 .login-container {
   border: 1px solid #e8e8e8;
   box-shadow: 0px 0px 20px #e6e6e6;
   padding: 20px 40px;
-  border-radius: 10px;    
+  border-radius: 10px;
   margin-top: 6%;
   margin-bottom: 60px;
 }
