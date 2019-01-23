@@ -4,30 +4,28 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th scope="col">Nom</th>
-                <th scope="col">Prénom</th>
+
+                <th scope="col">Client</th>
                 <th scope="col">Type de comptes</th>
-                <th scope="col">Solde</th>
+                <th scope="col">Activer ou désactiver</th>
             </tr>
             </thead>
             <tbody>
             <tr class="table-active">
-                <th scope="row">Active</th>
+                <th scope="row"><a class="text-link" href="/AdminCompteClient">Antoine Shervin
+                </a></th>
                 <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
+                <td>Activer</td>
             </tr>
             <tr>
-                <th scope="row">Default</th>
+                <th scope="row">Brutus, Jefferson</th>
                 <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
+                <td>Activer</td>
             </tr>
             <tr class="table-primary">
-                <th scope="row">Primary</th>
+                <th scope="row">Giannotti Benjamin</th>
                 <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
+                <td>Désactiver</td>
             </tr>
             </tbody>
         </table>
