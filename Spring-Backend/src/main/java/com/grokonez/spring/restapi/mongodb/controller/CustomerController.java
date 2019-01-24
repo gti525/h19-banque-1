@@ -41,7 +41,7 @@ public class CustomerController {
 	@PostMapping("/customer")
 	public Customer postCustomer(@RequestBody Customer customer) {
 
-		Customer _customer = repository.save(new Customer(customer.getName(), customer.getAge()));
+		Customer _customer = repository.save(new Customer(customer.getId(), customer.getLastName(), customer.getFirstName(), customer.getAge(), customer.getEmail(), customer.getPassword()));
 		return _customer;
 	}
 
@@ -54,10 +54,10 @@ public class CustomerController {
 		return new ResponseEntity<>("Customer has been deleted!", HttpStatus.OK);
 	}
 
-	@GetMapping("customers/age/{age}")
-	public List<Customer> findByAge(@PathVariable int age) {
+	@GetMapping("customers/nom/{nom}")
+	public List<Customer> findByNom(@PathVariable String nom) {
 
-		List<Customer> customers = repository.findByAge(age);
+		List<Customer> customers = repository.findByName(nom);
 		return customers;
 	}
 
@@ -69,12 +69,17 @@ public class CustomerController {
 
 		if (customerData.isPresent()) {
 			Customer _customer = customerData.get();
-			_customer.setName(customer.getName());
+			_customer.setLastName(customer.getLastName());
+			_customer.setFirstName(customer.getFirstName());
 			_customer.setAge(customer.getAge());
+			_customer.setEmail(customer.getEmail());
+			_customer.setPassword(customer.getPassword());
 			_customer.setActive(customer.isActive());
 			return new ResponseEntity<>(repository.save(_customer), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	
 }
