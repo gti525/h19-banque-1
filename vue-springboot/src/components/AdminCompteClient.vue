@@ -5,7 +5,7 @@
         <table class="table design">
             <thead>
             <tr class="table-active">
-                <th scope="col">client</th>
+                <th scope="col">Type de compte</th>
                 <th scope="col">Solde</th>
                 <th scope="col">Transaction</th>
             </tr>

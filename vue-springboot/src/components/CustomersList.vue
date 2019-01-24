@@ -47,9 +47,9 @@ export default {
     }
     /* eslint-enable no-console */
   },
-  mounted() {
-    this.retrieveCustomers();
-  }
+    mounted() {
+        this.retrieveCustomers();
+    }
 };
 </script>
 
