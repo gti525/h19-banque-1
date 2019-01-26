@@ -4,20 +4,35 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th scope="col">Client</th>
+                <th scope="col">Nom du client</th>
                 <th scope="col">Type de comptes</th>
                 <th scope="col">Activer ou désactiver</th>
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(customer) in customers" :key="customer.id">
-                <td>{{ customer.name }}</td>
-                <td>{{ customer.age }}</td>
-                <td>{{ customer.active }}</td>
+            <tr v-for="(user) in users" :key="user.id">
+
+                <td>{{ user.firstname }} , {{ user.lastname }}</td>
+                <td>{{ user.lastname }}</td>
+                <td>{{ user.mobile }}</td>
             </tr>
+
             </tbody>
         </table>
+        <div class="lol">
+            <ul>
+                <li v-for="(user, index) in users" :key="index">
+                    <router-link :to="{
+                            name: 'AdminCompteClient-details',
+                            params: { user: user, id: user.id, firstname: user.firstname }
+                        }">
+                        {{user.firstname}}
+                    </router-link>
+                </li>
+            </ul>
+     </div>
     </div>
+
 </template>
 
 <script>
@@ -31,7 +46,8 @@
         },
         data() {
             return {
-                customers: []
+                customers: [],
+                users: []
 
             };
         },
@@ -48,10 +64,23 @@
                     .catch(e => {
                         console.log(e);
                     });
+            },
+            saveUser() {
+                console.log("test")
+                http
+                    .get("/users")
+                    .then(response => {
+                        this.users = response.data; // JSON are parsed automatically.
+                        console.log(response.data);
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    });
             }
         },
         mounted() {
-            this.saveCustomer();
+            this.saveCustomer()
+            this.saveUser()
         },
     };
 </script>

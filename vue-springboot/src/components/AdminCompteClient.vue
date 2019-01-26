@@ -24,6 +24,12 @@
             <!--    <tr class="table-primary"> -->
             </tbody>
         </table>
+        <div v-if="this.user">
+            <h4>User</h4>
+            <div>
+                <label>Name: </label> {{this.user.firstname}}
+            </div>
+        </div>
         <div class="btn-group" aria-label="Basic example">
             <a href="/homeadmin" class="btn btn-primary" role="button">Retour</a>
         </div>
@@ -34,7 +40,8 @@
 <script>
     import NavBar from './NavBar.vue';
     export default {
-        name: "AdminHome",
+        name: "AdminCompteClient",
+        props: ["AdminCompteClient"],
         components: {
             NavBar: NavBar
         },
