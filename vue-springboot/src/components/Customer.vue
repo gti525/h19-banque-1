@@ -10,14 +10,14 @@
     <div>
       <label>Active: </label> {{this.customer.active}}
     </div>
-  
+
     <span v-if="this.customer.active"
       v-on:click="updateActive(false)"
       class="button is-small btn-primary">Inactive</span>
     <span v-else
       v-on:click="updateActive(true)"
       class="button is-small btn-primary">Active</span>
-  
+
     <span class="button is-small btn-danger" v-on:click="deleteCustomer()">Delete</span>
   </div>
   <div v-else>

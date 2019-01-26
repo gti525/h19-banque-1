@@ -1,19 +1,24 @@
 <template>
   <div class="submitform">
+      <nav>
+          <router-link class="btn btn-primary" to="/">Customers</router-link>
+          <router-link class="btn btn-primary" to="/add">Add</router-link>
+          <router-link class="btn btn-primary" to="/search">Search</router-link>
+      </nav>
     <div v-if="!submitted">
         <div class="form-group">
           <label for="name">Name</label>
           <input type="text" class="form-control" id="name" required v-model="customer.name" name="name">
         </div>
-    
+
         <div class="form-group">
           <label for="age">Age</label>
           <input type="number" class="form-control" id="age" required v-model="customer.age" name="age">
         </div>
-    
+
         <button v-on:click="saveCustomer" class="btn btn-success">Submit</button>
     </div>
-    
+
     <div v-else>
       <h4>You submitted successfully!</h4>
       <button class="btn btn-success" v-on:click="newCustomer">Add</button>
