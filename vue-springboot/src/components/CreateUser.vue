@@ -191,7 +191,7 @@
 </template>
 
 <script>
-    import NavBar from "./NavBar.vue";
+    import NavBar from "./NavBarAdmin.vue";
     import http from "../http-common";
 
     export default {

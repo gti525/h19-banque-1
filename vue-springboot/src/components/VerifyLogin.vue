@@ -26,7 +26,7 @@
 </template>
 
 <script>
-    import NavBar from './NavBar.vue';
+    import NavBar from './NavBarAdmin.vue';
     import http from "../http-common";
     /* eslint-disable no-console */
     export default {
