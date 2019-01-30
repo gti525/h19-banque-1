@@ -12,6 +12,7 @@ import HomeAdmin from "./components/HomeAdmin.vue";
 import CreateUser from "./components/CreateUser.vue";
 import ErrorPage from "./components/ErrorPage";
 import AdminCompteClient from "./components/AdminCompteClient.vue";
+import rechercheClient from "./components/RechercheClient.vue";
 
 Vue.use(Router);
 
@@ -78,6 +79,11 @@ export default new Router({
       path: "/createUser",
       name: "createUser",
       component: CreateUser
+    },
+    {
+      path: "/rechercheClient",
+      name: "rechercheClient",
+      component: rechercheClient
     },
     {
       path: "/errorPage",

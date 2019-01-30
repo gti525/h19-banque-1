@@ -9,7 +9,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/createUser">Trasaction</a>
+                        <a class="nav-link" href="/createUser">Transaction</a>
                     </li>
                 </ul>
             </div>
