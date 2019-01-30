@@ -5,32 +5,25 @@
             <thead>
             <tr>
                 <th scope="col">Nom du client</th>
-                <th scope="col">Type de comptes</th>
-                <th scope="col">Activer ou désactiver</th>
+                <th scope="col">Courriel</th>
+                <th scope="col">Numéro de téléphone</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="(user) in users" :key="user.id">
-
-                <td>{{ user.firstname }} , {{ user.lastname }}</td>
-                <td>{{ user.lastname }}</td>
-                <td>{{ user.mobile }}</td>
-            </tr>
-
-            </tbody>
-        </table>
-        <div class="lol">
-            <ul>
-                <li v-for="(user, index) in users" :key="index">
+                <td>
                     <router-link :to="{
                             name: 'AdminCompteClient-details',
                             params: { user: user, id: user.id, firstname: user.firstname }
                         }">
-                        {{user.firstname}}
+                        {{user.firstname}} {{ user.lastname }}
                     </router-link>
-                </li>
-            </ul>
-     </div>
+                </td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.homePhone }}</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 
 </template>
@@ -46,25 +39,11 @@
         },
         data() {
             return {
-                customers: [],
                 users: []
-
             };
         },
         methods: {
             /* eslint-disable no-console */
-            saveCustomer() {
-                console.log("test")
-                http
-                    .get("/customers")
-                    .then(response => {
-                        this.customers = response.data; // JSON are parsed automatically.
-                        console.log(response.data);
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    });
-            },
             saveUser() {
                 console.log("test")
                 http
@@ -79,7 +58,6 @@
             }
         },
         mounted() {
-            this.saveCustomer()
             this.saveUser()
         },
     };

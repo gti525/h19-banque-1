@@ -43,6 +43,7 @@ public class CustomerController {
         return null;
 
     }
+    
 
     @PostMapping("/customer")
     public Customer postCustomer(@RequestBody Customer customer) {
@@ -71,10 +72,8 @@ public class CustomerController {
 //        }
     }
 
-    @RequestMapping("/getUserInfo")
-    public User getUserInfo(@RequestBody User user) {
-        return userRepository.findByUsername(user.getUsername());
-    }
+
+    
 
     @RequestMapping("/validateCustomer")
     public boolean validateCustomer(@RequestBody User user) {
@@ -91,6 +90,19 @@ public class CustomerController {
         return new ResponseBean(200, "Login success", JWTUtil.sign(user.getUsername(), user.getPassword()));
     }
 
+    @RequestMapping("/getUserInfo")
+    public User getUserInfo(@RequestBody User user) {
+        return userRepository.findByUsername(user.getUsername());
+    }
+    
+	@GetMapping("/users/{id}")
+//	public List<User> getUserInfoById() {
+		public Optional<User> idUsers(@PathVariable("id") String id) {
+		System.out.println("Get information by Id");
+
+		Optional<User> users = userRepository.findById(id);
+		return users;
+	}
 
     @DeleteMapping("/customer/{id}")
     public ResponseEntity<String> deleteCustomer(@PathVariable("id") String id) {
@@ -107,7 +119,7 @@ public class CustomerController {
         List<Customer> customers = repository.findByAge(age);
         return customers;
     }
-
+    
     @PutMapping("/customer/{id}")
     public ResponseEntity<Customer> updateCustomer(@PathVariable("id") String id, @RequestBody Customer customer) {
         System.out.println("Update Customer with ID = " + id + "...");
@@ -125,15 +137,18 @@ public class CustomerController {
         }
     }
     
-//	@GetMapping("/users")
-//	public List<User> getAllUsers() {
-//		System.out.println("Get all Users...");
-//
-//		List<User> users = new ArrayList<>();
-//		repository.findAll().forEach(users::add);
-//
-//		return users;
-//	}
+    
+	@GetMapping("/users")
+	public List<User> getAllUsers() {
+		System.out.println("Get all Users...");
+
+		List<User> users = new ArrayList<>();
+		userRepository.findAll().forEach(users::add);
+
+		return users;
+	}
+	
+	
 //
 //	@PostMapping("/user")
 //	public User postUser(@RequestBody User user) {

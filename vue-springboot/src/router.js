@@ -46,7 +46,6 @@ export default new Router({
           path: "/AdminCompteClient/:id",
           name: "AdminCompteClient-details",
           component: AdminCompteClient,
-          props: true
 
 
     },
