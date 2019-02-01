@@ -30,7 +30,7 @@
 </template>
 
 <script>
-    import NavBar from './NavBar.vue';
+    import NavBar from './NavBarAdmin.vue';
     export default {
         name: "AdminHome",
         components:{

@@ -1,25 +1,22 @@
 <template>
     <div>
         <nav-bar></nav-bar>
-        <h1 class="top">Antoine Shervin</h1>
+        <h1 class="top">{{ users.firstname }} {{ users.lastname}}</h1>
         <table class="table design">
             <thead>
             <tr class="table-active">
                 <th scope="col">Type de compte</th>
                 <th scope="col">Solde</th>
-                <th scope="col">Transaction</th>
             </tr>
             </thead>
             <tbody>
             <tr class="design">
                 <th scope="row">Cheque</th>
-                <td>100.00 $</td>
-                <td>Activer</td>
+                <td> {{ users.amountAvailOfBankAccount }}{{dollard}}</td>
             </tr>
             <tr>
                 <th scope="row">Crédit</th>
-                <td>0.00 $</td>
-                <td>Activer</td>
+                <td>{{ users.balance}}{{dollard}}</td>
             </tr>
             <!--    <tr class="table-primary"> -->
             </tbody>
@@ -32,12 +29,43 @@
 </template>
 
 <script>
-    import NavBar from './NavBar.vue';
+    import NavBar from './NavBarAdmin.vue';
+    import http from "../http-common";
     export default {
-        name: "AdminHome",
+        name: "AdminCompteClient",
         components: {
             NavBar: NavBar
         },
+        data() {
+            return {
+                id: 0,
+                users: [],
+                dollard: ".00$"
+            }
+        },
+        /* eslint-disable no-console */
+        created() {
+            this.id = this.$route.params.id;
+            console.log(this.id)
+        },
+        methods: {
+            /* eslint-disable no-console */
+            saveUser() {
+                console.log("test123" + "  " +this.id)
+                http
+                    .get("/users/" + this.id)
+                    .then(response => {
+                        this.users = response.data; // JSON are parsed automatically.
+                        console.log(response.data);
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    });
+            },
+        },
+        mounted() {
+            this.saveUser()
+        }
     }
 </script>
 <style lang="scss" scoped>

@@ -5,11 +5,14 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <a class="nav-link" href="/homeAdmin">Client
+            <a class="nav-link" href="/homeAdmin">Liste des clients
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/createUser">Créer un utilisateur</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/rechercheClient">Recherche d'un utilisateur</a>
           </li>
         </ul>
       </div>
@@ -19,7 +22,7 @@
 
 <script>
 export default {
-  name: "navbar"
+  name: "navbar-Admin"
 };
 </script>
 

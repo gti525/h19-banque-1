@@ -4,24 +4,32 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th scope="col">Client</th>
-                <th scope="col">Type de comptes</th>
-                <th scope="col">Activer ou désactiver</th>
+                <th scope="col">Nom du client</th>
+                <th scope="col">Courriel</th>
+                <th scope="col">Numéro de téléphone</th>
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(customer) in customers" :key="customer.id">
-                <td>{{ customer.name }}</td>
-                <td>{{ customer.age }}</td>
-                <td>{{ customer.active }}</td>
+            <tr v-for="(user) in users" :key="user.id">
+                <td>
+                    <router-link :to="{
+                            name: 'AdminCompteClient-details',
+                            params: { user: user, id: user.id, firstname: user.firstname }
+                        }">
+                        {{user.firstname}} {{ user.lastname }}
+                    </router-link>
+                </td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.homePhone }}</td>
             </tr>
             </tbody>
         </table>
     </div>
+
 </template>
 
 <script>
-    import NavBar from './NavBar.vue';
+    import NavBar from './NavBarAdmin.vue';
     import http from "../http-common";
 
     export default {
@@ -31,18 +39,17 @@
         },
         data() {
             return {
-                customers: []
-
+                users: []
             };
         },
         methods: {
             /* eslint-disable no-console */
-            saveCustomer() {
+            saveUser() {
                 console.log("test")
                 http
-                    .get("/customers")
+                    .get("/users")
                     .then(response => {
-                        this.customers = response.data; // JSON are parsed automatically.
+                        this.users = response.data; // JSON are parsed automatically.
                         console.log(response.data);
                     })
                     .catch(e => {
@@ -51,7 +58,7 @@
             }
         },
         mounted() {
-            this.saveCustomer();
+            this.saveUser()
         },
     };
 </script>

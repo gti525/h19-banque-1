@@ -10,7 +10,9 @@ import LoginAdmin from "./components/LoginAdmin.vue";
 import VerifyLoginAdmin from "./components/VerifyLoginAdmin.vue";
 import HomeAdmin from "./components/HomeAdmin.vue";
 import CreateUser from "./components/CreateUser.vue";
+import ErrorPage from "./components/ErrorPage";
 import AdminCompteClient from "./components/AdminCompteClient.vue";
+import rechercheClient from "./components/RechercheClient.vue";
 
 Vue.use(Router);
 
@@ -35,6 +37,18 @@ export default new Router({
       path: "/add",
       name: "add",
       component: AddCustomer
+    },
+    {
+      path: "/homeAdmin",
+      name: "homeAdmin",
+      component: HomeAdmin,
+    },
+        {
+          path: "/AdminCompteClient/:id",
+          name: "AdminCompteClient-details",
+          component: AdminCompteClient,
+
+
     },
     {
       path: "/search",
@@ -62,19 +76,19 @@ export default new Router({
       component: VerifyLoginAdmin
     },
     {
-      path: "/homeAdmin",
-      name: "homeAdmin",
-      component: HomeAdmin
-    },
-    {
       path: "/createUser",
       name: "createUser",
       component: CreateUser
     },
     {
-      path: "/AdminCompteClient",
-      name: "AdminCompteClient",
-      component: AdminCompteClient
+      path: "/rechercheClient",
+      name: "rechercheClient",
+      component: rechercheClient
+    },
+    {
+      path: "/errorPage",
+      name: "errorPage",
+      component: ErrorPage
     }
   ]
 });
