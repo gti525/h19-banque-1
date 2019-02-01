@@ -32,24 +32,25 @@ export default {
   methods: {
     /* eslint-disable no-console */
     retrieveCustomers() {
-      http
-        .get("/customers")
-        .then(response => {
-          this.customers = response.data; // JSON are parsed automatically.
-          console.log(response.data);
-        })
-        .catch(e => {
-          console.log(e);
-        });
-    },
+          http
+              .get("/customers")
+              .then(response => {
+                  this.customers = response.data; // JSON are parsed automatically.
+                  console.log(response.data);
+              })
+              .catch(e => {
+                  console.log(e);
+              });
+      },
+
     refreshList() {
       this.retrieveCustomers();
     }
     /* eslint-enable no-console */
   },
-  mounted() {
-    this.retrieveCustomers();
-  }
+    mounted() {
+        this.retrieveCustomers();
+    }
 };
 </script>
 
