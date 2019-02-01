@@ -4,45 +4,55 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th scope="col">Nom</th>
-                <th scope="col">Prénom</th>
+                <th scope="col">Client</th>
                 <th scope="col">Type de comptes</th>
-                <th scope="col">Solde</th>
+                <th scope="col">Activer ou désactiver</th>
             </tr>
             </thead>
             <tbody>
-            <tr class="table-active">
-                <th scope="row">Active</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            <tr>
-                <th scope="row">Default</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
-            </tr>
-            <tr class="table-primary">
-                <th scope="row">Primary</th>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
+            <tr v-for="(customer) in customers" :key="customer.id">
+                <td>{{ customer.name }}</td>
+                <td>{{ customer.age }}</td>
+                <td>{{ customer.active }}</td>
             </tr>
             </tbody>
         </table>
-
     </div>
 </template>
 
 <script>
     import NavBar from './NavBar.vue';
+    import http from "../http-common";
 
     export default {
         name: "AdminHome",
         components: {
             NavBar: NavBar
-        }
+        },
+        data() {
+            return {
+                customers: []
+
+            };
+        },
+        methods: {
+            /* eslint-disable no-console */
+            saveCustomer() {
+                console.log("test")
+                http
+                    .get("/customers")
+                    .then(response => {
+                        this.customers = response.data; // JSON are parsed automatically.
+                        console.log(response.data);
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    });
+            }
+        },
+        mounted() {
+            this.saveCustomer();
+        },
     };
 </script>
 <style lang="scss" scoped>

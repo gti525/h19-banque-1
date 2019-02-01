@@ -5,14 +5,11 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <a class="nav-link" href="/homeAdmin">Compte
+            <a class="nav-link" href="/homeAdmin">Client
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/createUser">Créer un utilisateur</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Menu</a>
           </li>
         </ul>
       </div>

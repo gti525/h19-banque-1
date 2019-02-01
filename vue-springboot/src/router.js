@@ -10,6 +10,7 @@ import LoginAdmin from "./components/LoginAdmin.vue";
 import VerifyLoginAdmin from "./components/VerifyLoginAdmin.vue";
 import HomeAdmin from "./components/HomeAdmin.vue";
 import CreateUser from "./components/CreateUser.vue";
+import AdminCompteClient from "./components/AdminCompteClient.vue";
 
 Vue.use(Router);
 
@@ -69,6 +70,11 @@ export default new Router({
       path: "/createUser",
       name: "createUser",
       component: CreateUser
+    },
+    {
+      path: "/AdminCompteClient",
+      name: "AdminCompteClient",
+      component: AdminCompteClient
     }
   ]
 });
