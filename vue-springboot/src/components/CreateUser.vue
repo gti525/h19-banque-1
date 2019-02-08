@@ -150,7 +150,7 @@
                             <label for="amount-avail">Montant d'argent disponible</label>
                             <input
                                     type="text"
-                                    v-model="AmountOfMoneyAvailOfCreditAccount"
+                                    v-model="limiteCredit"
                                     name="amount-avail"
                                     class="form-control"
                             >
@@ -199,7 +199,7 @@
                 chequing: '',
                 saving: '',
                 amountAvailOfBankAccount: '',
-                AmountOfMoneyAvailOfCreditAccount: '',
+                limiteCredit: '',
                 balance: '',
                 chequingSaving: 'Chequing',
                 submitted: ''
@@ -225,7 +225,7 @@
                     chequing: this.chequing,
                     saving: this.saving,
                     amountAvailOfBankAccount: this.amountAvailOfBankAccount,
-                    AmountOfMoneyAvailOfCreditAccount: this.AmountOfMoneyAvailOfCreditAccount,
+                    limiteCredit: this.limiteCredit,
                     balance: this.balance,
                     chequingSaving: this.chequingSaving
 

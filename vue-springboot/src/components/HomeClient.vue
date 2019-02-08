@@ -48,7 +48,7 @@
                     </tr>
                     <tr>
                         <td>Limite de crédit :</td>
-                        <td>{{ users.amountAvailOfBankAccount }}$</td>
+                        <td>{{ users.limiteCredit }}$</td>
                     </tr>
                     </tbody>
                 </table>

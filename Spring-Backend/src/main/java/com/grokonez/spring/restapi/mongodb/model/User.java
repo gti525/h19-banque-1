@@ -24,7 +24,7 @@ public class User {
     private String chequing;
     private String saving;
     private String amountAvailOfBankAccount;
-    private String AmountOfMoneyAvailOfCreditAccount;
+    private String limiteCredit;
     private String balance;
 
     private String chequingSaving;
@@ -60,7 +60,7 @@ public class User {
     public User() {
     }
 
-    public User( String firstname, String lastname, String username, String password, String question1, String question2, String question3, String answer1, String answer2, String answer3, String fullAddress, String homePhone, String mobile, String email, String chequing, String saving, String amountAvailOfBankAccount, String AmountOfMoneyAvailOfCreditAccount, String balance) {
+    public User( String firstname, String lastname, String username, String password, String question1, String question2, String question3, String answer1, String answer2, String answer3, String fullAddress, String homePhone, String mobile, String email, String chequing, String saving, String amountAvailOfBankAccount, String limiteCredit, String balance) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.username = username;
@@ -78,7 +78,7 @@ public class User {
         this.chequing = chequing;
         this.saving = saving;
         this.amountAvailOfBankAccount = amountAvailOfBankAccount;
-        this.AmountOfMoneyAvailOfCreditAccount = AmountOfMoneyAvailOfCreditAccount;
+        this.limiteCredit = limiteCredit;
         this.balance = balance;
     }
 
@@ -227,12 +227,12 @@ public class User {
     }
 
 
-    public String getAmountOfMoneyAvailOfCreditAccount() {
-        return AmountOfMoneyAvailOfCreditAccount;
+    public String getlimiteCredit() {
+        return limiteCredit;
     }
 
-    public void setAmountOfMoneyAvailOfCreditAccount(String amountOfMoneyAvailOfCreditAccount) {
-        AmountOfMoneyAvailOfCreditAccount = amountOfMoneyAvailOfCreditAccount;
+    public void setlimiteCredit(String limiteCredit) {
+        this.limiteCredit = limiteCredit;
     }
 
     public String getBalance() {
