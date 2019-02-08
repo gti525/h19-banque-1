@@ -51,12 +51,17 @@
                     username: this.$route.query.username,
                     password: this.$route.query.password
                 }
+                console.log("bla1")
+                console.log(this.username)
                 if (this.text === this.questionMap.get(this.randomQuestion)) {
                     http
                         .post("/getToken", data)
                         .then(response => {
                             console.log(response.data);
-                            this.$router.push('/homeAdmin')
+                            this.$router.push({
+                                path : '/homeClient',
+                                query: {username: this.$route.query.username}
+                                })
                         })
                         .catch(e => {
                             this.$router.push('/errorPage');
@@ -72,6 +77,7 @@
             let data = {
                 username: this.$route.query.username
             }
+            console.log("bla2")
             console.log(data)
             http
                 .post("/getUserInfo", data)
