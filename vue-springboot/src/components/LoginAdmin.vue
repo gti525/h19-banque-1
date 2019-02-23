@@ -6,26 +6,26 @@
     </div>
 
     <div class="login-container">
-      <div class="main-header">
-        <h2>Se connecter</h2></div>
+      <!--<div class="main-header">-->
+      <!--<h2>Input Username & Password</h2></div>-->
       <div class="form-group">
         <label for="username">Nom d'utilisateur</label>
-        <input
-                type="text"
-                v-model="username"
-                name="username"
-                class="form-control"
-                :class="{ 'is-invalid': submitted && !username }"
+        <input ID="username"
+               type="text"
+               v-model="username"
+               name="username"
+               class="form-control"
+               :class="{ 'is-invalid': submitted && !username }"
         >
       </div>
       <div class="form-group">
         <label for="password">Mot de passe</label>
-        <input
-                type="password"
-                v-model="username"
-                name="username"
-                class="form-control"
-                :class="{ 'is-invalid': submitted && !username }"
+        <input id="password"
+               type="password"
+               v-model="password"
+               name="password"
+               class="form-control"
+               :class="{ 'is-invalid': submitted && !password }"
         >
       </div>
       <div class="form-group clearfix">
@@ -36,18 +36,43 @@
 </template>
 
 <script>
+  import http from "../http-common";
+
   export default {
     name: "Login",
     data() {
       return {
         username: '',
-        password: ''
+        password: '',
+        submitted: false
       }
     },
-
     methods: {
+      /* eslint-disable no-console */
       customerLogin() {
-        alert("customer login !")
+        //here should send the request to the backend and get to know if the username and password match
+        let data = {
+          username: this.username,
+          password: this.password
+        }
+        http
+                .post("/validateCustomer", data)
+                .then(response => {
+                  if (response.data == true) {
+                    // if username and password is cool then execute these block of statements and we use
+                    // this.$router.push to jump to the page we wanna with parameter
+                    this.$router.push({
+                      path: '/verifyLoginAdmin',
+                      query: {username: this.username, password: this.password}
+                    });
+                  } else {
+                    this.$router.push('/errorPage')
+                  }
+                })
+                .catch(e => {
+                  this.$router.push('/errorPage');
+                  console.log(e);
+                });
       }
     }
   };

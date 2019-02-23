@@ -1,11 +1,11 @@
 <template>
     <div>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a class="navbar-brand" href="/homeAdmin">Banquo Uno</a>
+            <a class="navbar-brand" href="/homeClient">Banquo Uno</a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/homeAdmin">Compte
+                        <a class="nav-link" href="/homeClient">Compte
                         </a>
                     </li>
                     <li class="nav-item">
@@ -19,7 +19,7 @@
 
 <script>
     export default {
-        name: "navbar"
+        name: "navbar-client"
     };
 </script>
 
