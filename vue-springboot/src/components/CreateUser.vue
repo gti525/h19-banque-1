@@ -68,10 +68,9 @@
                         <option>Dans quelle ville ou village votre mère et votre père se sont-ils rencontré?</option>
                         <option>Où étiez-vous quand vous avez eu votre premier baiser?</option>
                     </select>
-                    <span>Selected: {{ question1 }}</span>
                 </div>
                 <div class="form-group">
-                    <label for="address">Answer 1</label>
+                    <label for="address">Réponse 1</label>
                     <input id="address" type="text" v-model="answer1" name="address" class="form-control">
                 </div>
                 {{answer1}}
@@ -91,7 +90,7 @@
                     {{question2}}
                 </div>
                 <div class="form-group">
-                    <label for="address">Answer 2</label>
+                    <label for="address">Réponse 2</label>
                     <input type="text" v-model="answer2" name="address" class="form-control">
                 </div>
                 {{answer2}}
@@ -112,7 +111,7 @@
                     {{question3}}
                 </div>
                 <div class="form-group">
-                    <label for="address">Answer 3</label>
+                    <label for="address">Réponse 3</label>
                     <input type="text" v-model="answer3" name="address" class="form-control">
                 </div>
                 {{answer3}}
@@ -136,24 +135,6 @@
                     <div class="panel-title">Compte bancaire</div>
                     <div class="panel-content">
                         <div class="form-group">
-                            <label>Type de compte</label>
-                            <div>
-                                <div class="form-check-inline">
-                                    <label class="form-check-label">
-                                        <input v-model="chequingSaving" type="radio" class="form-check-input"
-                                               name="optradio" value="chequing">Chequing
-                                    </label>
-                                </div>
-                                <div class="form-check-inline">
-                                    <label class="form-check-label">
-                                        <input v-model="chequingSaving" type="radio" class="form-check-input"
-                                               name="optradio" value="saving">Saving
-                                    </label>
-                                </div>
-                                {{chequingSaving}}
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label for="amount-avail">Montant d'argent disponible</label>
                             <input id="amount-avail" type="text" v-model="amountAvailOfBankAccount" name="amount-avail"
                                    class="form-control">
@@ -169,7 +150,7 @@
                             <label for="amount-avail">Montant d'argent disponible</label>
                             <input
                                     type="text"
-                                    v-model="AmountOfMoneyAvailOfCreditAccount"
+                                    v-model="limiteCredit"
                                     name="amount-avail"
                                     class="form-control"
                             >
@@ -193,6 +174,45 @@
 <script>
     import NavBar from "./NavBarAdmin.vue";
     import http from "../http-common";
+
+    /* eslint-disable no-console */
+
+    var timeoutID;
+
+    function setup() {
+        document.addEventListener("mousemove", resetTimer, false);
+        document.addEventListener("mousedown", resetTimer, false);
+        document.addEventListener("keypress", resetTimer, false);
+        document.addEventListener("DOMMouseScroll", resetTimer, false);
+        document.addEventListener("mousewheel", resetTimer, false);
+        document.addEventListener("touchmove", resetTimer, false);
+        document.addEventListener("MSPointerMove", resetTimer, false);
+
+        startTimer();
+    }
+    setup();
+
+    function startTimer() {
+        // wait 300 seconds before calling goInactive
+        timeoutID = window.setTimeout(goInactive, 300000);
+    }
+
+    function resetTimer() {
+        window.clearTimeout(timeoutID);
+
+        goActive();
+    }
+
+    function goInactive() {
+        console.log("Je dors ...")
+        document.location.href = "http://localhost:4200";
+    }
+
+    function goActive() {
+        console.log("Je suis reveille")
+
+        startTimer();
+    }
 
     export default {
         name: "Login",
@@ -218,9 +238,9 @@
                 chequing: '',
                 saving: '',
                 amountAvailOfBankAccount: '',
-                AmountOfMoneyAvailOfCreditAccount: '',
+                limiteCredit: '',
                 balance: '',
-                chequingSaving: '',
+                chequingSaving: 'Chequing',
                 submitted: ''
             }
         },
@@ -244,7 +264,7 @@
                     chequing: this.chequing,
                     saving: this.saving,
                     amountAvailOfBankAccount: this.amountAvailOfBankAccount,
-                    AmountOfMoneyAvailOfCreditAccount: this.AmountOfMoneyAvailOfCreditAccount,
+                    limiteCredit: this.limiteCredit,
                     balance: this.balance,
                     chequingSaving: this.chequingSaving
 
