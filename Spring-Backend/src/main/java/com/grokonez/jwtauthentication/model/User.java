@@ -1,5 +1,6 @@
 package com.grokonez.jwtauthentication.model;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -27,18 +30,6 @@ import org.hibernate.annotations.NaturalId;
         }),
         @UniqueConstraint(columnNames = {
             "email"
-        }),
-        @UniqueConstraint(columnNames = {
-            "question1"
-        }),
-        @UniqueConstraint(columnNames = {
-            "answer1"
-        }),
-        @UniqueConstraint(columnNames = {
-            "question2"
-        }),
-        @UniqueConstraint(columnNames = {
-            "answer2"
         })
 })
 public class User{
@@ -46,9 +37,14 @@ public class User{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+    @Size(min=3, max = 50)
+    private String firstname;
     @NotBlank
     @Size(min=3, max = 50)
-    private String name;
+    private String lastname;
+
+
 
     @NotBlank
     @Size(min=3, max = 50)
@@ -80,7 +76,28 @@ public class User{
     @Size(min=6, max = 100)
     private String answer2;
 
-
+    private String accountno;
+    private int amount;
+    private String Status;
+   
+    
+    private String address;
+     
+    private String city;
+    private String province;
+    private String country;
+    private String zip;
+    private String landline;
+    private String mobile;
+    
+    private String creditcardno;
+    private String cvv;
+    
+    private String expirydate;
+    
+    private int creditbalanceavailable;
+    private int creditbalanceowned;
+    
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles", 
     	joinColumns = @JoinColumn(name = "user_id"), 
@@ -89,8 +106,9 @@ public class User{
 
     public User() {}
 
-    public User(String name, String username, String email, String question1, String answer1, String question2, String answer2, String password) {
-        this.name = name;
+    public User(String firstname,String lastname , String username, String email, String question1, String answer1, String question2, String answer2, String password) {
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.username = username;
         this.email = email;
         this.question1 = question1;
@@ -100,6 +118,10 @@ public class User{
         this.password = password;
         
     }
+
+
+    
+    
 
     public String getQuestion2() {
 		return question2;
@@ -149,12 +171,21 @@ public class User{
         this.username = username;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
@@ -180,4 +211,129 @@ public class User{
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+    public String getAccountno() {
+        return accountno;
+    }
+
+    public void setAccountno(String accountno) {
+        this.accountno = accountno;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String Status) {
+        this.Status = Status;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    public String getLandline() {
+        return landline;
+    }
+
+    public void setLandline(String landline) {
+        this.landline = landline;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getCreditcardno() {
+        return creditcardno;
+    }
+
+    public void setCreditcardno(String creditcardno) {
+        this.creditcardno = creditcardno;
+    }
+
+    public String getCvv() {
+        return cvv;
+    }
+
+    public void setCvv(String cvv) {
+        this.cvv = cvv;
+    }
+
+  
+
+    public int getCreditbalanceavailable() {
+        return creditbalanceavailable;
+    }
+
+    public void setCreditbalanceavailable(int creditbalanceavailable) {
+        this.creditbalanceavailable = creditbalanceavailable;
+    }
+
+    public int getCreditbalanceowned() {
+        return creditbalanceowned;
+    }
+
+    public void setCreditbalanceowned(int creditbalanceowned) {
+        this.creditbalanceowned = creditbalanceowned;
+    }
+
+    public String getExpirydate() {
+        return expirydate;
+    }
+
+    public void setExpirydate(String expirydate) {
+        this.expirydate = expirydate;
+    }
+    
+    
+    
 }

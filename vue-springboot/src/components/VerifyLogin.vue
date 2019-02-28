@@ -87,7 +87,7 @@
             console.log("bla2")
             console.log(data)
             http
-                .get("/users")
+                .get("/usersU")
                 .then(response => {
                     this.response = response.data; // JSON are parsed automatically.
 

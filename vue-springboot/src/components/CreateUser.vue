@@ -204,12 +204,10 @@
     }
 
     function goInactive() {
-        console.log("Je dors ...")
         document.location.href = "http://localhost:4200";
     }
 
     function goActive() {
-        console.log("Je suis reveille")
 
         startTimer();
     }

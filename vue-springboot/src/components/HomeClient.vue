@@ -109,12 +109,12 @@
     }
 
     function goInactive() {
-        console.log("Je dors ...")
+       
         document.location.href = "http://localhost:4200";
     }
 
     function goActive() {
-        console.log("Je suis reveille")
+        
 
         startTimer();
     }
@@ -146,7 +146,7 @@
             console.log(data)
             console.log(this.username)
             http
-                .get("/users")
+                .get("/usersU")
                 .then(response => {
                     this.users = response.data; // JSON are parsed automatically.
                     console.log("bla3")

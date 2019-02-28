@@ -7,7 +7,11 @@ import javax.validation.constraints.*;
 public class SignUpForm {
     @NotBlank
     @Size(min = 3, max = 50)
-    private String name;
+    private String firstname;
+
+    @NotBlank
+    @Size(min = 3, max = 50)
+    private String lastname;
 
     @NotBlank
     @Size(min = 3, max = 50)
@@ -35,6 +39,100 @@ public class SignUpForm {
     @NotBlank
     @Size(min=6, max = 100)
     private String answer2;
+    
+    private String address;
+
+    private int amount = 0;
+    private int creditbalanceavailable = 0;
+    private int creditbalanceowned =  0;
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public int getCreditbalanceavailable() {
+        return creditbalanceavailable;
+    }
+
+    public void setCreditbalanceavailable(int creditbalanceavailable) {
+        this.creditbalanceavailable = creditbalanceavailable;
+    }
+
+    public int getCreditbalanceowned() {
+        return creditbalanceowned;
+    }
+
+    public void setCreditbalanceowned(int creditbalanceowned) {
+        this.creditbalanceowned = creditbalanceowned;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    private String city;
+    private String province;
+    private String country;
+    private String zip;
+    private String landline;
+    private String mobile;
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    public String getLandline() {
+        return landline;
+    }
+
+    public void setLandline(String landline) {
+        this.landline = landline;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+    
+    
     
     public String getQuestion2() {
 		return question2;
@@ -73,12 +171,20 @@ public class SignUpForm {
 		this.question1 = question1;
 	}
 
-	public String getName() {
-        return name;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getUsername() {

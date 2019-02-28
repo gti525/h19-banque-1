@@ -116,11 +116,20 @@ public class TestRestAPIs {
     }
 
     // Use to get information about login user with token
-    @GetMapping("/users")
-    public Principal users(Principal user) {
+	@PreAuthorize("hasRole('USER')")
+    @GetMapping("/usersU")
+    public Principal usersU(Principal user) {
     	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return user;
     }
+
+	// Use to get information about login user with token
+	@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/usersA")
+	public Principal usersA(Principal user) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		return user;
+	}
     
     // Use to get just one informations
     @RequestMapping(value="/loginAuth", method = RequestMethod.GET)

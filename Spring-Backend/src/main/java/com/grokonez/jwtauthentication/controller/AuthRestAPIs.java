@@ -1,5 +1,8 @@
 package com.grokonez.jwtauthentication.controller;
 
+import com.google.common.base.Joiner;
+import com.grokonez.jwtauthentication.Utils.CreditCardNumberGenerator;
+import com.grokonez.jwtauthentication.Utils.Utils;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -33,6 +36,15 @@ import com.grokonez.jwtauthentication.model.User;
 import com.grokonez.jwtauthentication.repository.RoleRepository;
 import com.grokonez.jwtauthentication.repository.UserRepository;
 import com.grokonez.jwtauthentication.security.jwt.JwtProvider;
+import com.grokonez.jwtauthentication.specification.UserSpecificationsBuilder;
+import com.grokonez.jwtauthentication.Utils.SearchOperation;
+
+import java.util.List;
+import java.util.regex.Matcher;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -56,7 +68,7 @@ public class AuthRestAPIs {
 
 	
 	//Use to signin
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
 
@@ -84,7 +96,7 @@ public class AuthRestAPIs {
 	}
 
 	//Use to verify first verify
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+
 	@PostMapping("/verify1")
 	public ResponseEntity<?> authenticateVerify(@Valid @RequestBody VerifyLogin1 verifyLogin) {
 
@@ -98,7 +110,6 @@ public class AuthRestAPIs {
 	}
 
 	// use to create user
-	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/signup")
 	public ResponseEntity<String> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
 
@@ -150,10 +161,25 @@ public class AuthRestAPIs {
 
         
 		// Creating user's account
-		User user = new User(signUpRequest.getName(), signUpRequest.getUsername(), signUpRequest.getEmail(),
+		User user = new User(signUpRequest.getFirstname(),signUpRequest.getLastname(), signUpRequest.getUsername(), signUpRequest.getEmail(),
 				signUpRequest.getQuestion1(), signUpRequest.getAnswer1(), signUpRequest.getQuestion2(),
 				signUpRequest.getAnswer2(), encoder.encode(signUpRequest.getPassword()));
 
+				user.setZip(signUpRequest.getZip());
+				user.setProvince(signUpRequest.getProvince());
+				user.setCity(signUpRequest.getCity());
+				user.setCountry(signUpRequest.getCountry());
+				user.setMobile(signUpRequest.getMobile());
+				user.setLandline(signUpRequest.getLandline());
+                user.setAddress(signUpRequest.getAddress());
+                CreditCardNumberGenerator generator = new CreditCardNumberGenerator();
+                user.setAccountno(generator.generate("111", 8));
+                user.setCreditcardno(generator.generate("11111", 16));
+                user.setCreditbalanceavailable(signUpRequest.getCreditbalanceavailable());
+                user.setCreditbalanceowned(signUpRequest.getCreditbalanceowned());
+                user.setAmount(signUpRequest.getAmount());
+                user.setCvv(generator.generate("", 3));
+				user.setExpirydate(Utils.getYearTimeStampMMYY(3));
 		Set<String> strRoles = signUpRequest.getRole();
 		Set<Role> roles = new HashSet<>();
 
@@ -183,4 +209,22 @@ public class AuthRestAPIs {
 
 		return ResponseEntity.ok().body("User registered successfully!");
 	}
+        
+        @PreAuthorize("hasRole('ADMIN')")
+        @RequestMapping(method = RequestMethod.GET, value = "/searchusers")
+        @ResponseBody
+       public List<User> search(@RequestParam(value = "search") String search) {
+         UserSpecificationsBuilder builder = new UserSpecificationsBuilder();
+        String operationSetExper = Joiner.on("|")
+            .join(SearchOperation.SIMPLE_OPERATION_SET);
+        Pattern pattern = Pattern.compile("(\\w+?)(" + operationSetExper + ")(\\p{Punct}?)(\\w+?)(\\p{Punct}?),");
+        Matcher matcher = pattern.matcher(search + ",");
+        while (matcher.find()) {
+            builder.with(matcher.group(1), matcher.group(2), matcher.group(4), matcher.group(3), matcher.group(5));
+        }
+
+        Specification<User> spec = builder.build();
+        return userRepository.findAll(spec);
+    
+    }
 }
