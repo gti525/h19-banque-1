@@ -2,7 +2,7 @@
     <div>
         <nav-bar></nav-bar>
         <div class="container">
-            <div class="app-title">{{ users.firstname }} {{ users.lastname }}</div>
+            <div class="app-title">{{ users.principal.name }} {{ users.principal.lastname }}</div>
             <div class="login-container">
                 <table class="table">
                     <thead>
@@ -63,11 +63,11 @@
                     <tbody>
                     <tr>
                         <td>Courriel</td>
-                        <td>{{users.email}} </td>
+                        <td>{{users.principal.email}} </td>
                     </tr>
                     <tr>
                         <td>Téléphone :</td>
-                        <td>{{users.homePhone}}</td>
+                        <td>{{users.principal.lanline}}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -79,6 +79,46 @@
 <script>
     import NavBar from './NavBarClient.vue';
     import http from "../http-common";
+
+    /* eslint-disable no-console */
+
+    var timeoutID;
+
+    function setup() {
+        document.addEventListener("mousemove", resetTimer, false);
+        document.addEventListener("mousedown", resetTimer, false);
+        document.addEventListener("keypress", resetTimer, false);
+        document.addEventListener("DOMMouseScroll", resetTimer, false);
+        document.addEventListener("mousewheel", resetTimer, false);
+        document.addEventListener("touchmove", resetTimer, false);
+        document.addEventListener("MSPointerMove", resetTimer, false);
+
+        startTimer();
+    }
+    setup();
+
+    function startTimer() {
+        // wait 300 seconds before calling goInactive
+        timeoutID = window.setTimeout(goInactive, 300000);
+    }
+
+    function resetTimer() {
+        window.clearTimeout(timeoutID);
+
+        goActive();
+    }
+
+    function goInactive() {
+
+        document.location.href = "http://localhost:4200";
+        delete localStorage.token
+    }
+
+    function goActive() {
+
+
+        startTimer();
+    }
 
     export default {
         name: "HomeClient",
@@ -105,11 +145,14 @@
             }
             console.log("bla2")
             console.log(data)
+            console.log(this.username)
             http
-                .post("/getUserInfo", data)
+                .get("/usersU")
                 .then(response => {
                     this.users = response.data; // JSON are parsed automatically.
+                    console.log("bla3")
                     console.log(response.data);
+                    console.log("bla4")
                 })
                 .catch(e => {
                     this.$router.push('/errorPage');

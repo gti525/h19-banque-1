@@ -14,3 +14,5 @@ Spring-Backend/target/surefire-reports/TEST-com\.grokonez\.spring\.restapi\.mong
 Spring-Backend/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles\.lst
 
 Spring-Backend/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles\.lst
+
+mongo_data

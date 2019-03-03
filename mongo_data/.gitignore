@@ -1,9 +1,0 @@
-#Ignore folder node_modules
-diagnostic.data
-
-journal
-
-*.wt
-*.lock
-*.turtle
-WiredTiger
