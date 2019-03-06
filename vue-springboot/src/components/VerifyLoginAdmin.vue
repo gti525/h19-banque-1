@@ -31,7 +31,7 @@
     import http from "../http-common";
     /* eslint-disable no-console */
     export default {
-        name: "VerifyLogin",
+        name: "VerifyLoginAdmin",
         components: {
             NavBar: NavBar
         },
@@ -43,29 +43,40 @@
                 submitted: '',
                 questionMap: '',
                 randomQuestion:'',
+                qustionArray:'',
                 token: ''
             }
         },
         methods: {
             verify() {
-                let data = {
-                    username: this.$route.query.username,
-                    password: this.$route.query.password
-                }
-
-                if (this.text === this.questionMap.get(this.randomQuestion)) {
+                if (this.qustionArray[1] === this.randomQuestion) {
                     http
-                        .post("/getToken", data)
+                        .post("/auth/verify2", { question2: this.randomQuestion, answer2: this.text })
                         .then(response => {
                             console.log(response.data);
-                            this.$router.push('/homeAdmin')
+                            this.$router.push({
+                                path : '/HomeAdmin',
+                                //   query: {username: this.$route.query.username}
+                            })
                         })
                         .catch(e => {
                             this.$router.push('/errorPage');
                             console.log(e);
                         });
                 } else {
-                    this.$router.push('/errorPage')
+                    http
+                        .post("/auth/verify1", { question1: this.randomQuestion, answer1: this.text })
+                        .then(response => {
+                            console.log(response.data);
+                            this.$router.push({
+                                path : '/HomeAdmin',
+                                //   query: {username: this.$route.query.username}
+                            })
+                        })
+                        .catch(e => {
+                            this.$router.push('/errorPage');
+                            console.log(e);
+                        });
                 }
 
             }
@@ -74,32 +85,27 @@
             let data = {
                 username: this.$route.query.username
             }
+            console.log("bla2")
             console.log(data)
             http
-                .post("/getUserInfo", data)
+                .get("/usersA")
                 .then(response => {
-                    console.log(response.data);
-                    this.response = response.data
+                    this.response = response.data; // JSON are parsed automatically.
+
                     let questionMap = new Map();
-                    questionMap.set(response.data.question1, response.data.answer1);
-                    questionMap.set(response.data.question2, response.data.answer2);
-                    questionMap.set(response.data.question3, response.data.answer3);
+                    questionMap.set(response.data.principal.question1, response.data.principal.answer1);
+                    questionMap.set(response.data.principal.question2, response.data.principal.answer2);
 
                     this.questionMap = questionMap;
-                    console.log(this.questionMap)
-
-                    console.log("token",response.data)
-
 
                     let qustionArray = [
-                        response.data.question1,
-                        response.data.question2,
-                        response.data.question3
+                        response.data.principal.question1,
+                        response.data.principal.question2,
                     ];
+                    this.qustionArray = qustionArray
 
                     let randomQuestion = qustionArray[Math.floor(Math.random() * qustionArray.length)]
                     this.randomQuestion = randomQuestion;
-                    // console.log("randomQuestion:", randomQuestion)
 
                 })
                 .catch(e => {
@@ -108,8 +114,6 @@
                 });
         }
     }
-
-
 </script>
 <style lang="scss" scoped>
     @import "../scss/common.scss";
