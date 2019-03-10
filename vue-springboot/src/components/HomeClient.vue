@@ -67,7 +67,7 @@
                     </tr>
                     <tr>
                         <td>Téléphone :</td>
-                        <td>{{users.principal.lanline}}</td>
+                        <td>{{users.principal.landline}}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -150,15 +150,14 @@
                 .get("/usersU")
                 .then(response => {
                     this.users = response.data; // JSON are parsed automatically.
-                    console.log("bla3")
+                    console.log("bla3");
                     console.log(response.data);
-                    console.log("bla4")
+                    console.log("bla4");
                 })
                 .catch(e => {
                     this.$router.push('/errorPage');
                     console.log(e);
                 });
-
         },
     }
 </script>
