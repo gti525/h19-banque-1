@@ -17,11 +17,11 @@
                         }">
                             Cheque Banque Uno
                         </router-link></td>
-                        <td>Cheque IDNumber</td>
+                        <td>{{ users.principal.userCreditCard.user.userAccount.accountno }}</td>
                     </tr>
                     <tr>
                         <td>Solde :</td>
-                        <td>{{ users.amountAvailOfBankAccount }}$</td>
+                        <td>{{ users.principal.userCreditCard.user.userAccount.amount }}$</td>
                     </tr>
                     </tbody>
                 </table>
@@ -40,15 +40,15 @@
                         }">
                             Credit Banque Uno
                         </router-link></td>
-                        <td>Cheque IDNumber</td>
+                        <td>{{ users.principal.userCreditCard.creditcardno }}</td>
                     </tr>
                     <tr>
                         <td>Solde :</td>
-                        <td>{{ users.balance }}$</td>
+                        <td>{{ users.principal.userCreditCard.amountavailable }}$</td>
                     </tr>
                     <tr>
                         <td>Limite de crédit :</td>
-                        <td>{{ users.limiteCredit }}$</td>
+                        <td>{{ users.principal.userCreditCard.amountowned }}$</td>
                     </tr>
                     </tbody>
                 </table>

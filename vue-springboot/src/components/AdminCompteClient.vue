@@ -12,11 +12,11 @@
             <tbody>
             <tr class="design">
                 <th scope="row">Cheque</th>
-                <td> {{ users.amountAvailOfBankAccount }}{{dollard}}</td>
+                <td> {{ users }}{{dollard}}</td>
             </tr>
             <tr>
                 <th scope="row">Crédit</th>
-                <td>{{ users.balance}}{{dollard}}</td>
+                <td>{{ users }}{{dollard}}</td>
             </tr>
             <!--    <tr class="table-primary"> -->
             </tbody>
