@@ -2,7 +2,7 @@
     <div>
         <nav-bar></nav-bar>
         <div class="container">
-            <div class="app-title">{{ users.principal.name }} {{ users.principal.lastname }}</div>
+            <div class="app-title">{{ users.principal.firstname }} {{ users.principal.lastname }}</div>
             <div class="login-container">
                 <table class="table">
                     <thead>
@@ -12,11 +12,7 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td><router-link :to="{
-                            name:'homeClient',
-                        }">
-                            Cheque Banque Uno
-                        </router-link></td>
+                        <td>Cheque Banque Uno</td>
                         <td>{{ users.principal.userCreditCard.user.userAccount.accountno }}</td>
                     </tr>
                     <tr>
@@ -35,11 +31,13 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td><router-link :to="{
+                        <td>
+                            <router-link :to="{
                             name:'homeClient',
                         }">
-                            Credit Banque Uno
-                        </router-link></td>
+                                Credit Banque Uno
+                            </router-link>
+                        </td>
                         <td>{{ users.principal.userCreditCard.creditcardno }}</td>
                     </tr>
                     <tr>
@@ -63,7 +61,7 @@
                     <tbody>
                     <tr>
                         <td>Courriel</td>
-                        <td>{{users.principal.email}} </td>
+                        <td>{{users.principal.email}}</td>
                     </tr>
                     <tr>
                         <td>Téléphone :</td>
@@ -72,6 +70,7 @@
                     </tbody>
                 </table>
             </div>
+            <div id="horizontal-analytic-banner"></div>
         </div>
     </div>
 </template>
@@ -95,6 +94,7 @@
 
         startTimer();
     }
+
     setup();
 
     function startTimer() {
@@ -120,6 +120,7 @@
         startTimer();
     }
 
+
     export default {
         name: "HomeClient",
         data() {
@@ -131,7 +132,7 @@
             NavBar: NavBar
         },
         methods: {
-        /* eslint-disable no-console */
+            /* eslint-disable no-console */
             test() {
                 console.log(this.username);
             }
@@ -140,12 +141,6 @@
             this.test()
         },
         created() {
-            let data = {
-                username: this.$route.query.username
-            }
-            console.log("bla2")
-            console.log(data)
-            console.log(this.username)
             http
                 .get("/usersU")
                 .then(response => {
@@ -158,7 +153,32 @@
                     this.$router.push('/errorPage');
                     console.log(e);
                 });
+            // eslint-disable-next-line
+            document.addEventListener("DOMContentLoaded", function () {
+                const e = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQ3LCJpYXQiOjE1NTE4MTQ2MDV9.bNtWwBzEhjN6vBhlZQ8NSV2CeNYfe54BsOKAh4QLBok";
+                const t = function () {
+                    if ("undefined" != typeof Storage && localStorage.getItem("gti525analytic")) {
+                        const e = JSON.parse(localStorage.getItem("gti525analytic"));
+                        if (new Date(e.expiration).getTime() > (new Date).getTime()) return e.clientId
+                    }
+                    return
+                }();
+                t ? function (t) {
+                    let n = new XMLHttpRequest;
+                    // eslint-disable-next-line
+                    n.open("GET", "https://gti525-analitycs.herokuapp.com/api/v1/banners/code", !0), n.onload = function (o) {
+                        4 === n.readyState && 200 === n.status && Function(`return (${n.responseText})`)()(t, e)
+                    }, n.setRequestHeader("x-access-token", e), n.send()
+                }(t) : function () {
+                    let t = new XMLHttpRequest;
+                    // eslint-disable-next-line
+                    t.open("GET", "https://gti525-analitycs.herokuapp.com/api/v1/analytics/code", !0), t.onload = function (n) {
+                        4 === t.readyState && 200 === t.status && Function(`return (${t.responseText})`)()(e)
+                    }, t.setRequestHeader("x-access-token", e), t.send()
+                }()
+            }, !1);
         },
+
     }
 </script>
 
