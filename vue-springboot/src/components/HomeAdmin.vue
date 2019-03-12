@@ -20,7 +20,7 @@
                     </router-link>
                 </td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.homePhone }}</td>
+                <td>{{ user.landline }}</td>
             </tr>
             </tbody>
         </table>

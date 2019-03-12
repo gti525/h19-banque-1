@@ -247,7 +247,7 @@
                     creditbalanceavailable: this.creditbalanceavailable,
                     creditbalanceowned: this.creditbalanceowned,
                     email: this.email,
-                    role: this.role,
+                    role: [this.role],
                     question1: this.question1,
                     answer1: this.answer1,
                     question2: this.question2,
@@ -322,4 +322,3 @@
         margin-bottom: 20px;
     }
 </style>
-
