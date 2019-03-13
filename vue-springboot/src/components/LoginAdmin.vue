@@ -30,6 +30,7 @@
       </div>
       <div class="form-group clearfix">
         <button class="btn btn-primary btn-common float-right " v-on:click="customerLogin">Connexion</button>
+        <button class="btn btn-outline-primary btn-common float-right " v-on:click="clientRedirect">Page Client</button>
       </div>
     </div>
   </div>
@@ -73,6 +74,9 @@
       loginFailed () {
         this.$router.push('/errorPage')
         delete localStorage.token
+      },
+      clientRedirect () {
+        this.$router.push('/')
       }
     }
   };

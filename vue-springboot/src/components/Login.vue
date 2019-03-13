@@ -22,8 +22,9 @@
                class="form-control"
         >
       </div>
-      <div class="form-group clearfix">
-        <button class="btn btn-primary btn-common float-right " v-on:click="customerLogin">Connexion</button>
+      <div class="clearfix ">
+        <button class="btn btn-primary btn-common float-right" v-on:click="customerLogin">Connexion</button>
+        <button class="btn btn-outline-primary btn-common float-right" v-on:click="adminRedirect">Page Admin</button>
       </div>
     </div>
   </div>
@@ -31,7 +32,6 @@
 
 <script>
   import http from "../http-common";
-
   export default {
     name: "Login",
     data() {
@@ -67,6 +67,9 @@
       loginFailed () {
         this.$router.push('/errorPage')
         delete localStorage.token
+      },
+      adminRedirect() {
+        this.$router.push("/loginAdmin")
       }
     }
   };
