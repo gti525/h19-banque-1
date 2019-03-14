@@ -41,11 +41,11 @@
                         <td>{{ users.principal.userCreditCard.creditcardno }}</td>
                     </tr>
                     <tr>
-                        <td>Solde :</td>
+                        <td>Montant disponible :</td>
                         <td>{{ users.principal.userCreditCard.amountavailable }}$</td>
                     </tr>
                     <tr>
-                        <td>Limite de crédit :</td>
+                        <td>Montant à payer :</td>
                         <td>{{ users.principal.userCreditCard.amountowned }}$</td>
                     </tr>
                     </tbody>
