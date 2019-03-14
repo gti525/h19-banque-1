@@ -6,48 +6,77 @@
     </div>
 
     <div class="login-container">
-      <div class="main-header">
-        <h2>Se connecter</h2></div>
+      <!--<div class="main-header">-->
+      <!--<h2>Input Username & Password</h2></div>-->
       <div class="form-group">
         <label for="username">Nom d'utilisateur</label>
-        <input
-                type="text"
-                v-model="username"
-                name="username"
-                class="form-control"
-                :class="{ 'is-invalid': submitted && !username }"
+        <input ID="username"
+               type="text"
+               v-model="username"
+               name="username"
+               class="form-control"
+               required
         >
       </div>
       <div class="form-group">
         <label for="password">Mot de passe</label>
-        <input
-                type="password"
-                v-model="username"
-                name="username"
-                class="form-control"
-                :class="{ 'is-invalid': submitted && !username }"
+        <input id="password"
+               type="password"
+               v-model="password"
+               name="password"
+               class="form-control"
+               required
         >
       </div>
       <div class="form-group clearfix">
         <button class="btn btn-primary btn-common float-right " v-on:click="customerLogin">Connexion</button>
+        <button class="btn btn-outline-primary btn-common float-right " v-on:click="clientRedirect">Page Client</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import http from "../http-common";
+
   export default {
     name: "Login",
     data() {
       return {
         username: '',
-        password: ''
+        password: '',
+        error: false
       }
     },
-
     methods: {
+      /* eslint-disable no-console */
       customerLogin() {
-        alert("customer login !")
+        //here should send the request to the backend and get to know if the username and password match
+        http
+                .post("/auth/signin", { username: this.username, password: this.password })
+                .then(request => this.loginSuccessful(request))
+                .catch(() => this.loginFailed())
+      },
+      loginSuccessful (req) {
+        if (!req.data.accessToken) {
+          console.log(req)
+          this.loginFailed()
+          return
+        }
+        this.error = false
+        localStorage.token = req.data.accessToken
+        console.log(req)
+        this.$router.push({
+          path: '/VerifyLoginAdmin',
+          //query: {username: this.username, password: this.password}-->
+        });
+      },
+      loginFailed () {
+        this.$router.push('/errorPage')
+        delete localStorage.token
+      },
+      clientRedirect () {
+        this.$router.push('/')
       }
     }
   };

@@ -11,7 +11,6 @@
                v-model="username"
                name="username"
                class="form-control"
-               :class="{ 'is-invalid': submitted && !username }"
         >
       </div>
       <div class="form-group">
@@ -21,11 +20,11 @@
                v-model="password"
                name="password"
                class="form-control"
-               :class="{ 'is-invalid': submitted && !password }"
         >
       </div>
-      <div class="form-group clearfix">
-        <button class="btn btn-primary btn-common float-right " v-on:click="customerLogin">Connexion</button>
+      <div class="clearfix ">
+        <button class="btn btn-primary btn-common float-right" v-on:click="customerLogin">Connexion</button>
+        <button class="btn btn-outline-primary btn-common float-right" v-on:click="adminRedirect">Page Admin</button>
       </div>
     </div>
   </div>
@@ -33,42 +32,44 @@
 
 <script>
   import http from "../http-common";
-
   export default {
     name: "Login",
     data() {
       return {
         username: '',
         password: '',
-        submitted: false
+        error: false
       }
     },
     methods: {
       /* eslint-disable no-console */
       customerLogin() {
         //here should send the request to the backend and get to know if the username and password match
-        let data = {
-          username: this.username,
-          password: this.password
-        }
         http
-                .post("/validateCustomer", data)
-                .then(response => {
-                  if (response.data == true) {
-                    // if username and password is cool then execute these block of statements and we use
-                    // this.$router.push to jump to the page we wanna with parameter
-                    this.$router.push({
-                      path: '/verifyLogin',
-                      query: {username: this.username, password: this.password}
-                    });
-                  } else {
-                    this.$router.push('/errorPage')
-                  }
-                })
-                .catch(e => {
-                  this.$router.push('/errorPage');
-                  console.log(e);
-                });
+                .post("/auth/signin", { username: this.username, password: this.password })
+                .then(request => this.loginSuccessful(request))
+                .catch(() => this.loginFailed())
+      },
+      loginSuccessful (req) {
+        if (!req.data.accessToken) {
+          console.log(req)
+          this.loginFailed()
+          return
+        }
+        this.error = false
+        localStorage.token = req.data.accessToken
+        console.log(req)
+        this.$router.push({
+          path: '/VerifyLogin',
+          //query: {username: this.username, password: this.password}-->
+        });
+      },
+      loginFailed () {
+        this.$router.push('/errorPage')
+        delete localStorage.token
+      },
+      adminRedirect() {
+        this.$router.push("/loginAdmin")
       }
     }
   };
@@ -99,4 +100,3 @@
     margin-bottom: 28px;
   }
 </style>
-
