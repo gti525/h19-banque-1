@@ -89,8 +89,6 @@
         <option value="$PROJECT_DIR$/src/components/HomeAdmin.vue" />
         <option value="$PROJECT_DIR$/src/components/CreateUser.vue" />
         <option value="$PROJECT_DIR$/src/components/AdminCompteClient.vue" />
-        <option value="$PROJECT_DIR$/src/components/NavBarClient.vue" />
-        <option value="$PROJECT_DIR$/src/components/NavBarAdmin.vue" />
         <option value="$PROJECT_DIR$/src/components/LoginAdmin.vue" />
         <option value="$PROJECT_DIR$/src/components/TransferToOtherAccount.vue" />
         <option value="$PROJECT_DIR$/src/components/CreditCardPayment.vue" />
@@ -104,6 +102,10 @@
         <option value="$PROJECT_DIR$/src/components/ShowAccountTransactions.vue" />
         <option value="$PROJECT_DIR$/src/components/ShowCreditTransactions.vue" />
         <option value="$PROJECT_DIR$/src/components/HomeClient.vue" />
+        <option value="$PROJECT_DIR$/src/components/NavBarAdmin.vue" />
+        <option value="$PROJECT_DIR$/src/components/NavBarClient.vue" />
+        <option value="$PROJECT_DIR$/src/components/TransferToOtherAccount.vue" />
+        <option value="$PROJECT_DIR$/src/components/CreditCardPayment.vue" />
       </list>
     </option>
   </component>
@@ -437,13 +439,10 @@
         <state relative-caret-position="-516" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.js">
+    <entry file="file://$PROJECT_DIR$/src/components/AdminCompteClient.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="29" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="665">
+          <caret line="115" column="23" selection-start-line="115" selection-start-column="23" selection-end-line="115" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -527,7 +526,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/HomeClient.vue">
+    <entry file="file://$PROJECT_DIR$/src/components/TransferToOtherAccount.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="406">
           <caret line="173" column="13" selection-start-line="173" selection-start-column="13" selection-end-line="173" selection-end-column="13" />
