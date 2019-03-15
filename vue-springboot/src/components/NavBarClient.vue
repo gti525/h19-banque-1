@@ -14,6 +14,9 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="/transferToOtherAccount">Transfert</a>
                     </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/creditCardPayment">Paiement</a>
+                    </li>
                 </ul>
             </div>
             <div class="collapse navbar-collapse" id="navbarColor02">
