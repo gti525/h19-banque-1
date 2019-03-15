@@ -20,7 +20,8 @@
       </div>
       <div class="form-group">
         <label for="password">Mot de passe</label>
-        <input id="password"
+        <input @keyup.enter="customerLogin"
+               id="password"
                type="password"
                v-model="password"
                name="password"
@@ -86,12 +87,11 @@
 
   .app-header {
 
-    margin-top: 20%;
-
     .app-title {
+      margin-top: 2.8%;
       text-align: center;
       font-size: 40px;
-      font-weight: 600;
+      font-weight: 300;
       color: #002ec3;
       font-family: 'Hind Siliguri', sans-serif;
 

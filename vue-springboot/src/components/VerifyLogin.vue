@@ -88,7 +88,9 @@
                     questionMap.set(this.users.question1, this.users.answer1);
                     questionMap.set(this.users.question2, this.users.answer2);
 
-                    this.questionMap = questionMap;
+                        let questionMap = new Map();
+                        questionMap.set(response.data.principal.question1, response.data.principal.answer1);
+                        questionMap.set(response.data.principal.question2, response.data.principal.answer2);
 
                     let qustionArray = [
                         this.users.question1,
@@ -96,14 +98,30 @@
                     ];
                     this.qustionArray = qustionArray
 
-                    let randomQuestion = qustionArray[Math.floor(Math.random() * qustionArray.length)]
-                    this.randomQuestion = randomQuestion;
+                        let qustionArray = [
+                            response.data.principal.question1,
+                            response.data.principal.question2,
+                        ];
+                        this.qustionArray = qustionArray
 
-                })
-                .catch(e => {
-                    this.$router.push('/errorPage');
-                    console.log(e);
-                });
+                        let randomQuestion = qustionArray[Math.floor(Math.random() * qustionArray.length)]
+                        this.randomQuestion = randomQuestion;
+
+                    })
+                    .catch(e => {
+                        this.$router.push('/errorPage');
+                        console.log(e);
+                    });
+            }
+        },
+
+        created() {
+            //let data = {
+            //    username: this.$route.query.username
+            //}
+            console.log("bla2")
+            //console.log(data)
+            setTimeout(this.getUserQuestion,1000)
         }
     }
 

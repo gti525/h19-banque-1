@@ -12,11 +12,11 @@
             <tbody>
             <tr class="design">
                 <th scope="row">Cheque</th>
-                <td> {{ users }}{{dollard}}</td>
+                <td> {{ users }}{{dollardCheque}}</td>
             </tr>
             <tr>
                 <th scope="row">Crédit</th>
-                <td>{{ users }}{{dollard}}</td>
+                <td>{{ users }}{{dollardCredit}}</td>
             </tr>
             <!--    <tr class="table-primary"> -->
             </tbody>
@@ -77,13 +77,15 @@
             return {
                 id: 0,
                 users: [],
-                dollard: ".00$"
+                dollardCheque: ".00$",
+                dollardCredit: ".00$"
             }
         },
         /* eslint-disable no-console */
         created() {
             this.id = this.$route.params.id;
             console.log(this.id)
+
         },
         methods: {
             /* eslint-disable no-console */
@@ -93,6 +95,9 @@
                     .get("/users/" + this.id)
                     .then(response => {
                         this.users = response.data; // JSON are parsed automatically.
+                       // console.log(this.users)
+                       // this.dollardCheque =
+                       // this.dollardCredit =
                         console.log(response.data);
                     })
                     .catch(e => {
