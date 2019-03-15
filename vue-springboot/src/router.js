@@ -13,8 +13,10 @@ import ErrorPage from "./components/ErrorPage";
 import AdminCompteClient from "./components/AdminCompteClient.vue";
 import RechercheUserByAdmin from "./components/RechercheUserByAdmin.vue";
 import HomeClient from "./components/HomeClient.vue";
-import ShowTransaction from "./components/ShowTransaction.vue";
+import ShowTransaction from "./components/ShowAccountTransactions.vue";
 import TransferToOtherAccount from "./components/TransferToOtherAccount";
+import ShowAccountTransactions from "./components/ShowAccountTransactions";
+import ShowCreditTransactions from "./components/ShowCreditTransactions";
 import CreditCardPayment from "./components/CreditCardPayment";
 
 Vue.use(Router);
@@ -87,9 +89,14 @@ export default new Router({
       component: RechercheUserByAdmin
     },
     {
-      path: "/ShowTransaction",
-      name: "ShowTransaction",
-      component: ShowTransaction
+      path: "/ShowAccountTransactions",
+      name: "ShowAccountTransactions",
+      component: ShowAccountTransactions
+    },
+    {
+      path: "/ShowCreditTransactions",
+      name: "ShowCreditTransactions",
+      component: ShowCreditTransactions
     },
     {
       path: "/TransferToOtherAccount",
