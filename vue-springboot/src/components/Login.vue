@@ -60,10 +60,7 @@
         localStorage.token = req.data.accessToken
         localStorage.username = this.username
         console.log(req)
-        this.$router.push({
-          path: '/VerifyLogin',
-          //query: {username: this.username, password: this.password}-->
-        });
+        this.$router.push('/verifylogin');
       },
       loginFailed () {
         this.$router.push('/errorPage')
