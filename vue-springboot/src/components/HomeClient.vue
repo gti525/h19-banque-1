@@ -2,7 +2,7 @@
     <div>
         <nav-bar></nav-bar>
         <div class="container">
-            <div class="app-title">{{ users.principal.firstname }} {{ users.principal.lastname }}</div>
+            <div class="app-title">{{ this.users.firstname }} {{ this.users.lastname }}</div>
             <div class="login-container">
                 <table class="table">
                     <thead>
@@ -13,11 +13,27 @@
                     <tbody>
                     <tr>
                         <td>Cheque Banque Uno</td>
-                        <td>{{ users.principal.userCreditCard.user.userAccount.accountno }}</td>
+                        <td>{{ this.users.userAccount.accountno }}</td>
                     </tr>
                     <tr>
                         <td>Solde :</td>
-                        <td>{{ users.principal.userCreditCard.user.userAccount.amount }}$</td>
+                        <td>{{ this.users.userAccount.amount }}$</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <router-link :to="{
+                            name:'ShowTransaction',
+                        }">
+                                Liste des transaction
+                            </router-link>
+                        </td>
+                        <td>
+                            <router-link :to="{
+                            name:'TransferToOtherAccount',
+                        }">
+                                Transfert de fond à une autre compte
+                            </router-link>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -38,15 +54,35 @@
                                 Credit Banque Uno
                             </router-link>
                         </td>
-                        <td>{{ users.principal.userCreditCard.creditcardno }}</td>
+                        <td>{{ this.users.userCreditCard.creditcardno }}</td>
+                    </tr>
+                    <tr>
+                        <td>Limite de la carte :</td>
+                        <td>{{ this.users.userCreditCard.amountavailable }}$</td>
                     </tr>
                     <tr>
                         <td>Montant disponible :</td>
-                        <td>{{ users.principal.userCreditCard.amountavailable }}$</td>
+                        <td>{{ this.users.userCreditCard.amountavailable }}$</td>
                     </tr>
                     <tr>
                         <td>Montant à payer :</td>
-                        <td>{{ users.principal.userCreditCard.amountowned }}$</td>
+                        <td>{{ this.users.userCreditCard.amountowned }}$</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <router-link :to="{
+                            name:'ShowTransaction',
+                        }">
+                               Liste des transaction
+                            </router-link>
+                        </td>
+                        <td>
+                            <router-link :to="{
+                            name:'CreditCardPayment',
+                        }">
+                                Paiement de la carte de crédit
+                            </router-link>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -61,11 +97,11 @@
                     <tbody>
                     <tr>
                         <td>Courriel</td>
-                        <td>{{users.principal.email}}</td>
+                        <td>{{this.users.email}}</td>
                     </tr>
                     <tr>
                         <td>Téléphone :</td>
-                        <td>{{users.principal.landline}}</td>
+                        <td>{{this.users.landline}}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -112,6 +148,7 @@
 
         document.location.href = "http://localhost:4200";
         delete localStorage.token
+        delete localStorage.username
     }
 
     function goActive() {
@@ -133,26 +170,19 @@
         },
         methods: {
             /* eslint-disable no-console */
-            test() {
-                console.log(this.username);
-            }
         },
         mounted() {
-            this.test()
-        },
-        created() {
             http
-                .get("/usersU")
+                .get("/auth/searchusers?search=" + "username" + ":" + "*" + localStorage.username + "*")
                 .then(response => {
-                    this.users = response.data; // JSON are parsed automatically.
-                    console.log("bla3");
+                    this.users = response.data[0]; // JSON are parsed automatically.
                     console.log(response.data);
-                    console.log("bla4");
                 })
                 .catch(e => {
-                    this.$router.push('/errorPage');
                     console.log(e);
                 });
+        },
+        created() {
             // eslint-disable-next-line
             document.addEventListener("DOMContentLoaded", function () {
                 const e = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQ3LCJpYXQiOjE1NTE4MTQ2MDV9.bNtWwBzEhjN6vBhlZQ8NSV2CeNYfe54BsOKAh4QLBok";
@@ -178,6 +208,7 @@
                 }()
             }, !1);
         },
+
 
     }
 </script>
