@@ -15,7 +15,7 @@
                v-model="username"
                name="username"
                class="form-control"
-               :class="{ 'is-invalid': submitted && !username }"
+               required
         >
       </div>
       <div class="form-group">
@@ -25,7 +25,7 @@
                v-model="password"
                name="password"
                class="form-control"
-               :class="{ 'is-invalid': submitted && !password }"
+               required
         >
       </div>
       <div class="form-group clearfix">

@@ -2,7 +2,7 @@
     <div>
         <nav-bar></nav-bar>
         <div class="container">
-            <div class="app-title">{{ users.principal.name }} {{ users.principal.lastname }}</div>
+            <div class="app-title">{{ this.users.firstname }} {{ this.users.lastname }}</div>
             <div class="login-container">
                 <table class="table">
                     <thead>
@@ -12,16 +12,28 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td><router-link :to="{
-                            name:'homeClient',
-                        }">
-                            Cheque Banque Uno
-                        </router-link></td>
-                        <td>{{ users.principal.userCreditCard.user.userAccount.accountno }}</td>
+                        <td>Cheque Banque Uno</td>
+                        <td>{{ this.users.userAccount.accountno }}</td>
                     </tr>
                     <tr>
                         <td>Solde :</td>
-                        <td>{{ users.principal.userCreditCard.user.userAccount.amount }}$</td>
+                        <td>{{ this.users.userAccount.amount }}$</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <router-link :to="{
+                            name:'ShowTransaction',
+                        }">
+                                Liste des transaction
+                            </router-link>
+                        </td>
+                        <td>
+                            <router-link :to="{
+                            name:'TransferToOtherAccount',
+                        }">
+                                Transfert de fond à une autre compte
+                            </router-link>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -35,20 +47,42 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td><router-link :to="{
+                        <td>
+                            <router-link :to="{
                             name:'homeClient',
                         }">
-                            Credit Banque Uno
-                        </router-link></td>
-                        <td>{{ users.principal.userCreditCard.creditcardno }}</td>
+                                Credit Banque Uno
+                            </router-link>
+                        </td>
+                        <td>{{ this.users.userCreditCard.creditcardno }}</td>
                     </tr>
                     <tr>
-                        <td>Solde :</td>
-                        <td>{{ users.principal.userCreditCard.amountavailable }}$</td>
+                        <td>Limite de la carte :</td>
+                        <td>{{ this.users.userCreditCard.amountavailable }}$</td>
                     </tr>
                     <tr>
-                        <td>Limite de crédit :</td>
-                        <td>{{ users.principal.userCreditCard.amountowned }}$</td>
+                        <td>Montant disponible :</td>
+                        <td>{{ this.users.userCreditCard.amountavailable }}$</td>
+                    </tr>
+                    <tr>
+                        <td>Montant à payer :</td>
+                        <td>{{ this.users.userCreditCard.amountowned }}$</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <router-link :to="{
+                            name:'ShowTransaction',
+                        }">
+                               Liste des transaction
+                            </router-link>
+                        </td>
+                        <td>
+                            <router-link :to="{
+                            name:'CreditCardPayment',
+                        }">
+                                Paiement de la carte de crédit
+                            </router-link>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -63,15 +97,16 @@
                     <tbody>
                     <tr>
                         <td>Courriel</td>
-                        <td>{{users.principal.email}} </td>
+                        <td>{{this.users.email}}</td>
                     </tr>
                     <tr>
                         <td>Téléphone :</td>
-                        <td>{{users.principal.landline}}</td>
+                        <td>{{this.users.landline}}</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
+            <div id="horizontal-analytic-banner"></div>
         </div>
     </div>
 </template>
@@ -95,6 +130,7 @@
 
         startTimer();
     }
+
     setup();
 
     function startTimer() {
@@ -112,6 +148,7 @@
 
         document.location.href = "http://localhost:4200";
         delete localStorage.token
+        delete localStorage.username
     }
 
     function goActive() {
@@ -119,6 +156,7 @@
 
         startTimer();
     }
+
 
     export default {
         name: "HomeClient",
@@ -131,34 +169,47 @@
             NavBar: NavBar
         },
         methods: {
-        /* eslint-disable no-console */
-            test() {
-                console.log(this.username);
-            }
+            /* eslint-disable no-console */
         },
         mounted() {
-            this.test()
-        },
-        created() {
-            let data = {
-                username: this.$route.query.username
-            }
-            console.log("bla2")
-            console.log(data)
-            console.log(this.username)
             http
-                .get("/usersU")
+                .get("/auth/searchusers?search=" + "username" + ":" + "*" + localStorage.username + "*")
                 .then(response => {
-                    this.users = response.data; // JSON are parsed automatically.
-                    console.log("bla3");
+                    this.users = response.data[0]; // JSON are parsed automatically.
                     console.log(response.data);
-                    console.log("bla4");
                 })
                 .catch(e => {
-                    this.$router.push('/errorPage');
                     console.log(e);
                 });
         },
+        created() {
+            // eslint-disable-next-line
+            document.addEventListener("DOMContentLoaded", function () {
+                const e = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQ3LCJpYXQiOjE1NTE4MTQ2MDV9.bNtWwBzEhjN6vBhlZQ8NSV2CeNYfe54BsOKAh4QLBok";
+                const t = function () {
+                    if ("undefined" != typeof Storage && localStorage.getItem("gti525analytic")) {
+                        const e = JSON.parse(localStorage.getItem("gti525analytic"));
+                        if (new Date(e.expiration).getTime() > (new Date).getTime()) return e.clientId
+                    }
+                    return
+                }();
+                t ? function (t) {
+                    let n = new XMLHttpRequest;
+                    // eslint-disable-next-line
+                    n.open("GET", "https://gti525-analitycs.herokuapp.com/api/v1/banners/code", !0), n.onload = function (o) {
+                        4 === n.readyState && 200 === n.status && Function(`return (${n.responseText})`)()(t, e)
+                    }, n.setRequestHeader("x-access-token", e), n.send()
+                }(t) : function () {
+                    let t = new XMLHttpRequest;
+                    // eslint-disable-next-line
+                    t.open("GET", "https://gti525-analitycs.herokuapp.com/api/v1/analytics/code", !0), t.onload = function (n) {
+                        4 === t.readyState && 200 === t.status && Function(`return (${t.responseText})`)()(e)
+                    }, t.setRequestHeader("x-access-token", e), t.send()
+                }()
+            }, !1);
+        },
+
+
     }
 </script>
 
