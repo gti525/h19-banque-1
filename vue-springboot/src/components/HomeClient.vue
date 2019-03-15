@@ -24,11 +24,7 @@
                             <button class="btn btn-outline-primary btn-common float-left" v-on:click="listAccountTransactions()">Liste des transactions</button>
                         </td>
                         <td>
-                            <router-link :to="{
-                                name:'TransferToOtherAccount',
-                            }">
-                                Transfert de fond à une autre compte
-                            </router-link>
+                            <button class="btn btn-outline-primary btn-common float-left" v-on:click="transferToOtherAccount()">Transfert de fond à une autre compte</button>
                         </td>
                     </tr>
                     </tbody>
@@ -69,11 +65,7 @@
                             <button class="btn btn-outline-primary btn-common float-left" v-on:click="listCreditTransactions()">Liste des transactions</button>
                         </td>
                         <td>
-                            <router-link :to="{
-                            name:'CreditCardPayment',
-                        }">
-                                Paiement de la carte de crédit
-                            </router-link>
+                            <button class="btn btn-outline-primary btn-common float-left" v-on:click="creditCardPayment()">Paiement de la carte de crédit</button>
                         </td>
                     </tr>
                     </tbody>
@@ -169,6 +161,16 @@
             listCreditTransactions(){
 
                 this.$router.push('/ShowCreditTransactions');
+            },
+
+            transferToOtherAccount(){
+
+                this.$router.push('/TransferToOtherAccount');
+            },
+
+            creditCardPayment(){
+
+                this.$router.push('/creditCardPayment');
             }
         },
         mounted() {

@@ -15,10 +15,10 @@
             </thead>
             <tbody>
                 <tr v-for="(transaction) in transactions" :key="transaction.id">
-                    <td>{{ transaction.number }}</td>
-                    <td>{{ transaction.data }}</td>
-                    <td>{{ transaction.action }}</td>
-                    <td>{{ transaction.amount }}</td>
+                    <td>{{ transaction.id }}</td>
+                    <td>{{ transaction.transdate }}</td>
+                    <td>{{ transaction.description }}</td>
+                    <td>{{ transaction.balance }}</td>
                 </tr>
             </tbody>
         </table>
