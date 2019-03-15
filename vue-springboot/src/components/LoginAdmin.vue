@@ -20,7 +20,8 @@
       </div>
       <div class="form-group">
         <label for="password">Mot de passe</label>
-        <input id="password"
+        <input @keyup.enter="customerLogin"
+               id="password"
                type="password"
                v-model="password"
                name="password"
