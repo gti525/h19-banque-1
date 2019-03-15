@@ -41,6 +41,10 @@
                     >
                 </div>
                 <div class="form-group">
+                    <label for="company">Compagnie</label>
+                    <input id="company" type="text" v-model="company" name="company" class="form-control">
+                </div>
+                <div class="form-group">
                     <label for="password">Mot de Passe</label>
                     <input
                             id="password"
@@ -67,7 +71,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="address">Réponse 1</label>
+                    <label for="address">Réponse 1 (La taille de la réponse doit être comprise entre 6 et 100 caractères)</label>
                     <input id="address" type="text" v-model="answer1" name="answer1" class="form-control">
                 </div>
                 <div class="form-group">
@@ -85,7 +89,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="address">Réponse 2</label>
+                    <label for="address">Réponse 2 (La taille de la réponse doit être comprise entre 6 et 100 caractères)</label>
                     <input type="text" v-model="answer2" name="answer2" class="form-control">
                 </div>
                 <div class="form-group">
@@ -142,19 +146,23 @@
                     <div class="panel-title">Compte crédit</div>
                     <div class="panel-content">
                         <div class="form-group">
-                            <label for="amount-avail">Montant d'argent disponible</label>
+                            <label for="amount-avail">Limite de crédit</label>
+                            <input
+                                    type="text"
+                                    v-model="creditLimit"
+                                    name="amount-avail"
+                                    class="form-control"
+                            >
+                        </div>
+                        <!--<div class="form-group">
+                            <label for="amount-avail">Crédit disponible</label>
                             <input
                                     type="text"
                                     v-model="creditbalanceavailable"
                                     name="amount-avail"
                                     class="form-control"
                             >
-                        </div>
-                        <div class="form-group">
-                            <label for="amount-owed">Solde</label>
-                            <input id="amount-owed" type="text" v-model="creditbalanceowned" name="amount-owed"
-                                   class="form-control">
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <div class="form-group clearfix">
@@ -215,12 +223,14 @@
         },
         data() {
             return {
+                company: '',
                 firstname: '',
                 lastname: '',
                 username: '',
+                creditLimit: '',
                 amount: '',
                 creditbalanceavailable: '',
-                creditbalanceowned: '',
+                creditbalanceowned: 0,
                 email: '',
                 role: '',
                 question1: '',
@@ -240,9 +250,11 @@
         methods: {
             createUserBtnClicked() {
                 let data = {
+                    company: this.company,
                     firstname: this.firstname,
                     lastname: this.lastname,
                     username: this.username,
+                    creditLimit: this.creditbalanceavailable,
                     amount: this.amount,
                     creditbalanceavailable: this.creditbalanceavailable,
                     creditbalanceowned: this.creditbalanceowned,
