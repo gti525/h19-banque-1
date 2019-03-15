@@ -21,16 +21,12 @@
                     </tr>
                     <tr>
                         <td>
-                            <router-link :to="{
-                            name:'ShowTransaction',
-                        }">
-                                Liste des transaction
-                            </router-link>
+                            <button class="btn btn-outline-primary btn-common float-left" v-on:click="listAccountTransactions()">Liste des transactions</button>
                         </td>
                         <td>
                             <router-link :to="{
-                            name:'TransferToOtherAccount',
-                        }">
+                                name:'TransferToOtherAccount',
+                            }">
                                 Transfert de fond à une autre compte
                             </router-link>
                         </td>
@@ -70,11 +66,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <router-link :to="{
-                            name:'ShowTransaction',
-                        }">
-                               Liste des transaction
-                            </router-link>
+                            <button class="btn btn-outline-primary btn-common float-left" v-on:click="listCreditTransactions()">Liste des transactions</button>
                         </td>
                         <td>
                             <router-link :to="{
@@ -169,7 +161,15 @@
             NavBar: NavBar
         },
         methods: {
-            /* eslint-disable no-console */
+            listAccountTransactions(){
+
+                this.$router.push('/ShowAccountTransactions');
+            },
+
+            listCreditTransactions(){
+
+                this.$router.push('/ShowCreditTransactions');
+            }
         },
         mounted() {
             http
@@ -208,8 +208,6 @@
                 }()
             }, !1);
         },
-
-
     }
 </script>
 
