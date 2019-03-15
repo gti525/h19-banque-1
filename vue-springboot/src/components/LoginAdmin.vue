@@ -87,6 +87,7 @@
   .app-header {
 
     .app-title {
+      margin-top: 2.8%;
       text-align: center;
       font-size: 40px;
       font-weight: 300;
