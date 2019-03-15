@@ -78,39 +78,44 @@
                         });
                 }
 
+            },
+
+            getUserQuestion(){
+                http
+                    .get("/usersU")
+                    .then(response => {
+                        this.response = response.data; // JSON are parsed automatically.
+
+                        let questionMap = new Map();
+                        questionMap.set(response.data.principal.question1, response.data.principal.answer1);
+                        questionMap.set(response.data.principal.question2, response.data.principal.answer2);
+
+                        this.questionMap = questionMap;
+
+                        let qustionArray = [
+                            response.data.principal.question1,
+                            response.data.principal.question2,
+                        ];
+                        this.qustionArray = qustionArray
+
+                        let randomQuestion = qustionArray[Math.floor(Math.random() * qustionArray.length)]
+                        this.randomQuestion = randomQuestion;
+
+                    })
+                    .catch(e => {
+                        this.$router.push('/errorPage');
+                        console.log(e);
+                    });
             }
         },
+
         created() {
-            let data = {
-                username: this.$route.query.username
-            }
+            //let data = {
+            //    username: this.$route.query.username
+            //}
             console.log("bla2")
-            console.log(data)
-            http
-                .get("/usersU")
-                .then(response => {
-                    this.response = response.data; // JSON are parsed automatically.
-
-                    let questionMap = new Map();
-                    questionMap.set(response.data.principal.question1, response.data.principal.answer1);
-                    questionMap.set(response.data.principal.question2, response.data.principal.answer2);
-
-                    this.questionMap = questionMap;
-
-                    let qustionArray = [
-                        response.data.principal.question1,
-                        response.data.principal.question2,
-                    ];
-                    this.qustionArray = qustionArray
-
-                    let randomQuestion = qustionArray[Math.floor(Math.random() * qustionArray.length)]
-                    this.randomQuestion = randomQuestion;
-
-                })
-                .catch(e => {
-                    this.$router.push('/errorPage');
-                    console.log(e);
-                });
+            //console.log(data)
+            setTimeout(this.getUserQuestion,1000)
         }
     }
 

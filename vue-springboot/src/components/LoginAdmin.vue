@@ -86,12 +86,10 @@
 
   .app-header {
 
-    margin-top: 20%;
-
     .app-title {
       text-align: center;
       font-size: 40px;
-      font-weight: 600;
+      font-weight: 300;
       color: #002ec3;
       font-family: 'Hind Siliguri', sans-serif;
 
