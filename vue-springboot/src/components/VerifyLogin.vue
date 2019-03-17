@@ -55,6 +55,7 @@
                         .then(response => {
                             console.log(response.data);
                             this.$router.push('/HomeClient');
+                            location.reload();
                         })
                         .catch(() => this.wrongAnwser())
                 } else {
@@ -63,6 +64,7 @@
                         .then(response => {
                             console.log(response.data);
                             this.$router.push('/HomeClient');
+                            location.reload();
                         })
                         .catch(() => this.wrongAnwser())
                 }

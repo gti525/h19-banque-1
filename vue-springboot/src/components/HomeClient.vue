@@ -92,11 +92,14 @@
             </div>
             <div id="horizontal-analytic-banner"></div>
         </div>
+        <div class="app-title"></div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
     import NavBar from './NavBarClient.vue';
+    import Footer from './Footer.vue'
     import http from "../http-common";
 
     /* eslint-disable no-console */
@@ -150,7 +153,8 @@
             }
         },
         components: {
-            NavBar: NavBar
+            NavBar: NavBar,
+            Footer: Footer
         },
         methods: {
             listAccountTransactions(){
@@ -173,7 +177,7 @@
                 this.$router.push('/creditCardPayment');
             }
         },
-        mounted() {
+        created() {
             http
                 .get("/auth/searchusers?search=" + "username" + ":" + "*" + localStorage.username + "*")
                 .then(response => {
@@ -182,9 +186,10 @@
                 })
                 .catch(e => {
                     console.log(e);
+                    alert("Impossible de charger les informations")
                 });
         },
-        created() {
+        mounted () {
             // eslint-disable-next-line
             document.addEventListener("DOMContentLoaded", function () {
                 const e = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQ3LCJpYXQiOjE1NTE4MTQ2MDV9.bNtWwBzEhjN6vBhlZQ8NSV2CeNYfe54BsOKAh4QLBok";
