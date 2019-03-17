@@ -12,11 +12,11 @@
             <tbody>
             <tr class="design">
                 <th scope="row">Cheque</th>
-                <td> {{ users }}{{dollardCheque}}</td>
+                <td> {{dollardCheque}}</td>
             </tr>
             <tr>
                 <th scope="row">Crédit</th>
-                <td>{{ users }}{{dollardCredit}}</td>
+                <td>{{dollardCredit}}</td>
             </tr>
             <!--    <tr class="table-primary"> -->
             </tbody>
@@ -76,6 +76,7 @@
         data() {
             return {
                 id: 0,
+                username: '',
                 users: [],
                 dollardCheque: ".00$",
                 dollardCredit: ".00$"
@@ -84,21 +85,22 @@
         /* eslint-disable no-console */
         created() {
             this.id = this.$route.params.id;
-            console.log(this.id)
-
+            this.username = this.$route.params.username;
+            console.log(this.$route.params)
+            console.log(this.username)
         },
         methods: {
             /* eslint-disable no-console */
             saveUser() {
                 console.log("test123" + "  " +this.id)
                 http
-                    .get("/users/" + this.id)
+                    //.get("/users/" + this.id)
+                    .get("/auth/searchusers?search=" + "username" + ":" + "*" + this.username + "*")
                     .then(response => {
-                        this.users = response.data; // JSON are parsed automatically.
+                        this.users = response.data[0]; // JSON are parsed automatically.
                        // console.log(this.users)
-                       // this.dollardCheque =
-                       // this.dollardCredit =
-                        console.log(response.data);
+                        this.dollardCheque = this.users.userAccount.amount + " $"
+                        this.dollardCredit = this.users.userCreditCard.amountowned + " $"
                     })
                     .catch(e => {
                         console.log(e);
