@@ -50,7 +50,7 @@
                     </tr>
                     <tr>
                         <td>Limite de la carte :</td>
-                        <td>{{ this.users.userCreditCard.amountavailable }}$</td>
+                        <td>{{ this.users.userCreditCard.creditLimit }}$</td>
                     </tr>
                     <tr>
                         <td>Montant disponible :</td>

@@ -128,7 +128,7 @@
                     <input id="country" type="text" v-model="country" name="country" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="zip">Zip</label>
+                    <label for="zip">Code Postal</label>
                     <input id="zip" type="zip" v-model="zip" name="zip" class="form-control">
                 </div>
                 <div class="panel-section">
@@ -145,24 +145,26 @@
                 <div class="panel-section">
                     <div class="panel-title">Compte crédit</div>
                     <div class="panel-content">
+                        <!-- <div class="form-group">
+                             <label for="creditLimit">Limite de crédit</label>
+                             <input
+                                     id="creditLimit"
+                                     type="text"
+                                     v-model="creditLimit"
+                                     name="creditLimit"
+                                     class="form-control"
+                             >
+                         </div>-->
                         <div class="form-group">
-                            <label for="amount-avail">Limite de crédit</label>
+                            <label for="creditbalanceavailable">Crédit disponible</label>
                             <input
-                                    type="text"
-                                    v-model="creditLimit"
-                                    name="amount-avail"
-                                    class="form-control"
-                            >
-                        </div>
-                        <!--<div class="form-group">
-                            <label for="amount-avail">Crédit disponible</label>
-                            <input
+                                    id="creditbalanceavailable"
                                     type="text"
                                     v-model="creditbalanceavailable"
                                     name="amount-avail"
                                     class="form-control"
                             >
-                        </div>-->
+                        </div>
                     </div>
                 </div>
                 <div class="form-group clearfix">
@@ -171,14 +173,12 @@
                 </div>
             </div>
         </div>
-        <Footer></Footer>
     </div>
 </template>
 
 <script>
     import NavBar from "./NavBarAdmin.vue";
     import http from "../http-common";
-    import Footer from './Footer.vue'
 
     /* eslint-disable no-console */
 
@@ -221,9 +221,7 @@
     export default {
         name: "Login",
         components: {
-            NavBar: NavBar,
-            Footer: Footer
-
+            NavBar
         },
         data() {
             return {
@@ -258,7 +256,7 @@
                     firstname: this.firstname,
                     lastname: this.lastname,
                     username: this.username,
-                    creditLimit: this.creditbalanceavailable,
+                    creditLimit: this.creditLimit,
                     amount: this.amount,
                     creditbalanceavailable: this.creditbalanceavailable,
                     creditbalanceowned: this.creditbalanceowned,
