@@ -81,6 +81,7 @@
             return {
                 id: 0,
                 username: '',
+                searchFile: '',
                 users: [],
                 dollardCheque: ".00$",
                 dollardCredit: ".00$"
@@ -90,6 +91,7 @@
         created() {
             this.id = this.$route.params.id;
             this.username = this.$route.params.username;
+            this.searchFile = this.$route.params.searchFile;
             console.log(this.$route.params)
             console.log(this.username)
         },
@@ -99,7 +101,7 @@
                 console.log("test123" + "  " +this.id)
                 http
                     //.get("/users/" + this.id)
-                    .get("/auth/searchusers?search=" + "username" + ":" + "*" + this.username + "*")
+                    .get("/auth/searchusers?search=" + this.searchFile + ":" + "*" + this.username + "*")
                     .then(response => {
                         this.users = response.data[0]; // JSON are parsed automatically.
                        // console.log(this.users)
