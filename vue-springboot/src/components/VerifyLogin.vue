@@ -8,7 +8,7 @@
                 <h2>Vérification de l'accès</h2></div>
             <div class="form-group">
                 <label>{{this.randomQuestion}}</label>
-                <input
+                <input @keyup.enter="verify"
                         type="text"
                         v-model="text"
                         name="text"
@@ -56,10 +56,7 @@
                             console.log(response.data);
                             this.$router.push('/HomeClient');
                         })
-                        .catch(e => {
-                            this.$router.push('/errorPage');
-                            console.log(e);
-                        });
+                        .catch(() => this.wrongAnwser())
                 } else {
                     http
                         .post("/auth/verify1", { question1: this.randomQuestion, answer1: this.text })
@@ -67,17 +64,19 @@
                             console.log(response.data);
                             this.$router.push('/HomeClient');
                         })
-                        .catch(e => {
-                            this.$router.push('/errorPage');
-                            console.log(e);
-                        });
+                        .catch(() => this.wrongAnwser())
                 }
 
-            }
+            },
+            wrongAnwser () {
+                alert("Mauvaise réponse entrer veuillez recommancer")
+
+            },
+            loading () {
+                location.reload();
+            },
         },
         created() {
-            console.log("bla2")
-            console.log()
             http
                 .get("/auth/searchusers?search=" + "username" + ":" + "*" + localStorage.username + "*")
                 .then(response => {
@@ -97,11 +96,9 @@
                         let randomQuestion = qustionArray[Math.floor(Math.random() * qustionArray.length)]
                         this.randomQuestion = randomQuestion;
                     })
-                    .catch(e => {
-                        this.$router.push('/errorPage');
-                        console.log(e);
-                    });
-            }
+                .catch(() => this.loading())
+            },
+
         }
 
 

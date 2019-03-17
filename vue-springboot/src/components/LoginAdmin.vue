@@ -67,13 +67,10 @@
         this.error = false
         localStorage.token = req.data.accessToken
         console.log(req)
-        this.$router.push({
-          path: '/VerifyLoginAdmin',
-          //query: {username: this.username, password: this.password}-->
-        });
+        this.$router.push('/VerifyLoginAdmin')
       },
       loginFailed () {
-        this.$router.push('/errorPage')
+        alert("Mauvaise information rentrer")
         delete localStorage.token
       },
       clientRedirect () {

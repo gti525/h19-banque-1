@@ -64,7 +64,7 @@
         this.$router.push('/VerifyLogin')
       },
       loginFailed () {
-        this.$router.push('/errorPage')
+        alert("Mauvaise information rentrer")
         delete localStorage.token
       },
       adminRedirect() {

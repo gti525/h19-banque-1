@@ -9,7 +9,7 @@
                 <h2>Vérification de l'accès</h2></div>
             <div class="form-group">
                 <label>{{this.randomQuestion}}</label>
-                <input
+                <input @keyup.enter="verify"
                         type="text"
                         v-model="text"
                         name="text"
@@ -54,32 +54,27 @@
                         .post("/auth/verify2", { question2: this.randomQuestion, answer2: this.text })
                         .then(response => {
                             console.log(response.data);
-                            this.$router.push({
-                                path : '/HomeAdmin',
-                                //   query: {username: this.$route.query.username}
-                            })
+                            this.$router.push('/HomeAdmin');
                         })
-                        .catch(e => {
-                            this.$router.push('/errorPage');
-                            console.log(e);
-                        });
+                        .catch(() => this.wrongAnwser())
                 } else {
                     http
                         .post("/auth/verify1", { question1: this.randomQuestion, answer1: this.text })
                         .then(response => {
                             console.log(response.data);
-                            this.$router.push({
-                                path : '/HomeAdmin',
-                                //   query: {username: this.$route.query.username}
-                            })
+                            this.$router.push('/HomeAdmin');
                         })
-                        .catch(e => {
-                            this.$router.push('/errorPage');
-                            console.log(e);
-                        });
+                        .catch(() => this.wrongAnwser())
                 }
 
-            }
+            },
+            wrongAnwser () {
+                alert("Mauvaise réponse entrer veuillez recommancer")
+            },
+            loading () {
+                location.reload();
+                alert("Erreur en démarrant les message")
+            },
         },
         created() {
             let data = {
@@ -108,10 +103,7 @@
                     this.randomQuestion = randomQuestion;
 
                 })
-                .catch(e => {
-                    this.$router.push('/errorPage');
-                    console.log(e);
-                });
+                .catch(() => this.loading())
         }
     }
 </script>
