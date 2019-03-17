@@ -72,39 +72,32 @@
                 alert("Mauvaise réponse entrer veuillez recommancer")
             },
             loading () {
-                location.reload();
-                alert("Erreur en démarrant les message")
+                console.log("34443")
+               // location.reload();
             },
         },
         created() {
-            let data = {
-                username: this.$route.query.username
-            }
-            console.log("bla2")
-            console.log(data)
             http
-                .get("/usersA")
+                .get("/auth/searchusers?search=" + "username" + ":" + "*" + localStorage.username + "*")
                 .then(response => {
-                    this.response = response.data; // JSON are parsed automatically.
+                    this.users = response.data[0]; // JSON are parsed automatically.
+                    console.log(response.data);
 
                     let questionMap = new Map();
-                    questionMap.set(response.data.principal.question1, response.data.principal.answer1);
-                    questionMap.set(response.data.principal.question2, response.data.principal.answer2);
-
-                    this.questionMap = questionMap;
+                    questionMap.set(this.users.question1, this.users.answer1);
+                    questionMap.set(this.users.question2, this.users.answer2);
 
                     let qustionArray = [
-                        response.data.principal.question1,
-                        response.data.principal.question2,
+                        this.users.question1,
+                        this.users.question2,
                     ];
                     this.qustionArray = qustionArray
 
                     let randomQuestion = qustionArray[Math.floor(Math.random() * qustionArray.length)]
                     this.randomQuestion = randomQuestion;
-
                 })
                 .catch(() => this.loading())
-        }
+        },
     }
 </script>
 <style lang="scss" scoped>

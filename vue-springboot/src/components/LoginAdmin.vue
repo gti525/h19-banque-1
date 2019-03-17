@@ -66,6 +66,7 @@
         }
         this.error = false
         localStorage.token = req.data.accessToken
+        localStorage.username = this.username
         console.log(req)
         this.$router.push('/VerifyLoginAdmin')
       },
