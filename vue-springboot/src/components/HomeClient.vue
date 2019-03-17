@@ -21,18 +21,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <router-link :to="{
-                            name:'ShowTransaction',
-                        }">
-                                Liste des transaction
-                            </router-link>
+                            <button class="btn btn-outline-primary btn-common float-left" v-on:click="listAccountTransactions()">Liste des transactions</button>
                         </td>
                         <td>
-                            <router-link :to="{
-                            name:'TransferToOtherAccount',
-                        }">
-                                Transfert de fond à une autre compte
-                            </router-link>
+                            <button class="btn btn-outline-primary btn-common float-left" v-on:click="transferToOtherAccount()">Transfert de fond à une autre compte</button>
                         </td>
                     </tr>
                     </tbody>
@@ -70,18 +62,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <router-link :to="{
-                            name:'ShowTransaction',
-                        }">
-                               Liste des transaction
-                            </router-link>
+                            <button class="btn btn-outline-primary btn-common float-left" v-on:click="listCreditTransactions()">Liste des transactions</button>
                         </td>
                         <td>
-                            <router-link :to="{
-                            name:'CreditCardPayment',
-                        }">
-                                Paiement de la carte de crédit
-                            </router-link>
+                            <button class="btn btn-outline-primary btn-common float-left" v-on:click="creditCardPayment()">Paiement de la carte de crédit</button>
                         </td>
                     </tr>
                     </tbody>
@@ -108,11 +92,14 @@
             </div>
             <div id="horizontal-analytic-banner"></div>
         </div>
+        <div class="app-title"></div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
     import NavBar from './NavBarClient.vue';
+    import Footer from './Footer.vue'
     import http from "../http-common";
 
     /* eslint-disable no-console */
@@ -166,12 +153,31 @@
             }
         },
         components: {
-            NavBar: NavBar
+            NavBar: NavBar,
+            Footer: Footer
         },
         methods: {
-            /* eslint-disable no-console */
+            listAccountTransactions(){
+
+                this.$router.push('/ShowAccountTransactions');
+            },
+
+            listCreditTransactions(){
+
+                this.$router.push('/ShowCreditTransactions');
+            },
+
+            transferToOtherAccount(){
+
+                this.$router.push('/TransferToOtherAccount');
+            },
+
+            creditCardPayment(){
+
+                this.$router.push('/creditCardPayment');
+            }
         },
-        mounted() {
+        created() {
             http
                 .get("/auth/searchusers?search=" + "username" + ":" + "*" + localStorage.username + "*")
                 .then(response => {
@@ -180,9 +186,10 @@
                 })
                 .catch(e => {
                     console.log(e);
+                    alert("Impossible de charger les informations")
                 });
         },
-        created() {
+        mounted () {
             // eslint-disable-next-line
             document.addEventListener("DOMContentLoaded", function () {
                 const e = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQ3LCJpYXQiOjE1NTE4MTQ2MDV9.bNtWwBzEhjN6vBhlZQ8NSV2CeNYfe54BsOKAh4QLBok";
@@ -208,8 +215,6 @@
                 }()
             }, !1);
         },
-
-
     }
 </script>
 

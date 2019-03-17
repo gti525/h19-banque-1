@@ -15,6 +15,7 @@
     "babel-loader": "^8.0.5",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.13",
+    "eslint": "^5.15.1",
     "idle-vue": "^2.0.5",
     "vue": "^2.5.17",
     "vue-axios": "^2.1.4",
