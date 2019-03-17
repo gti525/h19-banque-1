@@ -24,6 +24,7 @@
         <div class="btn-group" aria-label="Basic example">
             <a href="/homeadmin" class="btn btn-primary" role="button">Retour</a>
         </div>
+        <Footer></Footer>
     </div>
 
 </template>
@@ -31,6 +32,8 @@
 <script>
     import NavBar from './NavBarAdmin.vue';
     import http from "../http-common";
+    import Footer from './Footer.vue'
+
     /* eslint-disable no-console */
 
     var timeoutID;
@@ -71,7 +74,8 @@
     export default {
         name: "AdminCompteClient",
         components: {
-            NavBar: NavBar
+            NavBar: NavBar,
+            Footer: Footer
         },
         data() {
             return {
