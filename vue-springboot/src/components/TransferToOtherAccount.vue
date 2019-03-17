@@ -41,6 +41,7 @@
     </div>
 </template>
 
+
 <script>
     import NavBar from "./NavBarClient.vue";
     import http from "../http-common";
@@ -98,34 +99,38 @@
             /* eslint-disable no-console */
             transferMoneyBtnClicked() {
                 //here should send the request to the backend and get to know if the username and password match
+                let data = {
+                    senderaccountno: this.senderaccountno,
+                    receiveraccountno: this.receiveraccountno,
+                    amount: this.amount,
+                }
                 http
-                    .post("/auth/Transfer", {receiveraccountno: this.receiveraccountno, amount: this.amount})
+                    .post("/auth/Transfer", data)
                     .then(request => this.transferSuccessful(request))
                     .catch(() => this.transferFailed())
             },
-        },
-        transferSuccessful(req) {
-            if (!req.data.accessToken) {
-                console.log(req)
-                this.transferFailed()
-                return
-            }
-            this.error = false
-            localStorage.token = req.data.accessToken
-            localStorage.receiveraccountno = this.receiveraccountno
+    transferSuccessful(req) {
+        if (!req.data.accessToken) {
             console.log(req)
-            this.$router.push('/HomeClient');
-        },
-        transferFailed() {
-            this.$router.push('/errorPage');
-            delete localStorage.token;
-        },
-        adminRedirect() {
-            this.$router.push("/loginAdmin")
+            this.transferFailed()
+            return
+        }
+        this.error = false
+        localStorage.token = req.data.accessToken
+        localStorage.receiveraccountno = this.receiveraccountno
+        console.log(req)
+        this.$router.push('/HomeClient')
+    },
+    transferFailed() {
+        this.$router.push('/errorPage');
+        delete localStorage.token;
+    },
+    adminRedirect() {
+        this.$router.push("/loginAdmin")
+    }
         }
     };
 </script>
-
 <style lang="scss" scoped>
     @import "../scss/common.scss";
 
