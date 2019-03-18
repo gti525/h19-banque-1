@@ -13,9 +13,9 @@ import ErrorPage from "./components/ErrorPage";
 import AdminCompteClient from "./components/AdminCompteClient.vue";
 import RechercheUserByAdmin from "./components/RechercheUserByAdmin.vue";
 import HomeClient from "./components/HomeClient.vue";
-import ShowTransaction from "./components/ShowAccountTransactions.vue";
 import TransferToOtherAccount from "./components/TransferToOtherAccount";
 import ShowAccountTransactions from "./components/ShowAccountTransactions";
+import ShowAccountTransactionsAdmin from "./components/ShowAccountTransactionsAdmin";
 import ShowCreditTransactions from "./components/ShowCreditTransactions";
 import CreditCardPayment from "./components/CreditCardPayment";
 
@@ -54,10 +54,16 @@ export default new Router({
           component: AdminCompteClient,
     },
     {
+      path: "/ShowAccountTransactionsAdmin/:id",
+      name: "ShowAccountTransactionsAdmin-details",
+      component: ShowAccountTransactionsAdmin,
+    },
+    {
       path: "/",
       name: "login",
       component: Login
     },
+
     {
       path: "/verifylogin",
       name: "verifylogin",
