@@ -12,11 +12,11 @@
             <tbody>
             <tr class="design">
                 <th scope="row">Cheque</th>
-                <td> {{dollardCheque}}</td>
+                <td> {{ users }}{{dollard}}</td>
             </tr>
             <tr>
                 <th scope="row">Crédit</th>
-                <td>{{dollardCredit}}</td>
+                <td>{{ users }}{{dollard}}</td>
             </tr>
             <!--    <tr class="table-primary"> -->
             </tbody>
@@ -24,7 +24,6 @@
         <div class="btn-group" aria-label="Basic example">
             <a href="/homeadmin" class="btn btn-primary" role="button">Retour</a>
         </div>
-        <Footer></Footer>
     </div>
 
 </template>
@@ -32,8 +31,6 @@
 <script>
     import NavBar from './NavBarAdmin.vue';
     import http from "../http-common";
-    import Footer from './Footer.vue'
-
     /* eslint-disable no-console */
 
     var timeoutID;
@@ -74,39 +71,29 @@
     export default {
         name: "AdminCompteClient",
         components: {
-            NavBar: NavBar,
-            Footer: Footer
+            NavBar: NavBar
         },
         data() {
             return {
                 id: 0,
-                username: '',
-                searchFile: '',
                 users: [],
-                dollardCheque: ".00$",
-                dollardCredit: ".00$"
+                dollard: ".00$"
             }
         },
         /* eslint-disable no-console */
         created() {
             this.id = this.$route.params.id;
-            this.username = this.$route.params.username;
-            this.searchFile = this.$route.params.searchFile;
-            console.log(this.$route.params)
-            console.log(this.username)
+            console.log(this.id)
         },
         methods: {
             /* eslint-disable no-console */
             saveUser() {
                 console.log("test123" + "  " +this.id)
                 http
-                    //.get("/users/" + this.id)
-                    .get("/auth/searchusers?search=" + this.searchFile + ":" + "*" + this.username + "*")
+                    .get("/users/" + this.id)
                     .then(response => {
-                        this.users = response.data[0]; // JSON are parsed automatically.
-                       // console.log(this.users)
-                        this.dollardCheque = this.users.userAccount.amount + " $"
-                        this.dollardCredit = this.users.userCreditCard.amountowned + " $"
+                        this.users = response.data; // JSON are parsed automatically.
+                        console.log(response.data);
                     })
                     .catch(e => {
                         console.log(e);

@@ -7,42 +7,23 @@
                 <th scope="col">Nom du client</th>
                 <th scope="col">Courriel</th>
                 <th scope="col">Numéro de téléphone</th>
-                <th scope="col">Transaction carte de compte courant</th>
-                <th scope="col">Transaction carte de credit</th>
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(user) in users" :key="user.id" v-if="user.roles[0].name === 'ROLE_USER'">
+            <tr v-for="(user) in users" :key="user.id">
                 <td>
                     <router-link :to="{
                             name: 'AdminCompteClient-details',
-                            params: { user: user, id: user.id, username: user.username, searchFile: 'username' }
+                            params: { user: user, id: user.id, firstname: user.firstname }
                         }">
-                        {{user.firstname}} {{ user.lastname }}
+                        {{user.name}} {{ user.lastname }}
                     </router-link>
                 </td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.landline }}</td>
-                <td>
-                    <router-link :to="{
-                            name: 'ShowAccountTransactionsAdmin-details',
-                            params: {id: user.id, username: user.username, searchFile: 'userAccount', textUsername: 'username' }
-                        }">
-                        {{user.userAccount.accountno}}
-                    </router-link>
-                </td>
-                <td>
-                    <router-link :to="{
-                            name: 'ShowAccountTransactionsAdmin-details',
-                            params: {id: user.id, username: user.username, searchFile: 'userCreditCard', textUsername: 'username' }
-                        }">
-                        {{user.userCreditCard.creditcardno}}
-                    </router-link>
-                </td>
             </tr>
             </tbody>
         </table>
-        <Footer></Footer>
     </div>
 
 </template>
@@ -50,7 +31,6 @@
 <script>
     import NavBar from './NavBarAdmin.vue';
     import http from "../http-common";
-    import Footer from './Footer.vue'
     /* eslint-disable no-console */
 
     var timeoutID;
@@ -94,8 +74,7 @@
     export default {
         name: "AdminHome",
         components: {
-            NavBar: NavBar,
-            Footer: Footer
+            NavBar: NavBar
         },
         data() {
             return {

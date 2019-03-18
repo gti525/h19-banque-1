@@ -50,7 +50,7 @@
                     </tr>
                     <tr>
                         <td>Limite de la carte :</td>
-                        <td>{{ this.users.userCreditCard.creditLimit }}$</td>
+                        <td>{{ this.users.userCreditCard.amountavailable }}$</td>
                     </tr>
                     <tr>
                         <td>Montant disponible :</td>
@@ -92,14 +92,11 @@
             </div>
             <div id="horizontal-analytic-banner"></div>
         </div>
-        <div class="app-title"></div>
-        <Footer></Footer>
     </div>
 </template>
 
 <script>
     import NavBar from './NavBarClient.vue';
-    import Footer from './Footer.vue'
     import http from "../http-common";
 
     /* eslint-disable no-console */
@@ -153,8 +150,7 @@
             }
         },
         components: {
-            NavBar: NavBar,
-            Footer: Footer
+            NavBar: NavBar
         },
         methods: {
             listAccountTransactions(){
@@ -177,7 +173,7 @@
                 this.$router.push('/creditCardPayment');
             }
         },
-        created() {
+        mounted() {
             http
                 .get("/auth/searchusers?search=" + "username" + ":" + "*" + localStorage.username + "*")
                 .then(response => {
@@ -186,10 +182,9 @@
                 })
                 .catch(e => {
                     console.log(e);
-                    alert("Impossible de charger les informations")
                 });
         },
-        mounted () {
+        created() {
             // eslint-disable-next-line
             document.addEventListener("DOMContentLoaded", function () {
                 const e = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQ3LCJpYXQiOjE1NTE4MTQ2MDV9.bNtWwBzEhjN6vBhlZQ8NSV2CeNYfe54BsOKAh4QLBok";

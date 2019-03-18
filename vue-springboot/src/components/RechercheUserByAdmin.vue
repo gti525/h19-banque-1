@@ -52,13 +52,11 @@
             </tr>
             </tbody>
         </table>
-        <Footer></Footer>
     </div>
 </template>
 
 <script>
-    import NavBar from './NavBarClient.vue';
-    import Footer from './Footer.vue'
+    import NavBar from "./NavBarAdmin.vue";
     import http from "../http-common";
 
     /* eslint-disable no-console */
@@ -102,8 +100,7 @@
     export default {
         name: "Login",
         components: {
-            NavBar: NavBar,
-            Footer: Footer
+            NavBar
         },
         data() {
             return {

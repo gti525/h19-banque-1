@@ -9,10 +9,10 @@
                         </a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/transferToOtherAccount">Transfert</a>
+                        <a class="nav-link" href="/showTransaction">Transaction</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/creditCardPayment">Paiement</a>
+                        <a class="nav-link" href="/transferToOtherAccount">Transfert</a>
                     </li>
                 </ul>
             </div>

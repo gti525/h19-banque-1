@@ -15,8 +15,7 @@
       </div>
       <div class="form-group">
         <label for="password">Mot de passe</label>
-        <input @keyup.enter="customerLogin"
-               id="password"
+        <input id="password"
                type="password"
                v-model="password"
                name="password"
@@ -61,10 +60,13 @@
         localStorage.token = req.data.accessToken
         localStorage.username = this.username
         console.log(req)
-        this.$router.push('/VerifyLogin')
+        this.$router.push({
+          path: '/VerifyLogin',
+          //query: {username: this.username, password: this.password}-->
+        });
       },
       loginFailed () {
-        alert("Mauvaise information rentrer")
+        this.$router.push('/errorPage')
         delete localStorage.token
       },
       adminRedirect() {
