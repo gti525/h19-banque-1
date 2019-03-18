@@ -12,7 +12,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(user) in users" :key="user.id">
+            <tr v-for="(user) in users" :key="user.id" v-if="user.roles[0].name === 'ROLE_USER'">
                 <td>
                     <router-link :to="{
                             name: 'AdminCompteClient-details',
