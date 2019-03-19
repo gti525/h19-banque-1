@@ -84,7 +84,7 @@
                     this.users = response.data[0]; // JSON are parsed automatically.
                     console.log(response.data);
 
-                    if ( response.data[0].roles[0].name === "ROLE_ADMIN") {
+                    if ( response.data[0].roles[0].name === "ROLE_USER") {
                         alert("Vous etes un client, redirection de page dans la bonne page")
                         this.$router.push('/VerifyLogin');
                     }
@@ -110,8 +110,6 @@
     @import "../scss/common.scss";
 
     .app-header {
-
-        margin-top: 20%;
 
         .app-title {
             text-align: center;
