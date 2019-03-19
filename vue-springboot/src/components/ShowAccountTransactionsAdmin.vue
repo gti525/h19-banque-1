@@ -2,7 +2,6 @@
     <div id="print">
         <nav-bar class="no-print"></nav-bar>
         <h1>Liste des transactions associées au compte courant</h1>
-        <button class="no-print" v-on:click="printDiv('print')">Print</button>
         <table class="table table-hover">
             <thead>
             <tr>
