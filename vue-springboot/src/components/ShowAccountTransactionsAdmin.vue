@@ -65,6 +65,8 @@
     function goInactive() {
         document.location.href = "http://localhost:4200";
         delete localStorage.token
+        delete localStorage.bypass
+        delete localStorage.username
     }
 
     function goActive() {
@@ -91,16 +93,21 @@
         },
         /* eslint-disable no-console */
         mounted() {
-            this.id = this.$route.params.id;
-            this.username = this.$route.params.username;
-            this.searchFile = this.$route.params.searchFile;
-            this.textUsername = this.$route.params.textUsername;
-            console.log(this.$route.params)
-            console.log(this.username)
-            if (this.searchFile == "userAccount") {
-                this.accountData()
+            if (!localStorage.bypass) {
+                alert("Vous devez vous connecter avant d'Accéder a cette page")
+                this.$router.push('/');
             } else {
-                this.creditData()
+                this.id = this.$route.params.id;
+                this.username = this.$route.params.username;
+                this.searchFile = this.$route.params.searchFile;
+                this.textUsername = this.$route.params.textUsername;
+                console.log(this.$route.params)
+                console.log(this.username)
+                if (this.searchFile == "userAccount") {
+                    this.accountData()
+                } else {
+                    this.creditData()
+                }
             }
         },
         methods: {

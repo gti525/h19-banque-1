@@ -65,6 +65,9 @@
     function goInactive() {
         document.location.href = "http://localhost:4200";
         delete localStorage.token
+        delete localStorage.bypass
+        delete localStorage.username
+
     }
 
     function goActive() {
@@ -114,7 +117,12 @@
             },
         },
         mounted() {
-            this.saveUser()
+            if (!localStorage.bypass) {
+                alert("Vous devez vous connecter avant d'Accéder a cette page")
+                this.$router.push('/');
+            } else {
+                this.saveUser()
+            }
         }
     }
 </script>

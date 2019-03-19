@@ -83,6 +83,8 @@
 
         document.location.href = "http://localhost:4200";
         delete localStorage.token
+        delete localStorage.bypass
+        delete localStorage.username
     }
 
     function goActive() {
@@ -105,22 +107,22 @@
         methods: {
             /* eslint-disable no-console */
             saveUser() {
-                console.log("test")
-                http
-                    .get("/usersAll")
-                    .then(response => {
-                        this.users = response.data; // JSON are parsed automatically.
-                        console.log(response.data);
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    });
+                if (!localStorage.bypass) {
+                    alert("Vous devez vous connecter avant d'Accéder a cette page")
+                    this.$router.push('/');
+                } else {
+                    console.log("test")
+                    http
+                        .get("/usersAll")
+                        .then(response => {
+                            this.users = response.data; // JSON are parsed automatically.
+                            console.log(response.data);
+                        })
+                        .catch(e => {
+                            console.log(e);
+                        });
+                }
             },
-            test () {
-                this.$router.push('/errorPage');
-            }
-
-
         },
 
         mounted() {

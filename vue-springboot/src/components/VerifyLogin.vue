@@ -55,6 +55,7 @@
                         .then(response => {
                             console.log(response.data);
                             this.$router.push('/HomeClient');
+                            localStorage.bypass = 1
                             location.reload();
                         })
                         .catch(() => this.wrongAnwser())
@@ -64,6 +65,7 @@
                         .then(response => {
                             console.log(response.data);
                             this.$router.push('/HomeClient');
+                            localStorage.bypass = 1
                             location.reload();
                         })
                         .catch(() => this.wrongAnwser())
