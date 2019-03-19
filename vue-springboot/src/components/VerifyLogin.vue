@@ -85,6 +85,12 @@
                     this.users = response.data[0]; // JSON are parsed automatically.
                     console.log(response.data);
 
+                    if ( response.data[0].roles[0].name === "ROLE_ADMIN") {
+                        alert("Vous etes un administrateur, redirection de page dans la bonne page")
+                        this.$router.push('/VerifyLoginAdmin');
+                    }
+
+
                     let questionMap = new Map();
                     questionMap.set(this.users.question1, this.users.answer1);
                     questionMap.set(this.users.question2, this.users.answer2);
