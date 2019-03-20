@@ -23,15 +23,15 @@
                     <option>Numéro compte</option>
                 </select>
                 <span> Sélectionné </span>
-                <div class="main-header">
-                </div>
                 <br>
                 <input type="text" v-model="username" name="username" class="form-control">
+                </div>
+                <div class="form-group clearfix">
+                    <button v-on:click="bob" class="btn btn-primary btn-common float-right">Recherche
+                    </button>
+
+
             </div>
-            <button v-on:click="rechercheTout" class="btn-group mr-2 btn btn-primary btn-common float-right">Recherche Tout
-            </button>
-            <button v-on:click="rechercheSimple" class="btn-group mr-2 btn btn-primary btn-common float-right">Recherche avec filtre
-            </button>
         </div>
         <table class="table table-hover">
             <thead>
@@ -46,7 +46,7 @@
                             name: 'AdminCompteClient-details',
                             params: { user: user, id: user.id, firstname: user.firstname }
                         }">
-                        {{user.firstname}} {{ user.lastname }}
+                        {{user.username}} {{ user.lastname }}
                     </router-link>
                 </td>
             </tr>
@@ -57,7 +57,7 @@
 </template>
 
 <script>
-    import NavBar from './NavBarAdmin.vue';
+    import NavBar from './NavBarClient.vue';
     import Footer from './Footer.vue'
     import http from "../http-common";
 
@@ -76,7 +76,6 @@
 
         startTimer();
     }
-
     setup();
 
     function startTimer() {
@@ -93,8 +92,6 @@
     function goInactive() {
         document.location.href = "http://localhost:4200";
         delete localStorage.token
-        delete localStorage.bypass
-        delete localStorage.username
     }
 
     function goActive() {
@@ -124,12 +121,11 @@
                 landline: '',
                 mobile: '',
                 creditcardno: '',
-                bobs: '',
-                selected: ''
-            }
+                bobs: ''
+        }
         },
         methods: {
-            rechercheSimple() {
+            bob () {
                 if (this.selected == "Prénom") {
                     this.bobs = "firstname"
                 }
@@ -160,16 +156,11 @@
                 if (this.selected == "Numéro carte crédit") {
                     this.bobs = "creditcardno"
                 }
-                if (this.selected == "Numéro compte") {
+                if (this.selected == "Numéro ompte") {
                     this.bobs = "accountno"
                 }
                 console.log(this.bobs)
                 console.log(this.username + "text")
-                this.recherche()
-            },
-            rechercheTout() {
-                this.selected = '',
-                this.bobs = "*"
                 this.recherche()
             },
             recherche() {
@@ -183,13 +174,7 @@
                         console.log(e);
                     });
             }
-        },
-        created() {
-            if (!localStorage.bypass) {
-                alert("Vous devez vous connecter avant d'Accéder a cette page")
-                this.$router.push('/');
-            }
-        },
+        }
     };
 </script>
 <style lang="scss" scoped>
