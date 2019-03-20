@@ -7,20 +7,38 @@
                 <th scope="col">Nom du client</th>
                 <th scope="col">Courriel</th>
                 <th scope="col">Numéro de téléphone</th>
+                <th scope="col">Transaction carte de compte courant</th>
+                <th scope="col">Transaction carte de credit</th>
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(user) in users" :key="user.id">
+            <tr v-for="(user) in users" :key="user.id" v-if="user.roles[0].name === 'ROLE_USER'">
                 <td>
                     <router-link :to="{
                             name: 'AdminCompteClient-details',
-                            params: { user: user, id: user.id, username: user.username }
+                            params: { user: user, id: user.id, username: user.username, searchFile: 'username' }
                         }">
-                        {{user.name}} {{ user.lastname }}
+                        {{user.firstname}} {{ user.lastname }}
                     </router-link>
                 </td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.landline }}</td>
+                <td>
+                    <router-link :to="{
+                            name: 'ShowAccountTransactionsAdmin-details',
+                            params: {id: user.id, username: user.username, searchFile: 'userAccount', textUsername: 'username' }
+                        }">
+                        {{user.userAccount.accountno}}
+                    </router-link>
+                </td>
+                <td>
+                    <router-link :to="{
+                            name: 'ShowAccountTransactionsAdmin-details',
+                            params: {id: user.id, username: user.username, searchFile: 'userCreditCard', textUsername: 'username' }
+                        }">
+                        {{user.userCreditCard.creditcardno}}
+                    </router-link>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -65,6 +83,8 @@
 
         document.location.href = "http://localhost:4200";
         delete localStorage.token
+        delete localStorage.bypass
+        delete localStorage.username
     }
 
     function goActive() {
@@ -87,22 +107,22 @@
         methods: {
             /* eslint-disable no-console */
             saveUser() {
-                console.log("test")
-                http
-                    .get("/usersAll")
-                    .then(response => {
-                        this.users = response.data; // JSON are parsed automatically.
-                        console.log(response.data);
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    });
+                if (!localStorage.bypass) {
+                    alert("Vous devez vous connecter avant d'Accéder a cette page")
+                    this.$router.push('/');
+                } else {
+                    console.log("test")
+                    http
+                        .get("/usersAll")
+                        .then(response => {
+                            this.users = response.data; // JSON are parsed automatically.
+                            console.log(response.data);
+                        })
+                        .catch(e => {
+                            console.log(e);
+                        });
+                }
             },
-            test () {
-                this.$router.push('/errorPage');
-            }
-
-
         },
 
         mounted() {

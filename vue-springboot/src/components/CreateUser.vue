@@ -71,7 +71,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="address">Réponse 1 (La taille de la réponse doit être comprise entre 6 et 100 caractères)</label>
+                    <label for="address">Réponse 1 (La taille de la réponse doit être comprise entre 6 et 100
+                        caractères)</label>
                     <input id="address" type="text" v-model="answer1" name="answer1" class="form-control">
                 </div>
                 <div class="form-group">
@@ -89,7 +90,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="address">Réponse 2 (La taille de la réponse doit être comprise entre 6 et 100 caractères)</label>
+                    <label for="address">Réponse 2 (La taille de la réponse doit être comprise entre 6 et 100
+                        caractères)</label>
                     <input type="text" v-model="answer2" name="answer2" class="form-control">
                 </div>
                 <div class="form-group">
@@ -145,16 +147,16 @@
                 <div class="panel-section">
                     <div class="panel-title">Compte crédit</div>
                     <div class="panel-content">
-                       <!-- <div class="form-group">
-                            <label for="creditLimit">Limite de crédit</label>
-                            <input
-                                    id="creditLimit"
-                                    type="text"
-                                    v-model="creditLimit"
-                                    name="creditLimit"
-                                    class="form-control"
-                            >
-                        </div>-->
+                        <!-- <div class="form-group">
+                             <label for="creditLimit">Limite de crédit</label>
+                             <input
+                                     id="creditLimit"
+                                     type="text"
+                                     v-model="creditLimit"
+                                     name="creditLimit"
+                                     class="form-control"
+                             >
+                         </div>-->
                         <div class="form-group">
                             <label for="creditbalanceavailable">Crédit disponible</label>
                             <input
@@ -173,14 +175,12 @@
                 </div>
             </div>
         </div>
-        <Footer></Footer>
     </div>
 </template>
 
 <script>
     import NavBar from "./NavBarAdmin.vue";
     import http from "../http-common";
-    import Footer from './Footer.vue'
 
     /* eslint-disable no-console */
 
@@ -197,6 +197,7 @@
 
         startTimer();
     }
+
     setup();
 
     function startTimer() {
@@ -213,6 +214,8 @@
     function goInactive() {
         document.location.href = "http://localhost:4200";
         delete localStorage.token
+        delete localStorage.bypass
+        delete localStorage.username
     }
 
     function goActive() {
@@ -223,9 +226,7 @@
     export default {
         name: "Login",
         components: {
-            NavBar: NavBar,
-            Footer: Footer
-
+            NavBar
         },
         data() {
             return {
@@ -254,6 +255,7 @@
             }
         },
         methods: {
+
             createUserBtnClicked() {
                 let data = {
                     company: this.company,
@@ -298,7 +300,13 @@
 
                 this.submitted = true;
             }
-        }
+        },
+        created() {
+            if (!localStorage.bypass) {
+                alert("Vous devez vous connecter avant d'Accéder a cette page")
+                this.$router.push('/');
+            }
+        },
     };
 </script>
 <style lang="scss" scoped>

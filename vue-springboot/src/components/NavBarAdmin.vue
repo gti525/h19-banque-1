@@ -34,6 +34,8 @@
         methods: {
             createUserBtnClicked() {
                 delete localStorage.token
+                delete localStorage.bypass
+                delete localStorage.username
             }
         }
     };
