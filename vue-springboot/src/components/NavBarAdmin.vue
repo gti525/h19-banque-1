@@ -26,13 +26,13 @@
                     </li>
                 </ul>
             </div>
-            <div class="collapse navbar-collapse" id="navbarColor03">
+           <!-- <div class="collapse navbar-collapse" id="navbarColor03">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active ">
                         <a class="nav-link" v-on:click="createCompanyBtnClicked" href="/loginadmin">Logout</a>
                     </li>
                 </ul>
-            </div>
+            </div>-->
         </nav>
     </div>
 </template>
