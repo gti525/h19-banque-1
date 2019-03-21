@@ -55,6 +55,7 @@
                         .then(response => {
                             console.log(response.data);
                             this.$router.push('/HomeAdmin');
+                            localStorage.bypass = 1
                             location.reload();
                         })
                         .catch(() => this.wrongAnwser())
@@ -64,6 +65,7 @@
                         .then(response => {
                             console.log(response.data);
                             this.$router.push('/HomeAdmin');
+                            localStorage.bypass = 1
                             location.reload();
                         })
                         .catch(() => this.wrongAnwser())
@@ -83,6 +85,11 @@
                 .then(response => {
                     this.users = response.data[0]; // JSON are parsed automatically.
                     console.log(response.data);
+
+                    if ( response.data[0].roles[0].name === "ROLE_USER") {
+                        alert("Vous etes un client, redirection de page dans la bonne page")
+                        this.$router.push('/VerifyLogin');
+                    }
 
                     let questionMap = new Map();
                     questionMap.set(this.users.question1, this.users.answer1);
@@ -105,8 +112,6 @@
     @import "../scss/common.scss";
 
     .app-header {
-
-        margin-top: 20%;
 
         .app-title {
             text-align: center;

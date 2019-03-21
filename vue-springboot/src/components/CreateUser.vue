@@ -71,7 +71,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="address">Réponse 1 (La taille de la réponse doit être comprise entre 6 et 100 caractères)</label>
+                    <label for="address">Réponse 1 (La taille de la réponse doit être comprise entre 6 et 100
+                        caractères)</label>
                     <input id="address" type="text" v-model="answer1" name="answer1" class="form-control">
                 </div>
                 <div class="form-group">
@@ -89,7 +90,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="address">Réponse 2 (La taille de la réponse doit être comprise entre 6 et 100 caractères)</label>
+                    <label for="address">Réponse 2 (La taille de la réponse doit être comprise entre 6 et 100
+                        caractères)</label>
                     <input type="text" v-model="answer2" name="answer2" class="form-control">
                 </div>
                 <div class="form-group">
@@ -195,6 +197,7 @@
 
         startTimer();
     }
+
     setup();
 
     function startTimer() {
@@ -211,6 +214,8 @@
     function goInactive() {
         document.location.href = "http://localhost:4200";
         delete localStorage.token
+        delete localStorage.bypass
+        delete localStorage.username
     }
 
     function goActive() {
@@ -250,6 +255,7 @@
             }
         },
         methods: {
+
             createUserBtnClicked() {
                 let data = {
                     company: this.company,
@@ -294,7 +300,13 @@
 
                 this.submitted = true;
             }
-        }
+        },
+        created() {
+            if (!localStorage.bypass) {
+                alert("Vous devez vous connecter avant d'Accéder a cette page")
+                this.$router.push('/');
+            }
+        },
     };
 </script>
 <style lang="scss" scoped>

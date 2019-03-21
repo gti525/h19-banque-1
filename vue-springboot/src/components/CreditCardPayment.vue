@@ -45,7 +45,7 @@
 
 <script>
     import NavBar from "./NavBarClient.vue";
-    import http from "../http-common";
+    //import http from "../http-common";
 
     var timeoutID;
 
@@ -76,6 +76,8 @@
     function goInactive() {
         document.location.href = "http://localhost:4200";
         delete localStorage.token
+        delete localStorage.bypass
+        delete localStorage.username
     }
 
     function goActive() {
@@ -92,7 +94,13 @@
             return {
 
             }
-        }
+        },
+        created() {
+            if (!localStorage.bypass) {
+                alert("Vous devez vous connecter avant d'Accéder a cette page")
+                this.$router.push('/');
+            }
+        },
     }
 </script>
 
