@@ -1,25 +1,28 @@
 <template>
-    <div class="container">
-        <div class="app-header">
-            <div class="app-title">Banquo Uno</div>
-            <div class="app-sub-title">Administration</div>
-        </div>
-        <div class="login-container">
-            <div class="main-header">
-                <h2>Vérification de l'accès</h2></div>
-            <div class="form-group">
-                <label>{{this.randomQuestion}}</label>
-                <input @keyup.enter="verify"
-                        type="text"
-                        v-model="text"
-                        name="text"
-                        class="form-control"
-                        :class="{ 'is-invalid': submitted }"
-                >
-            </div>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="#">Banquo Uno</a>
+        </nav>
 
-            <div class="form-group clearfix">
-                <button class="btn btn-primary btn-common float-right" v-on:click="verify">Vérifier</button>
+        <div class="container">
+                <div class="app-title">Administration</div>
+            <div class="login-container">
+                <div class="main-header">
+                    <h2>Vérification de l'accès</h2></div>
+                <div class="form-group">
+                    <label>{{this.randomQuestion}}</label>
+                    <input @keyup.enter="verify"
+                            type="text"
+                            v-model="text"
+                            name="text"
+                            class="form-control"
+                            :class="{ 'is-invalid': submitted }"
+                    >
+                </div>
+
+                <div class="form-group clearfix">
+                    <button class="btn btn-primary btn-common float-right" v-on:click="verify">Vérifier</button>
+                </div>
             </div>
         </div>
     </div>
@@ -104,28 +107,13 @@
 <style lang="scss" scoped>
     @import "../scss/common.scss";
 
-    .app-header {
-
-        margin-top: 20%;
-
-        .app-title {
-            text-align: center;
-            font-size: 40px;
-            font-weight: 600;
-            color: #002ec3;
-            font-family: 'Hind Siliguri', sans-serif;
-
-        }
-
-        .app-sub-title {
-            text-align: center;
-            font-size: 16px;
-            text-transform: uppercase;
-            font-weight: 600;
-            color: #d41919;
-            font-family: 'Hind Siliguri', sans-serif;
-
-        }
+    .app-title {
+        margin-top: 5%;
+        text-align: center;
+        font-size: 40px;
+        font-weight: 300;
+        color: #d41919;   //#002ec3;
+        font-family: 'Hind Siliguri', sans-serif;
     }
 
     .login-container {
