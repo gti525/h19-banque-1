@@ -287,7 +287,7 @@
 
                     })
                     .catch(e => {
-                        this.$router.push('/errorPage');
+                        alert("Impossible de charger les informations. Un champ obligatoire n'est pas rempli ou est incorrect.");
                         console.log(e);
                         console.log(e.request)
                         console.log(e.config)
