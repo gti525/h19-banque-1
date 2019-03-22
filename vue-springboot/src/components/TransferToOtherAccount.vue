@@ -33,15 +33,13 @@
                     >
                 </div>
                 <div class="form-group clearfix">
-                    <button v-on:click="transferMoneyBtnClicked" class="btn btn-primary btn-common float-right">
-                        Transférer
+                    <button v-on:click="transferMoneyBtnClicked" class="btn btn-primary btn-common float-right">Transférer
                     </button>
                 </div>
             </div>
         </div>
     </div>
 </template>
-
 
 <script>
     import NavBar from "./NavBarClient.vue";
@@ -62,7 +60,6 @@
 
         startTimer();
     }
-
     setup();
 
     function startTimer() {
@@ -79,15 +76,12 @@
     function goInactive() {
         document.location.href = "http://localhost:4200";
         delete localStorage.token
-        delete localStorage.bypass
-        delete localStorage.username
     }
 
     function goActive() {
 
         startTimer();
     }
-
     export default {
         name: "TransferToOtherAccount",
         components: {
@@ -103,51 +97,35 @@
         methods: {
             /* eslint-disable no-console */
             transferMoneyBtnClicked() {
-                if (!localStorage.bypass) {
-                    alert("Vous devez vous connecter avant d'Accéder a cette page")
-                    this.$router.push('/');
-                } else {
-                    //here should send the request to the backend and get to know if the username and password match
-                    let data = {
-                        senderaccountno: this.senderaccountno,
-                        receiveraccountno: this.receiveraccountno,
-                        amount: this.amount,
-                    }
-                    http
-                        .post("/auth/Transfer", data)
-                        .then(request => this.transferSuccessful(request))
-                        .catch(() => this.transferFailed())
-                }
+                //here should send the request to the backend and get to know if the username and password match
+                http
+                    .post("/auth/Transfer", {receiveraccountno: this.receiveraccountno, amount: this.amount})
+                    .then(request => this.transferSuccessful(request))
+                    .catch(() => this.transferFailed())
             },
-            transferSuccessful(req) {
-                if (!req.data.accessToken) {
-                    console.log(req)
-                    this.transferFailed()
-                    return
-                }
-                this.error = false
-                localStorage.token = req.data.accessToken
-                localStorage.receiveraccountno = this.receiveraccountno
+        },
+        transferSuccessful(req) {
+            if (!req.data.accessToken) {
                 console.log(req)
-                this.$router.push('/HomeClient')
-            },
-            transferFailed() {
-                this.$router.push('/errorPage');
-                delete localStorage.token;
-            },
-            adminRedirect() {
-                this.$router.push("/loginAdmin")
+                this.transferFailed()
+                return
             }
+            this.error = false
+            localStorage.token = req.data.accessToken
+            localStorage.receiveraccountno = this.receiveraccountno
+            console.log(req)
+            this.$router.push('/HomeClient');
         },
-        created() {
-            if (!localStorage.bypass) {
-                alert("Vous devez vous connecter avant d'Accéder a cette page")
-                this.$router.push('/');
-            }
+        transferFailed() {
+            this.$router.push('/errorPage');
+            delete localStorage.token;
         },
-    }
-    ;
+        adminRedirect() {
+            this.$router.push("/loginAdmin")
+        }
+    };
 </script>
+
 <style lang="scss" scoped>
     @import "../scss/common.scss";
 

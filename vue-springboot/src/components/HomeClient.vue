@@ -136,7 +136,6 @@
         document.location.href = "http://localhost:4200";
         delete localStorage.token
         delete localStorage.username
-        delete localStorage.bypass
     }
 
     function goActive() {
@@ -178,23 +177,17 @@
                 this.$router.push('/creditCardPayment');
             }
         },
-        // eslint-disable-next-line
         created() {
-            if (!localStorage.bypass) {
-                alert("Vous devez vous connecter avant d'Accéder a cette page")
-                this.$router.push('/');
-            } else {
-                http
-                    .get("/auth/searchusers?search=" + "username" + ":" + "*" + localStorage.username + "*")
-                    .then(response => {
-                        this.users = response.data[0]; // JSON are parsed automatically.
-                        console.log(response.data);
-                    })
-                    .catch(e => {
-                        console.log(e);
-                        alert("Impossible de charger les informations")
-                    })
-            }
+            http
+                .get("/auth/searchusers?search=" + "username" + ":" + "*" + localStorage.username + "*")
+                .then(response => {
+                    this.users = response.data[0]; // JSON are parsed automatically.
+                    console.log(response.data);
+                })
+                .catch(e => {
+                    console.log(e);
+                    alert("Impossible de charger les informations")
+                });
         },
         mounted () {
             // eslint-disable-next-line

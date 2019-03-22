@@ -12,6 +12,9 @@
                         <a class="nav-link" href="/createUser">Créer un utilisateur</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/createCompany">Créer une compagnie</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/RechercheUserByAdmin">Recherche d'un utilisateur</a>
                     </li>
                 </ul>
@@ -23,6 +26,13 @@
                     </li>
                 </ul>
             </div>
+           <!-- <div class="collapse navbar-collapse" id="navbarColor03">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active ">
+                        <a class="nav-link" v-on:click="createCompanyBtnClicked" href="/loginadmin">Logout</a>
+                    </li>
+                </ul>
+            </div>-->
         </nav>
     </div>
 </template>
@@ -34,8 +44,9 @@
         methods: {
             createUserBtnClicked() {
                 delete localStorage.token
-                delete localStorage.bypass
-                delete localStorage.username
+            },
+            createCompanyBtnClicked() {
+                delete localStorage.token
             }
         }
     };
