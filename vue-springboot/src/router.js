@@ -75,6 +75,11 @@ export default new Router({
       component: HomeClient
     },
     {
+      path: "/createCompany",
+      name: "createCompany",
+      component: CreateCompany
+    },
+    {
       path: "/verifyloginAdmin",
       name: "verifyloginadmin",
       component: VerifyLoginAdmin
