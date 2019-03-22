@@ -12,6 +12,9 @@
                         <a class="nav-link" href="/createUser">Créer un utilisateur</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/createCompany">Créer une compagnie</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/RechercheUserByAdmin">Recherche d'un utilisateur</a>
                     </li>
                 </ul>

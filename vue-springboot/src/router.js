@@ -15,6 +15,7 @@ import ShowAccountTransactions from "./components/ShowAccountTransactions";
 import ShowAccountTransactionsAdmin from "./components/ShowAccountTransactionsAdmin";
 import ShowCreditTransactions from "./components/ShowCreditTransactions";
 import CreditCardPayment from "./components/CreditCardPayment";
+import CreateCompany from "./components/CreateCompany";
 
 Vue.use(Router);
 
@@ -56,6 +57,11 @@ export default new Router({
       path: "/HomeClient",
       name: "HomeClient",
       component: HomeClient
+    },
+    {
+      path: "/createCompany",
+      name: "createCompany",
+      component: CreateCompany
     },
     {
       path: "/verifyloginAdmin",
