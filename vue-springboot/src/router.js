@@ -15,9 +15,9 @@ import RechercheUserByAdmin from "./components/RechercheUserByAdmin.vue";
 import HomeClient from "./components/HomeClient.vue";
 import TransferToOtherAccount from "./components/TransferToOtherAccount";
 import ShowAccountTransactions from "./components/ShowAccountTransactions";
-import ShowAccountTransactionsAdmin from "./components/ShowAccountTransactionsAdmin";
 import ShowCreditTransactions from "./components/ShowCreditTransactions";
 import CreditCardPayment from "./components/CreditCardPayment";
+import CreateCompany from "./components/CreateCompany";
 
 Vue.use(Router);
 
@@ -54,11 +54,6 @@ export default new Router({
           component: AdminCompteClient,
     },
     {
-      path: "/ShowAccountTransactionsAdmin/:id",
-      name: "ShowAccountTransactionsAdmin-details",
-      component: ShowAccountTransactionsAdmin,
-    },
-    {
       path: "/",
       name: "login",
       component: Login
@@ -88,6 +83,11 @@ export default new Router({
       path: "/createUser",
       name: "createUser",
       component: CreateUser
+    },
+    {
+      path: "/createCompany",
+      name: "createCompany",
+      component: CreateCompany
     },
     {
       path: "/RechercheUserByAdmin",

@@ -77,7 +77,8 @@
                 alert("Mauvaise réponse entrer veuillez recommancer")
             },
             loading () {
-               location.reload();
+                console.log("34443")
+               // location.reload();
             },
         },
         created() {

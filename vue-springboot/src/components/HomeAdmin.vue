@@ -7,8 +7,6 @@
                 <th scope="col">Nom du client</th>
                 <th scope="col">Courriel</th>
                 <th scope="col">Numéro de téléphone</th>
-                <th scope="col">Transaction carte de compte courant</th>
-                <th scope="col">Transaction carte de credit</th>
             </tr>
             </thead>
             <tbody>
@@ -16,29 +14,13 @@
                 <td>
                     <router-link :to="{
                             name: 'AdminCompteClient-details',
-                            params: { user: user, id: user.id, username: user.username, searchFile: 'username' }
+                            params: { user: user, id: user.id, username: user.username }
                         }">
-                        {{user.firstname}} {{ user.lastname }}
+                        {{user.name}} {{ user.lastname }}
                     </router-link>
                 </td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.landline }}</td>
-                <td>
-                    <router-link :to="{
-                            name: 'ShowAccountTransactionsAdmin-details',
-                            params: {id: user.id, username: user.username, searchFile: 'userAccount', textUsername: 'username' }
-                        }">
-                        {{user.userAccount.accountno}}
-                    </router-link>
-                </td>
-                <td>
-                    <router-link :to="{
-                            name: 'ShowAccountTransactionsAdmin-details',
-                            params: {id: user.id, username: user.username, searchFile: 'userCreditCard', textUsername: 'username' }
-                        }">
-                        {{user.userCreditCard.creditcardno}}
-                    </router-link>
-                </td>
             </tr>
             </tbody>
         </table>
