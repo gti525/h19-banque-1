@@ -7,6 +7,11 @@
                 <div class="main-header">
                     <h2>Transfert de fonds vers un autre compte</h2>
                 </div>
+
+                <div class="bob-container">
+
+                </div>
+
                 <div class="form-group">
                     <label for="receiveraccountno">Numéro du compte de destination</label>
                     <input
@@ -95,9 +100,7 @@
         },
         data() {
             return {
-                receiveraccountno: '',
-                amount: '',
-                error: false
+                users: []
             }
         },
         methods: {
@@ -109,7 +112,7 @@
                 } else {
                     //here should send the request to the backend and get to know if the username and password match
                     let data = {
-                        senderaccountno: this.senderaccountno,
+                        senderaccountno: this.users.userAccount.accountno,
                         receiveraccountno: this.receiveraccountno,
                         amount: this.amount,
                     }
@@ -160,7 +163,7 @@
         font-family: "Hind Siliguri", sans-serif;
     }
 
-    .login-container {
+    .bob-container {
         border: 1px solid #e8e8e8;
         box-shadow: 0px 0px 20px #e6e6e6;
         padding: 20px 40px;
