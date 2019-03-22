@@ -49,11 +49,15 @@
         </div>
       </div>
     </div>
+    <div id="app">
+      <Footer></Footer>
+    </div>
   </div>
 </template>
 
 <script>
   import http from "../http-common";
+  import Footer from './Footer.vue';
   export default {
     name: "Login",
     data() {
@@ -62,6 +66,9 @@
         password: '',
         error: false
       }
+    },
+    components: {
+      Footer: Footer
     },
     methods: {
       /* eslint-disable no-console */
@@ -118,4 +125,11 @@
     margin-top: 20px;
     margin-bottom: 28px;
   }
+
+  .app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
 </style>
