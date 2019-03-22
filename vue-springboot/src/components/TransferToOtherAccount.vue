@@ -8,25 +8,6 @@
                     <h2>Transfert de fonds vers un autre compte</h2>
                 </div>
 
-                <div class="bob-container">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">Compte courant</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>Solde :</td>
-                            <td>
-
-                            </td>
-                       <td>{{ users.amount }}$</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
                 <div class="form-group">
                     <label for="receiveraccountno">Numéro du compte de destination</label>
                     <input
