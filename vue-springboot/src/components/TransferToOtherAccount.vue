@@ -8,10 +8,6 @@
                     <h2>Transfert de fonds vers un autre compte</h2>
                 </div>
 
-                <div class="bob-container">
-
-                </div>
-
                 <div class="form-group">
                     <label for="receiveraccountno">Numéro du compte de destination</label>
                     <input
