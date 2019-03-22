@@ -1,44 +1,62 @@
 <template>
-  <div class="container">
-    <div class="app-header">
-      <div class="app-title">Banquo Uno</div>
-      <div class="app-sub-title">Administration</div>
-    </div>
+  <div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="#">Banquo Uno</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div class="login-container">
-      <!--<div class="main-header">-->
-      <!--<h2>Input Username & Password</h2></div>-->
-      <div class="form-group">
-        <label for="username">Nom d'utilisateur</label>
-        <input ID="username"
-               type="text"
-               v-model="username"
-               name="username"
-               class="form-control"
-               required
-        >
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#" v-on:click="clientRedirect">Page Client</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Page Admin<span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
       </div>
-      <div class="form-group">
-        <label for="password">Mot de passe</label>
-        <input id="password"
-               type="password"
-               v-model="password"
-               name="password"
-               class="form-control"
-               required
-        >
-      </div>
-      <div class="form-group clearfix">
-        <button class="btn btn-primary btn-common float-right " v-on:click="customerLogin">Connexion</button>
-        <button class="btn btn-outline-primary btn-common float-right " v-on:click="clientRedirect">Page Client</button>
+    </nav>
+
+    <div class="container">
+      <div class="app-title">Administration</div>
+      <div class="login-container">
+        <!--<div class="main-header">-->
+        <!--<h2>Input Username & Password</h2></div>-->
+        <div class="form-group">
+          <label for="username">Nom d'utilisateur</label>
+          <input ID="username"
+                 type="text"
+                 v-model="username"
+                 name="username"
+                 class="form-control"
+                 required
+          >
+        </div>
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <input @keyup.enter="customerLogin"
+                 id="password"
+                 type="password"
+                 v-model="password"
+                 name="password"
+                 class="form-control"
+                 required
+          >
+        </div>
+        <div class="clearfix">
+          <button class="btn btn-primary btn-common float-right " v-on:click="customerLogin">Connexion</button>
+        </div>
       </div>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
   import http from "../http-common";
-
+  import Footer from './Footer.vue';
+  import NavBar from './NavBarAdmin.vue';
   export default {
     name: "Login",
     data() {
@@ -47,6 +65,10 @@
         password: '',
         error: false
       }
+    },
+    components: {
+      NavBar: NavBar,
+      Footer: Footer
     },
     methods: {
       /* eslint-disable no-console */
