@@ -76,6 +76,7 @@
         data() {
             return {
                 id: 0,
+                username: '',
                 users: [],
                 dollard: ".00$"
             }
@@ -83,14 +84,17 @@
         /* eslint-disable no-console */
         created() {
             this.id = this.$route.params.id;
-            console.log(this.id)
+            this.username = this.$route.params.username;
+            console.log(this.$route.params)
+            console.log(this.username)
         },
         methods: {
             /* eslint-disable no-console */
             saveUser() {
                 console.log("test123" + "  " +this.id)
                 http
-                    .get("/users/" + this.id)
+                    //.get("/users/" + this.id)
+                    .get("/auth/searchusers?search=" + "username" + ":" + "*" + this.username + "*")
                     .then(response => {
                         this.users = response.data; // JSON are parsed automatically.
                         console.log(response.data);

@@ -79,7 +79,14 @@
                         });
                 }
 
-            }
+            },
+            wrongAnwser () {
+                alert("Mauvaise réponse entrer veuillez recommancer")
+            },
+            loading () {
+                console.log("34443")
+               // location.reload();
+            },
         },
         created() {
             let data = {

@@ -18,6 +18,7 @@ import TransferToOtherAccount from "./components/TransferToOtherAccount";
 import ShowAccountTransactions from "./components/ShowAccountTransactions";
 import ShowCreditTransactions from "./components/ShowCreditTransactions";
 import CreditCardPayment from "./components/CreditCardPayment";
+import CreateCompany from "./components/CreateCompany";
 
 Vue.use(Router);
 
@@ -82,6 +83,11 @@ export default new Router({
       path: "/createUser",
       name: "createUser",
       component: CreateUser
+    },
+    {
+      path: "/createCompany",
+      name: "createCompany",
+      component: CreateCompany
     },
     {
       path: "/RechercheUserByAdmin",

@@ -5,32 +5,21 @@
             <div class="app-title">Banquo Uno</div>
             <div class="login-container">
                 <div class="main-header">
-                    <h2>Créer un utilisateur</h2>
+                    <h2>Créer un compte entreprise</h2>
                 </div>
                 <div class="form-group">
-                    <label for="firstname">Prénom</label>
+                    <label for="company">Nom de l'entreprise</label>
                     <input
-                            id="firstname"
+                            id="company"
                             type="text"
-                            v-model="firstname"
-                            name="firstname"
+                            v-model="company"
+                            name="company"
                             class="form-control"
-                            :class="{ 'is-invalid': submitted && !firstname }"
+                            :class="{ 'is-invalid': submitted && !company }"
                     >
                 </div>
                 <div class="form-group">
-                    <label for="lastname">Nom</label>
-                    <input
-                            id="lastname"
-                            type="text"
-                            v-model="lastname"
-                            name="lastname"
-                            class="form-control"
-                            :class="{ 'is-invalid': submitted && !lastname }"
-                    >
-                </div>
-                <div class="form-group">
-                    <label for="username">Nom d'utilisateur</label>
+                    <label for="username">Nom d'utilisateur du compte entreprise</label>
                     <input
                             id="username"
                             type="text"
@@ -55,37 +44,29 @@
                 <div class="form-group">
                     <label for="mmn">Question 1</label>
                     <select v-model="question1" class="form-control" id="mmn">
-                        <option>Quel était votre surnom d'enfance?</option>
-                        <option>Dans quelle ville avez-vous rencontré votre conjoint?</option>
-                        <option>Quel est le nom de votre ami d'enfance préféré?</option>
-                        <option>Dans quelle rue viviez-vous en troisième année?</option>
-                        <option>Quelle école avez-vous fréquenté en sixième année?</option>
-                        <option>Quel est le prénom et le nom de votre cousin le plus âgé?</option>
-                        <option>Quel était le nom de votre premier animal de compagnie?</option>
-                        <option>Dans quelle ville ou village votre mère et votre père se sont-ils rencontré?</option>
-                        <option>Où étiez-vous quand vous avez eu votre premier baiser?</option>
+                        <option>Quel est le siège social de l'entreprise?</option>
+                        <option>Dans quelle ville a été créé l'entreprise?</option>
+                        <option>Quel est le nombre d'employé dans la compagnie?</option>
+                        <option>Qui est le directeur général de l'entreprise?</option>
+                        <option>En quelle année a été fondé l'entreprise?</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="address">Réponse 1</label>
+                    <label for="address">Réponse 1 (La taille de la réponse doit être comprise entre 6 et 100 caractères)</label>
                     <input id="address" type="text" v-model="answer1" name="answer1" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="mmn">Question 2</label>
                     <select v-model="question2" class="form-control">
-                        <option>Quel était votre surnom d'enfance?</option>
-                        <option>Dans quelle ville avez-vous rencontré votre conjoint?</option>
-                        <option>Quel est le nom de votre ami d'enfance préféré?</option>
-                        <option>Dans quelle rue viviez-vous en troisième année?</option>
-                        <option>Quelle école avez-vous fréquenté en sixième année?</option>
-                        <option>Quel est le prénom et le nom de votre cousin le plus âgé?</option>
-                        <option>Quel était le nom de votre premier animal de compagnie?</option>
-                        <option>Dans quelle ville ou village votre mère et votre père se sont-ils rencontré?</option>
-                        <option>Où étiez-vous quand vous avez eu votre premier baiser?</option>
+                        <option>Quel est le siège social de l'entreprise?</option>
+                        <option>Dans quelle ville a été créé l'entreprise?</option>
+                        <option>Quel est le nombre d'employé dans la compagnie?</option>
+                        <option>Qui est le directeur général de l'entreprise?</option>
+                        <option>En quelle année a été fondé l'entreprise?</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="address">Réponse 2</label>
+                    <label for="address">Réponse 2 (La taille de la réponse doit être comprise entre 6 et 100 caractères)</label>
                     <input type="text" v-model="answer2" name="answer2" class="form-control">
                 </div>
                 <div class="form-group">
@@ -93,22 +74,17 @@
                     <input type="text" v-model="address" name="address" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="landline">Numéro de téléphone à domicile</label>
+                    <label for="landline">Numéro de téléphone</label>
                     <input id="landline" type="tel" v-model="landline" name="landline" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="mobile">Numéro de téléphone mobile</label>
-                    <input id="mobile" type="tel" v-model="mobile" name="mobile" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="email">Adresse Courriel</label>
+                    <label for="email">Adresse Courriel de l'entreprise</label>
                     <input id="email" type="email" v-model="email" name="email" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="mmn">Rôle</label>
                     <select v-model="role" class="form-control">
-                        <option>admin</option>
-                        <option>client</option>
+                        <option>company</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -124,7 +100,7 @@
                     <input id="country" type="text" v-model="country" name="country" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="zip">Zip</label>
+                    <label for="zip">Code Postal</label>
                     <input id="zip" type="zip" v-model="zip" name="zip" class="form-control">
                 </div>
                 <div class="panel-section">
@@ -141,34 +117,30 @@
                 <div class="panel-section">
                     <div class="panel-title">Compte crédit</div>
                     <div class="panel-content">
-                       <!-- <div class="form-group">
-                            <label for="creditLimit">Limite de crédit</label>
-                            <input
-                                    id="creditLimit"
-                                    type="text"
-                                    v-model="creditLimit"
-                                    name="creditLimit"
-                                    class="form-control"
-                            >
-                        </div>-->
+                        <!-- <div class="form-group">
+                             <label for="creditLimit">Limite de crédit</label>
+                             <input
+                                     id="creditLimit"
+                                     type="text"
+                                     v-model="creditLimit"
+                                     name="creditLimit"
+                                     class="form-control"
+                             >
+                         </div>-->
                         <div class="form-group">
-                            <label for="amount-avail">Montant d'argent disponible</label>
+                            <label for="creditbalanceavailable">Crédit disponible</label>
                             <input
+                                    id="creditbalanceavailable"
                                     type="text"
                                     v-model="creditbalanceavailable"
                                     name="amount-avail"
                                     class="form-control"
                             >
                         </div>
-                        <div class="form-group">
-                            <label for="amount-owed">Solde</label>
-                            <input id="amount-owed" type="text" v-model="creditbalanceowned" name="amount-owed"
-                                   class="form-control">
-                        </div>
                     </div>
                 </div>
                 <div class="form-group clearfix">
-                    <button v-on:click="createUserBtnClicked" class="btn btn-primary btn-common float-right">Créer
+                    <button v-on:click="createCompanyBtnClicked" class="btn btn-primary btn-common float-right">Créer
                     </button>
                 </div>
             </div>
@@ -229,12 +201,14 @@
         },
         data() {
             return {
+                company: '',
                 firstname: '',
                 lastname: '',
                 username: '',
+                creditLimit: '',
                 amount: '',
                 creditbalanceavailable: '',
-                creditbalanceowned: '',
+                creditbalanceowned: 0,
                 email: '',
                 role: '',
                 question1: '',
@@ -252,11 +226,13 @@
             }
         },
         methods: {
-            createUserBtnClicked() {
+            createCompanyBtnClicked() {
                 let data = {
+                    company: this.company,
                     firstname: this.firstname,
                     lastname: this.lastname,
                     username: this.username,
+                    creditLimit: this.creditLimit,
                     amount: this.amount,
                     creditbalanceavailable: this.creditbalanceavailable,
                     creditbalanceowned: this.creditbalanceowned,

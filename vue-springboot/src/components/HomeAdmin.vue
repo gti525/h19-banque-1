@@ -14,7 +14,7 @@
                 <td>
                     <router-link :to="{
                             name: 'AdminCompteClient-details',
-                            params: { user: user, id: user.id, firstname: user.firstname }
+                            params: { user: user, id: user.id, username: user.username }
                         }">
                         {{user.name}} {{ user.lastname }}
                     </router-link>
