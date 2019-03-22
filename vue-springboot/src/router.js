@@ -13,12 +13,12 @@ import ErrorPage from "./components/ErrorPage";
 import AdminCompteClient from "./components/AdminCompteClient.vue";
 import RechercheUserByAdmin from "./components/RechercheUserByAdmin.vue";
 import HomeClient from "./components/HomeClient.vue";
-import ShowTransaction from "./components/ShowAccountTransactions.vue";
 import TransferToOtherAccount from "./components/TransferToOtherAccount";
 import ShowAccountTransactions from "./components/ShowAccountTransactions";
 import ShowCreditTransactions from "./components/ShowCreditTransactions";
 import CreditCardPayment from "./components/CreditCardPayment";
 import CreateCompany from "./components/CreateCompany";
+import ModifyPassword from "./components/ModifyPassword";
 
 Vue.use(Router);
 
@@ -68,6 +68,11 @@ export default new Router({
       path: "/loginAdmin",
       name: "loginadmin",
       component: LoginAdmin
+    },
+    {
+      path: "/modifyPassword",
+      name: "ModifyPassword",
+      component: ModifyPassword
     },
     {
       path: "/HomeClient",

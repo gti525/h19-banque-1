@@ -87,6 +87,15 @@
                         <td>Téléphone :</td>
                         <td>{{this.users.landline}}</td>
                     </tr>
+                    <tr>
+                        <td>
+                            <router-link :to="{
+                            name:'ModifyPassword',
+                        }">
+                                Changement de mot de passe
+                            </router-link>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

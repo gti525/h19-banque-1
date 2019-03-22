@@ -4,20 +4,22 @@
         <h1>Liste des transactions associées au compte courant</h1>
         <button class="no-print" v-on:click="printDiv('print')">Print</button>
         <break></break>
-        <table class="table table-hover">
+        <table id="myTable" class="table table-hover">
             <thead>
-            <tr>
-                <th scope="col">Numéro de transaction</th>
-                <th scope="col">Date</th>
-                <th scope="col">Action</th>
-                <th scope="col">Montant</th>
-            </tr>
+                <tr>
+                    <th scope="col">Numéro de transaction</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Action</th>
+                    <th scope="col">Montant</th>
+                    <th scope="col">Solde</th>
+                </tr>
             </thead>
             <tbody>
                 <tr v-for="(transaction) in transactions" :key="transaction.id">
                     <td>{{ transaction.id }}</td>
-                    <td>{{ transaction.transdate }}</td>
+                    <td>{{ correctTimeDateFormat(transaction.transdate) }}</td>
                     <td>{{ transaction.description }}</td>
+                    <td>{{ correctAmountFormat(transaction.credit, transaction.debit) }}</td>
                     <td>{{ transaction.balance }}</td>
                 </tr>
             </tbody>
@@ -32,6 +34,7 @@
 <script>
     import NavBar from './NavBarClient.vue';
     import http from "../http-common";
+    import moment from "moment";
     /* eslint-disable no-console */
 
     var timeoutID;
@@ -69,7 +72,6 @@
     }
 
     function goActive() {
-
 
         startTimer();
     }
@@ -109,6 +111,20 @@
                     .catch(e => {
                         console.log(e);
                     });
+            },
+
+            correctTimeDateFormat(transactionDate) {
+
+                return moment(transactionDate).format('YYYY-MM-DD HH:mm:ss');
+            },
+
+            correctAmountFormat(transactionCredit, transactionDebit) {
+
+                if (transactionCredit == 0) {
+                    return "-" + transactionDebit
+                }
+
+                return "+" + transactionCredit
             }
         },
 
