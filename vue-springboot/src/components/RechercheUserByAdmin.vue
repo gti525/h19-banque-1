@@ -12,6 +12,7 @@
                     <option>Prénom</option>
                     <option>Nom</option>
                     <option>Nom d'utilisateur</option>
+                    <option>Compagnie</option>
                     <option>Courriel</option>
                     <option>Adresse</option>
                     <option>Code postal</option>
@@ -19,8 +20,8 @@
                     <option>Ville</option>
                     <option>Province</option>
                     <option>Pays</option>
-                    <option>Numéro carte crédit</option>
-                    <option>Numéro compte</option>
+                    <!--<option>Numéro carte crédit</option>-->
+                    <!--<option>Numéro compte</option>-->
                 </select>
                 <span> Sélectionné </span>
                 <div class="main-header">
@@ -92,9 +93,9 @@
 
     function goInactive() {
         document.location.href = "http://localhost:4200";
-        delete localStorage.token
-        delete localStorage.bypass
-        delete localStorage.username
+        delete localStorage.token;
+        delete localStorage.bypass;
+        delete localStorage.username;
     }
 
     function goActive() {
@@ -115,7 +116,8 @@
                 lastname: '',
                 username: '',
                 password: '',
-                accountno: '',
+                company: '',
+                //accountno: '',
                 address: '',
                 city: '',
                 province: '',
@@ -123,7 +125,7 @@
                 zip: '',
                 landline: '',
                 mobile: '',
-                creditcardno: '',
+                //creditcardno: '',
                 bobs: '',
                 selected: ''
             }
@@ -148,7 +150,7 @@
                 if (this.selected == "Code postal") {
                     this.bobs = "zip"
                 }
-                if (this.selected == "Téléphone") {
+                if (this.selected == "Téléphone résidentiel") {
                     this.bobs = "landline"
                 }
                 if (this.selected == "Ville") {
@@ -157,19 +159,22 @@
                 if (this.selected == "Pays") {
                     this.bobs = "country"
                 }
-                if (this.selected == "Numéro carte crédit") {
-                    this.bobs = "creditcardno"
+                if (this.selected == "Compagnie") {
+                    this.bobs = "company"
                 }
-                if (this.selected == "Numéro compte") {
-                    this.bobs = "accountno"
-                }
-                console.log(this.bobs)
-                console.log(this.username + "text")
+                // if (this.selected == "Numéro carte crédit") {
+                //     this.bobs = "creditcardno"
+                // }
+                // if (this.selected == "Numéro compte") {
+                //     this.bobs = "accountno"
+                // }
+                console.log(this.bobs);
+                console.log(this.username + "text");
                 this.recherche()
             },
             rechercheTout() {
-                this.selected = '',
-                this.bobs = "*"
+                this.selected = '';
+                this.bobs = "*";
                 this.recherche()
             },
             recherche() {
@@ -186,7 +191,7 @@
         },
         created() {
             if (!localStorage.bypass) {
-                alert("Vous devez vous connecter avant d'Accéder a cette page")
+                alert("Vous devez vous connecter avant d'Accéder a cette page");
                 this.$router.push('/');
             }
         },
