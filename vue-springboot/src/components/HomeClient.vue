@@ -21,6 +21,12 @@
                     </tr>
                     <tr>
                         <td>
+                            <!--<router-link : to="{
+                             name: 'TransferToOtherAccount',
+                             params: {senderaccountno: user.accountno, amount: user.amount)
+                             }">
+                                {{user.firstname}}
+                            </router-link>-->
                             <button class="btn btn-outline-primary btn-common float-left" v-on:click="listAccountTransactions()">Liste des transactions</button>
                         </td>
                         <td>
@@ -39,13 +45,6 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>
-                            <router-link :to="{
-                            name:'homeClient',
-                        }">
-                                Credit Banque Uno
-                            </router-link>
-                        </td>
                         <td>{{ this.users.userCreditCard.creditcardno }}</td>
                     </tr>
                     <tr>
@@ -176,6 +175,14 @@
             creditCardPayment(){
 
                 this.$router.push('/creditCardPayment');
+            },
+
+            passToTransfer(){
+                this.$router.push({
+                    path: '/TransferToAnotherAccount',
+                    query: {amount: this.amount,
+                    senderaccountno: this.accountno}
+                });
             }
         },
         // eslint-disable-next-line
