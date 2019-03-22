@@ -49,9 +49,7 @@
         </div>
       </div>
     </div>
-    <div id="app">
       <Footer></Footer>
-    </div>
   </div>
 </template>
 
@@ -124,12 +122,6 @@
   .main-header {
     margin-top: 20px;
     margin-bottom: 28px;
-  }
-
-  .app {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
   }
 
 </style>

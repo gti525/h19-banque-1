@@ -49,11 +49,13 @@
         </div>
       </div>
     </div>
+      <Footer></Footer>
   </div>
 </template>
 
 <script>
   import http from "../http-common";
+  import Footer from './Footer.vue';
 
   export default {
     name: "Login",
@@ -63,6 +65,9 @@
         password: '',
         error: false
       }
+    },
+    components: {
+      Footer: Footer
     },
     methods: {
       /* eslint-disable no-console */
