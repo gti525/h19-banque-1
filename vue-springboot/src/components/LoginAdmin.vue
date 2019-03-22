@@ -49,12 +49,14 @@
         </div>
       </div>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
   import http from "../http-common";
-
+  import Footer from './Footer.vue';
+  import NavBar from './NavBarAdmin.vue';
   export default {
     name: "Login",
     data() {
@@ -63,6 +65,10 @@
         password: '',
         error: false
       }
+    },
+    components: {
+      NavBar: NavBar,
+      Footer: Footer
     },
     methods: {
       /* eslint-disable no-console */

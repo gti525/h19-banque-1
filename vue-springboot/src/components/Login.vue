@@ -49,12 +49,14 @@
         </div>
       </div>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 
 
 <script>
   import http from "../http-common";
+  import Footer from './Footer.vue';
   export default {
     name: "Login",
     data() {
@@ -63,6 +65,9 @@
         password: '',
         error: false
       }
+    },
+    components: {
+      Footer: Footer
     },
     methods: {
       /* eslint-disable no-console */
@@ -105,7 +110,6 @@
     font-weight: 300;
     color: #002ec3;
     font-family: 'Hind Siliguri', sans-serif;
-
   }
 
   .login-container {
@@ -120,4 +124,5 @@
     margin-top: 20px;
     margin-bottom: 28px;
   }
+
 </style>

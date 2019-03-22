@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <footer class="navbar navbar-expand-lg justify-center align-content-center navbar-dark bg-primary">
-            <a class="navbar-brand">Copyright 2019 - Banque Uno</a>
+    <div class="layout">
+        <footer class="justify-center align-content-center bg-primary">
+            <a class="navbar-brand text-white">Copyright 2019 - Banque Uno</a>
         </footer>
     </div>
 </template>
@@ -12,4 +12,14 @@
 <style lang="scss" scoped>
     @import "../scss/common.scss";
 
+    .layout {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 30px;
+        line-height: 20px;
+    }
+
 </style>
+
+
