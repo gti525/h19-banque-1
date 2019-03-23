@@ -21,10 +21,14 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="/RechercheUserByAdmin">Recherche d'un utilisateur</a>
                     </li>
-                    <li class="nav-item active active">
-                        <a class="nav-link" v-on:click="createUserBtnClicked" href="/loginadmin"><strong>Logout</strong></a>
-                    </li>
                 </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <ul class="navbar-nav mr-auto my-2 my-lg-0">
+                        <li class="nav-item active">
+                            <a class="nav-link" v-on:click="createUserBtnClicked" href="/"><strong>Logout</strong></a>
+                        </li>
+                    </ul>
+                </form>
             </div>
         </nav>
     </div>
