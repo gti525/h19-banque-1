@@ -1,7 +1,7 @@
 <template>
     <div class="layout">
         <footer class="justify-center align-content-center bg-primary">
-            <a class="navbar-brand text-white">Copyright 2019 - Banque Uno</a>
+            <a class="navbar-brand text-white">Copyright 2019 - Banquo Uno</a>
         </footer>
     </div>
 </template>
