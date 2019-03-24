@@ -21,17 +21,22 @@
                     </tr>
                     <tr>
                         <td>
-                            <!--<router-link : to="{
-                             name: 'TransferToOtherAccount',
-                             params: {senderaccountno: user.accountno, amount: user.amount)
-                             }">
-                                {{user.firstname}}
-                            </router-link>-->
                             <button class="btn btn-outline-primary btn-common float-left" v-on:click="listAccountTransactions()">Liste des transactions</button>
                         </td>
-                        <td>
+
+                        <router-link :to="{
+                        name: 'TransferToOtherAccount',
+                        params: {amount: users.userAccount.amount }
+                        }">
                             <button class="btn btn-outline-primary btn-common float-left" v-on:click="transferToOtherAccount()">Transfert de fond à une autre compte</button>
-                        </td>
+
+                        </router-link>
+                      <!--  <td>
+
+
+                              <button class="btn btn-outline-primary btn-common float-left" v-on:click="transferToOtherAccount()">Transfert de fond à une autre compte</button>
+
+                        </td>-->
                     </tr>
                     </tbody>
                 </table>
