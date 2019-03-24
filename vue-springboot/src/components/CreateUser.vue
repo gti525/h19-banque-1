@@ -67,8 +67,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="address">Réponse 1 (La taille de la réponse doit être comprise entre 6 et 100
-                        caractères)</label>
+                    <label for="address">Réponse 1</label>
                     <input id="address" type="text" v-model="answer1" name="answer1" class="form-control">
                 </div>
                 <div class="form-group">
@@ -86,8 +85,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="address">Réponse 2 (La taille de la réponse doit être comprise entre 6 et 100
-                        caractères)</label>
+                    <label for="address">Réponse 2</label>
                     <input type="text" v-model="answer2" name="answer2" class="form-control">
                 </div>
                 <div class="form-group">

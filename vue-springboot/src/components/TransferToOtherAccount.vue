@@ -8,6 +8,23 @@
                     <h2>Transfert de fonds vers un autre compte</h2>
                 </div>
 
+                <div class="solde-container">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Compte courant</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Solde :</td>
+                            <td> {{ amount}}$</td>
+                            <!-- <td>{{ this.users.userAccount.amount }}$</td>-->
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
                 <div class="form-group">
                     <label for="receiveraccountno">Numéro du compte de destination</label>
                     <input
@@ -42,7 +59,6 @@
         </div>
     </div>
 </template>
-
 
 
 <script>
@@ -97,9 +113,20 @@
         },
         data() {
             return {
-                users: []
+                users: [],
+                senderaccountno: '',
+                amount: ''
             }
         },
+
+        /* eslint-disable no-console*/
+        created(){
+
+            this.amount = this.$route.params.amount;
+            console.log(this.$route.params)
+            console.log(this.amount)
+        },
+
         methods: {
             /* eslint-disable no-console */
             transferMoneyBtnClicked() {
@@ -139,10 +166,25 @@
                 this.$router.push("/loginAdmin")
             }
         },
-        created() {
+
+        searchTransferData() {
+            http
+                .get("/auth/searchusers?search=" + "username" + ":" + "*" + localStorage.username + "*")
+                .then(response =>{
+                    this.users = response.data[0].userAccount.users;
+                    console.log(response.data);
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        },
+
+        mounted() {
             if (!localStorage.bypass) {
                 alert("Vous devez vous connecter avant d'Accéder a cette page")
                 this.$router.push('/');
+            } else {
+                this.searchTransferData()
             }
         },
     }
@@ -158,6 +200,15 @@
         font-weight: 600;
         color: #002ec3;
         font-family: "Hind Siliguri", sans-serif;
+    }
+
+    .bob-container {
+        border: 1px solid #e8e8e8;
+        box-shadow: 0px 0px 20px #e6e6e6;
+        padding: 20px 40px;
+        border-radius: 10px;
+        margin-top: 6%;
+        margin-bottom: 60px;
     }
 
     .main-header {

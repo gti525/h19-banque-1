@@ -12,6 +12,7 @@
                     <option>Prénom</option>
                     <option>Nom</option>
                     <option>Nom d'utilisateur</option>
+                    <option>Compagnie</option>
                     <option>Courriel</option>
                     <option>Adresse</option>
                     <option>Code postal</option>
@@ -19,14 +20,14 @@
                     <option>Ville</option>
                     <option>Province</option>
                     <option>Pays</option>
-                    <option>Numéro carte crédit</option>
-                    <option>Numéro compte</option>
+                    <!--<option>Numéro carte crédit</option>-->
+                    <!--<option>Numéro compte</option>-->
                 </select>
                 <span> Sélectionné </span>
                 <div class="main-header">
                 </div>
                 <br>
-                <input type="text" v-model="username" name="username" class="form-control">
+                <input @keyup.enter="bob" type="text" v-model="username" name="username" class="form-control">
             </div>
             <button v-on:click="rechercheTout" class="btn-group mr-2 btn btn-primary btn-common float-right">Recherche Tout
             </button>
@@ -55,6 +56,7 @@
         <Footer></Footer>
     </div>
 </template>
+
 
 <script>
     import NavBar from './NavBarAdmin.vue';

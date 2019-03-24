@@ -6,7 +6,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarColor01">
+      <div class="collapse navbar-collapse float-left text-justify" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <a class="nav-link" href="#" v-on:click="clientRedirect">Page Client</a>
@@ -105,7 +105,6 @@
 <style lang="scss" scoped>
   @import "../scss/common.scss";
 
-  .app-header {
 
     .app-title {
       margin-top: 2.8%;
@@ -126,7 +125,6 @@
       font-family: 'Hind Siliguri', sans-serif;
 
     }
-  }
 
   .login-container {
     border: 1px solid #e8e8e8;

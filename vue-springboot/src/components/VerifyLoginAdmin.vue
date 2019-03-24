@@ -79,7 +79,7 @@
 
             },
             wrongAnwser () {
-                alert("Mauvaise réponse entrer veuillez recommancer")
+                alert("Mauvaise réponse entrée, veuillez recommancer")
             },
             loading () {
                location.reload();

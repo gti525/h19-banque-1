@@ -52,13 +52,13 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="address">Réponse 1 (La taille de la réponse doit être comprise entre 6 et 100 caractères)</label>
+                    <label for="address">Réponse 1</label>
                     <input id="address" type="text" v-model="answer1" name="answer1" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="mmn">Question 2</label>
                     <select v-model="question2" class="form-control">
-                        <option>Quel est le siège social de l'entreprise?</option>
+                        <option>À quel endroit se situe le siège social de l'entreprise?</option>
                         <option>Dans quelle ville a été créé l'entreprise?</option>
                         <option>Quel est le nombre d'employé dans la compagnie?</option>
                         <option>Qui est le directeur général de l'entreprise?</option>
@@ -66,7 +66,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="address">Réponse 2 (La taille de la réponse doit être comprise entre 6 et 100 caractères)</label>
+                    <label for="address">Réponse 2</label>
                     <input type="text" v-model="answer2" name="answer2" class="form-control">
                 </div>
                 <div class="form-group">
