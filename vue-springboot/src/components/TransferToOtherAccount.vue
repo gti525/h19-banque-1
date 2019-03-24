@@ -109,8 +109,8 @@
             transferMoneyBtnClicked() {
 
                         //Vérifie si le compte receiver vient de banque 1 ou 2
-                        let digits = (Math.log10(this.receiverAccountNo));
-                        let firstdigit = (this.receiverAccountNo / (Math.pow(10,digits)));
+                        let digits = Math.floor((Math.log10(this.receiverAccountNo)));
+                        let firstdigit = Math.floor((this.receiverAccountNo / (Math.pow(10,digits))));
                         console.log(firstdigit);
                         if (Math.floor(firstdigit) == 1) {
                             alert("Transfer a Banque1")
@@ -119,21 +119,36 @@
                                     .post("/auth/Transfer", { senderAccountNo: this.senderAccountNo, receiverAccountNo: this.receiverAccountNo, amount: this.montant})
                                     .then(response => {
                                         console.log(response.data);
-                                        alert("Transfert réussi")
+                                        alert("Le transfert a été effectué avec succès. ")
                                         localStorage.bypass = 1
                                         location.reload();
                                     })
                                     .catch(e => {
-                                        alert("Transfert fail")
+                                        alert("Le transfert a échoué. Veuillez-vous assurer de la validit des informations entrées.")
                                         console.log(e);
                                         console.log(e.request)
                                         console.log(e.config)
                                         console.log(e.message)
                                     });
-                            } else {
-                                alert("Transfer a Banque2 (non configuré")
+                        } else {
+                            alert("Transfer a Banque2 (non configuré)")
+                            http
+                                    .post("/auth/otherBankTransfer", { senderAccountNo: this.senderAccountNo, receiverAccountNo: this.receiverAccountNo, amount: this.montant})
+                                    .then(response => {
+                                        console.log(response.data);
+                                        alert("Le transfert a été effectué avec succès.")
+                                        localStorage.bypass = 1
+                                        location.reload();
+                                    })
+                                    .catch(e => {
+                                        alert("Le transfert a échoué. Veuillez-vous assurer de la validit des informations entrées.")
+                                        console.log(e);
+                                        console.log(e.request)
+                                        console.log(e.config)
+                                        console.log(e.message)
+                                    });
                             }
-                
+
             }
         },
 
