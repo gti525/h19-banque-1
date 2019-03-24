@@ -7,32 +7,18 @@
                 <div class="main-header">
                     <h2>Paiement de la carte de crédit</h2>
                 </div>
-                <div class="form-group">
-                    <label for="receiveraccountno">Solde actuel</label>
-                    <input
-                            id="receiveraccountno"
-                            type="number"
-                            min="0.01"
-                            step="0.01"
-                            v-model="receiveraccountno"
-                            name="receiveraccountno"
-                            class="form-control"
-                            :class="{ 'is-invalid': submitted && !amount }"
-                    >
-
+                <div>
+                    <table class="table">
+                        <tr>
+                            <td>Vous devez :</td>
+                            <td> {{this.amount}}$</td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="form-group">
-                    <label for="amount">Montant</label>
-                    <input
-                            id="amount"
-                            type="number"
-                            min="0.01"
-                            step="0.01"
-                            v-model="amount"
-                            name="amount"
-                            class="form-control"
-                            :class="{ 'is-invalid': submitted && !amount }"
-                    >
+                    <form>
+                        Montant : <input v-model="montant" type="number" name="montant"><br>
+                    </form>
                 </div>
                 <div class="form-group clearfix">
                     <button v-on:click="paymentBtnClicked" class="btn btn-primary btn-common float-right">Payer
@@ -45,7 +31,7 @@
 
 <script>
     import NavBar from "./NavBarClient.vue";
-    //import http from "../http-common";
+    import http from "../http-common";
 
     var timeoutID;
 
@@ -60,6 +46,7 @@
 
         startTimer();
     }
+
     setup();
 
     function startTimer() {
@@ -87,21 +74,48 @@
 
     export default {
         name: "CreditCardPayment",
-        components:{
+        components: {
             NavBar
         },
         data() {
             return {
+                amount: '',
+                accountNumber: '',
+                creditNumber: ''
+            }
+        },
+        /* eslint-disable no-console*/
+        methods: {
+            paymentBtnClicked() {
+                http
+                    .post("/auth/CrediCardPayment", {
+                        senderaccountno: this.accountNumber,
+                        creditcardno: this.creditNumber,
+                        amount: this.montant
+                    })
+                    .then(response => {
+                        console.log(response.data);
+                        alert("Paiement réussi")
+                        localStorage.bypass = 1
+                        location.reload();
+                    })
+                    .catch(e => {
+                        alert("Paiement fail")
+                        console.log(e);
+                        console.log(e.request)
+                        console.log(e.config)
+                        console.log(e.message)
+                    });
+            }
+        },
 
-            }
-        },
         created() {
-            if (!localStorage.bypass) {
-                alert("Vous devez vous connecter avant d'Accéder a cette page")
-                this.$router.push('/');
-            }
+            this.amount = this.$route.params.amount;
+            this.accountNumber = this.$route.params.sender;
+            this.creditNumber = this.$route.params.number;
+            console.log(this.$route.params)
         },
-    }
+    };
 </script>
 
 <style lang="scss" scoped>
