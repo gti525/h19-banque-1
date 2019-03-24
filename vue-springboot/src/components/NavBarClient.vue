@@ -13,7 +13,10 @@
                         <a class="nav-link" href="/homeClient">Compte</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/transferToOtherAccount">Transfert</a>
+                        <a class="nav-link"
+                           v-on:click="transferToOtherAccount()" href="/transferToOtherAccount">Transfert
+                        </a>
+
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="/creditCardPayment">Paiement</a>
@@ -40,7 +43,14 @@
                 delete localStorage.token
                 delete localStorage.bypass
                 delete localStorage.username
-            }
+            },
+
+            transferToOtherAccount() {
+                this.$router.push({
+                    name: 'TransferToOtherAccount',
+                    params: {amount: this.amountResponse, sender: this.accountnoResponse}
+                });
+            },
         }
     };
 
