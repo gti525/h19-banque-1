@@ -29,8 +29,6 @@
                 <br>
                 <input @keyup.enter="bob" type="text" v-model="username" name="username" class="form-control">
             </div>
-            <button v-on:click="rechercheTout" class="btn-group mr-2 btn btn-primary btn-common float-right">Recherche Tout
-            </button>
             <button v-on:click="rechercheSimple" class="btn-group mr-2 btn btn-primary btn-common float-right">Recherche avec filtre
             </button>
         </div>
@@ -45,7 +43,7 @@
                 <td>
                     <router-link :to="{
                             name: 'AdminCompteClient-details',
-                            params: { user: user, id: user.id, firstname: user.firstname }
+                            params: { user: user, id: user.id, firstname: user.firstname, searchFile: 'username' }
                         }">
                         {{user.firstname}} {{ user.lastname }}
                     </router-link>

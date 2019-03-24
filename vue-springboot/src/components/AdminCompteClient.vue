@@ -12,11 +12,11 @@
             <tbody>
             <tr class="design">
                 <th scope="row">Cheque</th>
-                <td> {{dollardCheque}}</td>
+                <td> {{this.amountResponse}}</td>
             </tr>
             <tr>
                 <th scope="row">Crédit</th>
-                <td>{{dollardCredit}}</td>
+                <td>{{this.amountownedResponse}}</td>
             </tr>
             <!--    <tr class="table-primary"> -->
             </tbody>
@@ -31,7 +31,6 @@
 
 <script>
     import NavBar from './NavBarAdmin.vue';
-    import http from "../http-common";
     import Footer from './Footer.vue'
 
     /* eslint-disable no-console */
@@ -86,6 +85,8 @@
                 username: '',
                 searchFile: '',
                 users: [],
+                amountResponse: '',
+                amountownedResponse: '',
                 dollardCheque: ".00$",
                 dollardCredit: ".00$"
             }
@@ -97,31 +98,19 @@
             this.searchFile = this.$route.params.searchFile;
             console.log(this.$route.params)
             console.log(this.username)
+            this.amountResponse = this.$route.params.user.userAccount.amount
+            this.amountownedResponse = this.$route.params.user.userCreditCard.amountowned
+
         },
         methods: {
             /* eslint-disable no-console */
-            saveUser() {
-                console.log("test123" + "  " +this.id)
-                http
-                    //.get("/users/" + this.id)
-                    .get("/auth/searchusers?search=" + this.searchFile + ":" + "*" + this.username + "*")
-                    .then(response => {
-                        this.users = response.data[0]; // JSON are parsed automatically.
-                       // console.log(this.users)
-                        this.dollardCheque = this.users.userAccount.amount + " $"
-                        this.dollardCredit = this.users.userCreditCard.amountowned + " $"
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    });
-            },
         },
         mounted() {
             if (!localStorage.bypass) {
                 alert("Vous devez vous connecter avant d'Accéder a cette page")
                 this.$router.push('/');
             } else {
-                this.saveUser()
+                console.log("d")
             }
         }
     }

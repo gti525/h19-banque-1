@@ -7,8 +7,8 @@
                 <th scope="col">Nom du client</th>
                 <th scope="col">Courriel</th>
                 <th scope="col">Numéro de téléphone</th>
-                <th scope="col">Transaction carte de compte courant</th>
-                <th scope="col">Transaction carte de credit</th>
+                <th scope="col">Transaction du compte courant</th>
+                <th scope="col">Transaction de la carte de credit</th>
             </tr>
             </thead>
             <tbody>

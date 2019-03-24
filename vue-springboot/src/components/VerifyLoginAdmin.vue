@@ -90,6 +90,8 @@
                 .get("/auth/searchusers?search=" + "username" + ":" + "*" + localStorage.username + "*")
                 .then(response => {
                     this.users = response.data[0]; // JSON are parsed automatically.
+                    this.answer1 = response.data[0].answer1
+                    this.answer2 = response.data[0].answer2
                     console.log(response.data);
 
                     if ( response.data[0].roles[0].name === "ROLE_USER") {
@@ -98,8 +100,8 @@
                     }
 
                     let questionMap = new Map();
-                    questionMap.set(this.users.question1, this.users.answer1);
-                    questionMap.set(this.users.question2, this.users.answer2);
+                    questionMap.set(this.users.question1, this.answer1);
+                    questionMap.set(this.users.question2, this.answer2);
 
                     let qustionArray = [
                         this.users.question1,
@@ -117,9 +119,8 @@
 <style lang="scss" scoped>
     @import "../scss/common.scss";
 
-    .app-header {
-
         .app-title {
+            margin-top: 2.8%;
             text-align: center;
             font-size: 40px;
             font-weight: 600;
@@ -137,7 +138,6 @@
             font-family: 'Hind Siliguri', sans-serif;
 
         }
-    }
 
     .login-container {
         border: 1px solid #e8e8e8;
