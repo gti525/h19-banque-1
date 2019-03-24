@@ -9,8 +9,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarColor01">
-                <ul class="navbar-nav mr-auto">
+            <div class="collapse navbar-collapse float-left text-justify" id="navbarColor01">
+                <ul class="navbar-nav mr-auto float-left">
                     <li class="nav-item active">
                         <a class="nav-link" href="#">Page Client <span class="sr-only">(current)</span></a>
                     </li>

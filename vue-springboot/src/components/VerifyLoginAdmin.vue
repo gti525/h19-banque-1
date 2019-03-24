@@ -77,7 +77,7 @@
 
             },
             wrongAnwser () {
-                alert("Mauvaise réponse entrer veuillez recommancer")
+                alert("Mauvaise réponse entrée, veuillez recommancer")
             },
             loading () {
                 console.log("34443")

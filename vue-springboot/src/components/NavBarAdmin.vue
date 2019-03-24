@@ -7,7 +7,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarColor01">
+            <div class="collapse navbar-collapse float-left text-justify" id="navbarColor01">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
                         <a class="nav-link" href="/homeAdmin">Liste des clients</a>
