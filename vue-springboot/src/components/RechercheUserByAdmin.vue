@@ -24,7 +24,7 @@
                 </select>
                 <span> Sélectionné </span>
                 <br>
-                <input type="text" v-model="username" name="username" class="form-control">
+                <input @keyup.enter="bob" type="text" v-model="username" name="username" class="form-control">
                 </div>
                 <div class="form-group clearfix">
                     <button v-on:click="bob" class="btn btn-primary btn-common float-right">Recherche
