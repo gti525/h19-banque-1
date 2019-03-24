@@ -13,18 +13,22 @@
                     <tbody>
                     <tr>
                         <td>Cheque Banque Uno</td>
-                        <td>{{ this.users.userAccount.accountno }}</td>
+                        <td>{{ this.accountnoResponse }}</td>
                     </tr>
                     <tr>
                         <td>Solde :</td>
-                        <td>{{ this.users.userAccount.amount }}$</td>
+                        <td>{{ this.amountResponse }}$</td>
                     </tr>
                     <tr>
                         <td>
-                            <button class="btn btn-outline-primary btn-common float-left" v-on:click="listAccountTransactions()">Liste des transactions</button>
+                            <button class="btn btn-outline-primary btn-common float-left"
+                                    v-on:click="listAccountTransactions()">Liste des transactions
+                            </button>
                         </td>
                         <td>
-                            <button class="btn btn-outline-primary btn-common float-left" v-on:click="transferToOtherAccount()">Transfert de fond à une autre compte</button>
+                            <button class="btn btn-outline-primary btn-common float-left"
+                                    v-on:click="transferToOtherAccount()">Transfert de fond à une autre compte
+                            </button>
                         </td>
                     </tr>
                     </tbody>
@@ -39,33 +43,31 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>
-                            <router-link :to="{
-                            name:'homeClient',
-                        }">
-                                Credit Banque Uno
-                            </router-link>
-                        </td>
-                        <td>{{ this.users.userCreditCard.creditcardno }}</td>
+                        <td>Credit Banque Uno</td>
+                        <td>{{ this.creditcardnoResponse }}</td>
                     </tr>
                     <tr>
                         <td>Limite de la carte :</td>
-                        <td>{{ this.users.userCreditCard.creditLimit }}$</td>
+                        <td>{{ this.creditLimitResponse }}$</td>
                     </tr>
                     <tr>
                         <td>Montant disponible :</td>
-                        <td>{{ this.users.userCreditCard.amountavailable }}$</td>
+                        <td>{{ this.amountavailableResponse }}$</td>
                     </tr>
                     <tr>
                         <td>Montant à payer :</td>
-                        <td>{{ this.users.userCreditCard.amountowned }}$</td>
+                        <td>{{ this.amountownedResponse }}$</td>
                     </tr>
                     <tr>
                         <td>
-                            <button class="btn btn-outline-primary btn-common float-left" v-on:click="listCreditTransactions()">Liste des transactions</button>
+                            <button class="btn btn-outline-primary btn-common float-left"
+                                    v-on:click="listCreditTransactions()">Liste des transactions
+                            </button>
                         </td>
                         <td>
-                            <button class="btn btn-outline-primary btn-common float-left" v-on:click="creditCardPayment()">Paiement de la carte de crédit</button>
+                            <button class="btn btn-outline-primary btn-common float-left"
+                                    v-on:click="creditCardPayment()">Paiement de la carte de crédit
+                            </button>
                         </td>
                     </tr>
                     </tbody>
@@ -150,7 +152,13 @@
         name: "HomeClient",
         data() {
             return {
-                users: []
+                users: [],
+                accountnoResponse: '',
+                amountResponse: '',
+                creditcardnoResponse: '',
+                creditLimitResponse: '',
+                amountavailableResponse: '',
+                amountownedResponse: ''
             }
         },
         components: {
@@ -158,25 +166,29 @@
             Footer: Footer
         },
         methods: {
-            listAccountTransactions(){
+            listAccountTransactions() {
 
                 this.$router.push('/ShowAccountTransactions');
             },
 
-            listCreditTransactions(){
+            transferToOtherAccount() {
+                this.$router.push({
+                    name: 'TransferToOtherAccount',
+                    params: {amount: this.amountResponse, sender: this.accountnoResponse}
+                });
+            },
+
+            creditCardPayment() {
+                this.$router.push({
+                    name: 'CreditCardPayment',
+                    params: {amount: this.amountownedResponse, sender: this.accountnoResponse, number: this.creditcardnoResponse}
+                });
+            },
+
+            listCreditTransactions() {
 
                 this.$router.push('/ShowCreditTransactions');
             },
-
-            transferToOtherAccount(){
-
-                this.$router.push('/TransferToOtherAccount');
-            },
-
-            creditCardPayment(){
-
-                this.$router.push('/creditCardPayment');
-            }
         },
         // eslint-disable-next-line
         created() {
@@ -188,7 +200,12 @@
                     .get("/auth/searchusers?search=" + "username" + ":" + "*" + localStorage.username + "*")
                     .then(response => {
                         this.users = response.data[0]; // JSON are parsed automatically.
-                        console.log(response.data);
+                        this.accountnoResponse = response.data[0].userAccount.accountno
+                        this.amountResponse = response.data[0].userAccount.amount
+                        this.creditcardnoResponse = response.data[0].userCreditCard.creditcardno
+                        this.creditLimitResponse = response.data[0].userCreditCard.creditLimit
+                        this.amountavailableResponse = response.data[0].userCreditCard.amountavailable
+                        this.amountownedResponse = response.data[0].userCreditCard.amountowned
                     })
                     .catch(e => {
                         console.log(e);
@@ -196,7 +213,7 @@
                     })
             }
         },
-        mounted () {
+        mounted() {
             // eslint-disable-next-line
             document.addEventListener("DOMContentLoaded", function () {
                 const e = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQ3LCJpYXQiOjE1NTE4MTQ2MDV9.bNtWwBzEhjN6vBhlZQ8NSV2CeNYfe54BsOKAh4QLBok";

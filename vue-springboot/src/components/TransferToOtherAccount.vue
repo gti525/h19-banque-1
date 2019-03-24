@@ -3,34 +3,29 @@
         <nav-bar></nav-bar>
         <div class="container">
             <div class="app-title">Banquo Uno</div>
-            <div class="transfer-container">
-                <div class="main-header">
+            <div>
+                <div>
                     <h2>Transfert de fonds vers un autre compte</h2>
                 </div>
+
+                <div>
+                    <table class="table">
+                        <tr>
+                            <td>Votre Solde :</td>
+                            <td> {{this.amount}}$</td>
+                        </tr>
+                    </table>
+                </div>
+
                 <div class="form-group">
-                    <label for="receiveraccountno">Numéro du compte de destination</label>
-                    <input
-                            id="receiveraccountno"
-                            type="number"
-                            min="0"
-                            v-model="receiveraccountno"
-                            name="receiveraccountno"
-                            class="form-control"
-                            :class="{ 'is-invalid': submitted && !receiveraccountno }"
-                    >
+                    <form>
+                        Numéro du compte de destination : <input v-model="receiverAccountNo" type="text" name="usrname" maxlength="8"><br>
+                    </form>
                 </div>
                 <div class="form-group">
-                    <label for="amount">Montant</label>
-                    <input
-                            id="amount"
-                            type="number"
-                            min="0.01"
-                            step="0.01"
-                            v-model="amount"
-                            name="amount"
-                            class="form-control"
-                            :class="{ 'is-invalid': submitted && !amount }"
-                    >
+                    <form>
+                       Montant : <input v-model="montant" type="number" name="montant"><br>
+                    </form>
                 </div>
                 <div class="form-group clearfix">
                     <button v-on:click="transferMoneyBtnClicked" class="btn btn-primary btn-common float-right">
@@ -95,51 +90,42 @@
         },
         data() {
             return {
-                receiveraccountno: '',
+                receiverAccountNo: '',
+                senderAccountNo: '',
                 amount: '',
-                error: false
+                montant: ''
             }
         },
+
+        /* eslint-disable no-console*/
+        created(){
+            this.amount = this.$route.params.amount;
+            this.senderAccountNo = this.$route.params.sender;
+        },
+
+
         methods: {
-            /* eslint-disable no-console */
+
             transferMoneyBtnClicked() {
-                if (!localStorage.bypass) {
-                    alert("Vous devez vous connecter avant d'Accéder a cette page")
-                    this.$router.push('/');
-                } else {
-                    //here should send the request to the backend and get to know if the username and password match
-                    let data = {
-                        senderaccountno: this.senderaccountno,
-                        receiveraccountno: this.receiveraccountno,
-                        amount: this.amount,
-                    }
-                    http
-                        .post("/auth/Transfer", data)
-                        .then(request => this.transferSuccessful(request))
-                        .catch(() => this.transferFailed())
-                }
-            },
-            transferSuccessful(req) {
-                if (!req.data.accessToken) {
-                    console.log(req)
-                    this.transferFailed()
-                    return
-                }
-                this.error = false
-                localStorage.token = req.data.accessToken
-                localStorage.receiveraccountno = this.receiveraccountno
-                console.log(req)
-                this.$router.push('/HomeClient')
-            },
-            transferFailed() {
-                this.$router.push('/errorPage');
-                delete localStorage.token;
-            },
-            adminRedirect() {
-                this.$router.push("/loginAdmin")
+                http
+                    .post("/auth/Transfer", { senderAccountNo: this.senderAccountNo, receiverAccountNo: this.receiverAccountNo, amount: this.montant})
+                    .then(response => {
+                        console.log(response.data);
+                        alert("Transfert réussi")
+                        localStorage.bypass = 1
+                        location.reload();
+                    })
+                    .catch(e => {
+                        alert("Transfert fail")
+                        console.log(e);
+                        console.log(e.request)
+                        console.log(e.config)
+                        console.log(e.message)
+                    });
             }
         },
-        created() {
+
+        mounted() {
             if (!localStorage.bypass) {
                 alert("Vous devez vous connecter avant d'Accéder a cette page")
                 this.$router.push('/');
@@ -160,7 +146,7 @@
         font-family: "Hind Siliguri", sans-serif;
     }
 
-    .login-container {
+    .bob-container {
         border: 1px solid #e8e8e8;
         box-shadow: 0px 0px 20px #e6e6e6;
         padding: 20px 40px;

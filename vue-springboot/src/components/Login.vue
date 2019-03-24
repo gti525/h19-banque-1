@@ -4,12 +4,13 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <a class="navbar-brand" href="#">Banquo Uno</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+              aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarColor01">
-        <ul class="navbar-nav mr-auto">
+      <div class="collapse navbar-collapse float-left text-justify" id="navbarColor01">
+        <ul class="navbar-nav mr-auto float-left">
           <li class="nav-item active">
             <a class="nav-link" href="#">Page Client <span class="sr-only">(current)</span></a>
           </li>
@@ -53,10 +54,10 @@
   </div>
 </template>
 
-
 <script>
   import http from "../http-common";
   import Footer from './Footer.vue';
+
   export default {
     name: "Login",
     data() {
@@ -74,11 +75,11 @@
       customerLogin() {
         //here should send the request to the backend and get to know if the username and password match
         http
-                .post("/auth/signin", { username: this.username, password: this.password })
+                .post("/auth/signin", {username: this.username, password: this.password})
                 .then(request => this.loginSuccessful(request))
                 .catch(() => this.loginFailed())
       },
-      loginSuccessful (req) {
+      loginSuccessful(req) {
         if (!req.data.accessToken) {
           console.log(req)
           this.loginFailed()
@@ -89,8 +90,9 @@
         localStorage.username = this.username
         console.log(req)
         this.$router.push('/VerifyLogin')
+        location.reload();
       },
-      loginFailed () {
+      loginFailed() {
         alert("Mauvaise information rentrer")
         delete localStorage.token
       },
@@ -107,7 +109,7 @@
     margin-top: 5%;
     text-align: center;
     font-size: 40px;
-    font-weight: 300;
+    font-weight: 600;
     color: #002ec3;
     font-family: 'Hind Siliguri', sans-serif;
   }

@@ -53,6 +53,8 @@
                 questionMap: '',
                 randomQuestion:'',
                 qustionArray:'',
+                answer1: '',
+                answer2: '',
                 token: ''
             }
         },
@@ -82,8 +84,7 @@
 
             },
             wrongAnwser () {
-                alert("Mauvaise réponse entrer veuillez recommancer")
-
+                alert("Mauvaise réponse entrée, veuillez recommancer")
             },
             loading () {
                 location.reload();
@@ -94,6 +95,8 @@
                 .get("/auth/searchusers?search=" + "username" + ":" + "*" + localStorage.username + "*")
                 .then(response => {
                     this.users = response.data[0]; // JSON are parsed automatically.
+                    this.answer1 = response.data[0].answer1
+                    this.answer2 = response.data[0].answer2
                     console.log(response.data);
 
                     if ( response.data[0].roles[0].name === "ROLE_ADMIN") {
@@ -103,8 +106,8 @@
 
 
                     let questionMap = new Map();
-                    questionMap.set(this.users.question1, this.users.answer1);
-                    questionMap.set(this.users.question2, this.users.answer2);
+                    questionMap.set(this.users.question1, this.answer1);
+                    questionMap.set(this.users.question2, this.answer2);
 
                     let qustionArray = [
                         this.users.question1,

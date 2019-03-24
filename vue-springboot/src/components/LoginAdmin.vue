@@ -6,7 +6,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarColor01">
+      <div class="collapse navbar-collapse float-left text-justify" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <a class="nav-link" href="#" v-on:click="clientRedirect">Page Client</a>
@@ -91,6 +91,7 @@
         localStorage.bypass = '0'
         console.log(req)
         this.$router.push('/VerifyLoginAdmin')
+        location.reload();
       },
       loginFailed () {
         alert("Mauvaise information rentrer")
@@ -105,13 +106,12 @@
 <style lang="scss" scoped>
   @import "../scss/common.scss";
 
-  .app-header {
 
     .app-title {
       margin-top: 2.8%;
       text-align: center;
       font-size: 40px;
-      font-weight: 300;
+      font-weight: 600;
       color: #002ec3;
       font-family: 'Hind Siliguri', sans-serif;
 
@@ -126,7 +126,6 @@
       font-family: 'Hind Siliguri', sans-serif;
 
     }
-  }
 
   .login-container {
     border: 1px solid #e8e8e8;
