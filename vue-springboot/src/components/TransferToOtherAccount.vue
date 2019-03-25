@@ -24,7 +24,7 @@
                 </div>
                 <div class="form-group">
                     <form>
-                       Montant : <input v-model="montant" type="number" name="montant"><br>
+                        Montant : <input v-model="montant" type="number" name="montant"><br>
                     </form>
                 </div>
                 <div class="form-group clearfix">
@@ -107,21 +107,47 @@
         methods: {
 
             transferMoneyBtnClicked() {
-                http
-                    .post("/auth/Transfer", { senderAccountNo: this.senderAccountNo, receiverAccountNo: this.receiverAccountNo, amount: this.montant})
-                    .then(response => {
-                        console.log(response.data);
-                        alert("Transfert réussi")
-                        localStorage.bypass = 1
-                        location.reload();
-                    })
-                    .catch(e => {
-                        alert("Transfert fail")
-                        console.log(e);
-                        console.log(e.request)
-                        console.log(e.config)
-                        console.log(e.message)
-                    });
+
+                //Vérifie si le compte receiver vient de banque 1 ou 2 et effectue un post à l'API approprié.
+                let digits = Math.floor((Math.log10(this.receiverAccountNo)));
+                let firstdigit = Math.floor((this.receiverAccountNo / (Math.pow(10,digits))));
+                if (Math.floor(firstdigit) == 1) {
+                    alert("Transfert à Banque1")
+
+                    http
+                        .post("/auth/Transfer", { senderAccountNo: this.senderAccountNo, receiverAccountNo: this.receiverAccountNo, amount: this.montant})
+                        .then(response => {
+                            console.log(response.data);
+                            alert("Le transfert a été effectué avec succès. ")
+                            localStorage.bypass = 1
+                            location.reload();
+                        })
+                        .catch(e => {
+                            alert("Le transfert a échoué. Veuillez-vous assurer de la validité des informations entrées.")
+                            console.log(e);
+                            console.log(e.request)
+                            console.log(e.config)
+                            console.log(e.message)
+                        });
+                } else {
+                    alert("Transfert à Banque2 ")
+
+                    http
+                        .post("/auth/OtherBankTransfer", { senderAccountNo: this.senderAccountNo, receiverAccountNo: this.receiverAccountNo, amount: this.montant})
+                        .then(response => {
+                            console.log(response.data);
+                            alert("Le transfert a été effectué avec succès.")
+                            localStorage.bypass = 1
+                            location.reload();
+                        })
+                        .catch(e => {
+                            alert("Le transfert a échoué. Veuillez-vous assurer de la validité des informations entrées.")
+                            console.log(e);
+                            console.log(e.request)
+                            console.log(e.config)
+                            console.log(e.message)
+                        });
+                }
             }
         },
 
@@ -131,6 +157,8 @@
                 this.$router.push('/');
             }
         },
+
+
     }
     ;
 </script>

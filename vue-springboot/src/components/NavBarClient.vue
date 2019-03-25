@@ -12,12 +12,6 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="/homeClient">Compte</a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/transferToOtherAccount">Transfert</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/creditCardPayment">Paiement</a>
-                    </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <ul class="navbar-nav mr-auto my-2 my-lg-0">
