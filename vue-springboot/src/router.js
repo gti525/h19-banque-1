@@ -6,7 +6,6 @@ import LoginAdmin from "./components/LoginAdmin.vue";
 import VerifyLoginAdmin from "./components/VerifyLoginAdmin.vue";
 import HomeAdmin from "./components/HomeAdmin.vue";
 import CreateUser from "./components/CreateUser.vue";
-import ErrorPage from "./components/ErrorPage";
 import AdminCompteClient from "./components/AdminCompteClient.vue";
 import RechercheUserByAdmin from "./components/RechercheUserByAdmin.vue";
 import HomeClient from "./components/HomeClient.vue";
@@ -97,11 +96,6 @@ export default new Router({
       path: "/CreditCardPayment",
       name: "CreditCardPayment",
       component: CreditCardPayment
-    },
-    {
-      path: "/errorPage",
-      name: "errorPage",
-      component: ErrorPage
     }
   ]
 });

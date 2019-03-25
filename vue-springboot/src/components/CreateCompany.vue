@@ -169,6 +169,7 @@
 
         startTimer();
     }
+
     setup();
 
     function startTimer() {
@@ -267,8 +268,6 @@
                         console.log(e.config)
                         console.log(e.message)
                     });
-
-                this.submitted = true;
             }
         }
     };
