@@ -64,7 +64,7 @@
       return {
         username: '',
         password: '',
-        error: false
+        error: false,
       }
     },
     components: {
@@ -93,6 +93,7 @@
         location.reload();
       },
       loginFailed() {
+        console.log(this.test)
         alert("Mauvaise information rentrer")
         delete localStorage.token
       },

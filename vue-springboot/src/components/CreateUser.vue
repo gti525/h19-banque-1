@@ -15,7 +15,6 @@
                             v-model="firstname"
                             name="firstname"
                             class="form-control"
-                            :class="{ 'is-invalid': submitted && !firstname }"
                     >
                 </div>
                 <div class="form-group">
@@ -26,18 +25,6 @@
                             v-model="lastname"
                             name="lastname"
                             class="form-control"
-                            :class="{ 'is-invalid': submitted && !lastname }"
-                    >
-                </div>
-                <div class="form-group">
-                    <label for="username">Nom d'utilisateur</label>
-                    <input
-                            id="username"
-                            type="text"
-                            v-model="username"
-                            name="username"
-                            class="form-control"
-                            :class="{ 'is-invalid': submitted && !username }"
                     >
                 </div>
                 <div class="form-group">
@@ -48,7 +35,6 @@
                             v-model="password"
                             name="password"
                             class="form-control"
-                            :class="{ 'is-invalid': submitted && !password }"
                     >
                     {{password}}
                 </div>
@@ -224,7 +210,7 @@
         },
         data() {
             return {
-                company: '',
+                company: "banque",
                 firstname: '',
                 lastname: '',
                 username: '',
@@ -246,6 +232,7 @@
                 country: '',
                 mobile: '',
                 landline: '',
+                random_number: Math.floor(Math.random() * (9999 - 1 +1)) + 9999
             }
         },
         methods: {
@@ -255,8 +242,8 @@
                     company: this.company,
                     firstname: this.firstname,
                     lastname: this.lastname,
-                    username: this.username,
-                    creditLimit: this.creditLimit,
+                    username: this.firstname + "-" + this.lastname + this.random_number,
+                    creditLimit: this.creditbalanceavailable,
                     amount: this.amount,
                     creditbalanceavailable: this.creditbalanceavailable,
                     creditbalanceowned: this.creditbalanceowned,
@@ -282,7 +269,7 @@
                     .then(response => {
                         console.log(response.data);
                         this.$router.push('/homeAdmin');
-
+                        alert("votre nom d'utilisateur est " + data.username)
                     })
                     .catch(e => {
                         alert("Impossible de charger les informations. Un champ obligatoire n'est pas rempli ou est incorrect.");
