@@ -4,7 +4,7 @@
         <div class="container">
             <div class="app-title">{{ this.users.firstname }} {{ this.users.lastname }}</div>
             <div class="login-container">
-                <table class="table">
+                <table class="table table-borderless table-condensed table-hover">
                     <thead>
                     <tr>
                         <th scope="col">Compte courant</th>
@@ -35,7 +35,7 @@
                 </table>
             </div>
             <div class="login-container">
-                <table class="table">
+                <table class="table ">
                     <thead>
                     <tr>
                         <th scope="col">Compte credit</th>
