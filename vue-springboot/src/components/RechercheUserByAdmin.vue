@@ -29,13 +29,16 @@
                 <br>
                 <input @keyup.enter="bob" type="text" v-model="username" name="username" class="form-control">
             </div>
-            <button v-on:click="rechercheSimple" class="btn-group mr-2 btn btn-primary btn-common float-right">Recherche avec filtre
+            <button v-on:click="rechercheSimple" class="btn-group mr-2 btn btn-primary btn-common float-right">Recherche
+                avec filtre
             </button>
         </div>
         <table class="table table-hover">
             <thead>
             <tr>
                 <th scope="col">Nom du client</th>
+                <th scope="col">Transaction du compte courant</th>
+                <th scope="col">Transaction de la carte de credit</th>
             </tr>
             </thead>
             <tbody>
@@ -46,6 +49,22 @@
                             params: { user: user, id: user.id, firstname: user.firstname, searchFile: 'username' }
                         }">
                         {{user.firstname}} {{ user.lastname }}
+                    </router-link>
+                </td>
+                <td>
+                    <router-link :to="{
+                            name: 'ShowAccountTransactionsAdmin-details',
+                            params: {id: user.id, username: user.username, searchFile: 'userAccount', textUsername: 'username' }
+                        }">
+                        {{user.userAccount.accountno}}
+                    </router-link>
+                </td>
+                <td>
+                    <router-link :to="{
+                            name: 'ShowAccountTransactionsAdmin-details',
+                            params: {id: user.id, username: user.username, searchFile: 'userCreditCard', textUsername: 'username' }
+                        }">
+                        {{user.userCreditCard.creditcardno}}
                     </router-link>
                 </td>
             </tr>
@@ -165,12 +184,21 @@
                 }
                 console.log(this.bobs)
                 console.log(this.username + "text")
-                this.recherche()
+                this.validation()
             },
             rechercheTout() {
                 this.selected = '',
-                this.bobs = "*"
+                    this.bobs = "*"
                 this.recherche()
+            },
+            validation() {
+                if (!this.bobs) {
+                    alert("Veuillez choisir ce que vous voulez rechercher")
+                } else if (!this.username) {
+                    alert("Veuillez entrer ce que vous recherchez")
+                } else {
+                    this.recherche()
+                }
             },
             recherche() {
                 http
@@ -186,7 +214,7 @@
         },
         created() {
             if (!localStorage.bypass) {
-                alert("Vous devez vous connecter avant d'Accéder a cette page")
+                alert("Vous devez vous connecter avant d'accéder a cette page")
                 this.$router.push('/');
             }
         },
