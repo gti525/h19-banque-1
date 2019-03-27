@@ -12,6 +12,7 @@
                     <option>Prénom</option>
                     <option>Nom</option>
                     <option>Nom d'utilisateur</option>
+                    <option>Compagnie</option>
                     <option>Courriel</option>
                     <option>Adresse</option>
                     <option>Code postal</option>
@@ -19,24 +20,25 @@
                     <option>Ville</option>
                     <option>Province</option>
                     <option>Pays</option>
-                    <option>Numéro carte crédit</option>
-                    <option>Numéro compte</option>
+                    <!--<option>Numéro carte crédit</option>-->
+                    <!--<option>Numéro compte</option>-->
                 </select>
                 <span> Sélectionné </span>
-                <br>
-                <input type="text" v-model="username" name="username" class="form-control">
+                <div class="main-header">
                 </div>
-                <div class="form-group clearfix">
-                    <button v-on:click="bob" class="btn btn-primary btn-common float-right">Recherche
-                    </button>
-
-
+                <br>
+                <input @keyup.enter="bob" type="text" v-model="username" name="username" class="form-control">
             </div>
+            <button v-on:click="rechercheSimple" class="btn-group mr-2 btn btn-primary btn-common float-right">Recherche
+                avec filtre
+            </button>
         </div>
         <table class="table table-hover">
             <thead>
             <tr>
                 <th scope="col">Nom du client</th>
+                <th scope="col">Transaction du compte courant</th>
+                <th scope="col">Transaction de la carte de credit</th>
             </tr>
             </thead>
             <tbody>
@@ -44,19 +46,38 @@
                 <td>
                     <router-link :to="{
                             name: 'AdminCompteClient-details',
-                            params: { user: user, id: user.id, firstname: user.firstname }
+                            params: { user: user, id: user.id, firstname: user.firstname, searchFile: 'username' }
                         }">
-                        {{user.username}} {{ user.lastname }}
+                        {{user.firstname}} {{ user.lastname }}
+                    </router-link>
+                </td>
+                <td>
+                    <router-link :to="{
+                            name: 'ShowAccountTransactionsAdmin-details',
+                            params: {id: user.id, username: user.username, searchFile: 'userAccount', textUsername: 'username' }
+                        }">
+                        {{user.userAccount.accountno}}
+                    </router-link>
+                </td>
+                <td>
+                    <router-link :to="{
+                            name: 'ShowAccountTransactionsAdmin-details',
+                            params: {id: user.id, username: user.username, searchFile: 'userCreditCard', textUsername: 'username' }
+                        }">
+                        {{user.userCreditCard.creditcardno}}
                     </router-link>
                 </td>
             </tr>
             </tbody>
         </table>
+        <Footer></Footer>
     </div>
 </template>
 
+
 <script>
-    import NavBar from "./NavBarAdmin.vue";
+    import NavBar from './NavBarAdmin.vue';
+    import Footer from './Footer.vue'
     import http from "../http-common";
 
     /* eslint-disable no-console */
@@ -74,6 +95,7 @@
 
         startTimer();
     }
+
     setup();
 
     function startTimer() {
@@ -90,6 +112,8 @@
     function goInactive() {
         document.location.href = "http://localhost:4200";
         delete localStorage.token
+        delete localStorage.bypass
+        delete localStorage.username
     }
 
     function goActive() {
@@ -100,7 +124,8 @@
     export default {
         name: "Login",
         components: {
-            NavBar
+            NavBar: NavBar,
+            Footer: Footer
         },
         data() {
             return {
@@ -118,11 +143,12 @@
                 landline: '',
                 mobile: '',
                 creditcardno: '',
-                bobs: ''
-        }
+                bobs: '',
+                selected: ''
+            }
         },
         methods: {
-            bob () {
+            rechercheSimple() {
                 if (this.selected == "Prénom") {
                     this.bobs = "firstname"
                 }
@@ -153,12 +179,26 @@
                 if (this.selected == "Numéro carte crédit") {
                     this.bobs = "creditcardno"
                 }
-                if (this.selected == "Numéro ompte") {
+                if (this.selected == "Numéro compte") {
                     this.bobs = "accountno"
                 }
                 console.log(this.bobs)
                 console.log(this.username + "text")
+                this.validation()
+            },
+            rechercheTout() {
+                this.selected = '',
+                    this.bobs = "*"
                 this.recherche()
+            },
+            validation() {
+                if (!this.bobs) {
+                    alert("Veuillez choisir ce que vous voulez rechercher")
+                } else if (!this.username) {
+                    alert("Veuillez entrer ce que vous recherchez")
+                } else {
+                    this.recherche()
+                }
             },
             recherche() {
                 http
@@ -171,7 +211,13 @@
                         console.log(e);
                     });
             }
-        }
+        },
+        created() {
+            if (!localStorage.bypass) {
+                alert("Vous devez vous connecter avant d'accéder a cette page")
+                this.$router.push('/');
+            }
+        },
     };
 </script>
 <style lang="scss" scoped>

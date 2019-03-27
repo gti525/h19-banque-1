@@ -15,9 +15,7 @@
                             v-model="firstname"
                             name="firstname"
                             class="form-control"
-                            :class="{ 'is-invalid': submitted && !firstname }"
                     >
-                    {{firstname}}
                 </div>
                 <div class="form-group">
                     <label for="lastname">Nom</label>
@@ -27,21 +25,7 @@
                             v-model="lastname"
                             name="lastname"
                             class="form-control"
-                            :class="{ 'is-invalid': submitted && !lastname }"
                     >
-                    {{lastname}}
-                </div>
-                <div class="form-group">
-                    <label for="username">Nom d'utilisateur</label>
-                    <input
-                            id="username"
-                            type="text"
-                            v-model="username"
-                            name="username"
-                            class="form-control"
-                            :class="{ 'is-invalid': submitted && !username }"
-                    >
-                    {{username}}
                 </div>
                 <div class="form-group">
                     <label for="password">Mot de Passe</label>
@@ -51,7 +35,6 @@
                             v-model="password"
                             name="password"
                             class="form-control"
-                            :class="{ 'is-invalid': submitted && !password }"
                     >
                     {{password}}
                 </div>
@@ -71,9 +54,8 @@
                 </div>
                 <div class="form-group">
                     <label for="address">Réponse 1</label>
-                    <input id="address" type="text" v-model="answer1" name="address" class="form-control">
+                    <input id="address" type="text" v-model="answer1" name="answer1" class="form-control">
                 </div>
-                {{answer1}}
                 <div class="form-group">
                     <label for="mmn">Question 2</label>
                     <select v-model="question2" class="form-control">
@@ -87,78 +69,83 @@
                         <option>Dans quelle ville ou village votre mère et votre père se sont-ils rencontré?</option>
                         <option>Où étiez-vous quand vous avez eu votre premier baiser?</option>
                     </select>
-                    {{question2}}
                 </div>
                 <div class="form-group">
                     <label for="address">Réponse 2</label>
-                    <input type="text" v-model="answer2" name="address" class="form-control">
+                    <input type="text" v-model="answer2" name="answer2" class="form-control">
                 </div>
-                {{answer2}}
-                <div class="form-group">
-                    <label for="mmn">Question 3</label>
-                    <select v-model="question3" class="form-control">
-                        <option>Quel était votre surnom d'enfance?</option>
-                        <option>Dans quelle ville avez-vous rencontré votre conjoint?</option>
-                        <option>Quel est le nom de votre ami d'enfance préféré?</option>
-                        <option>Dans quelle rue viviez-vous en troisième année?</option>
-                        <option>Quelle école avez-vous fréquenté en sixième année?</option>
-                        <option>Quel est le prénom et le nom de votre cousin le plus âgé?</option>
-                        <option>Quel était le nom de votre premier animal de compagnie?</option>
-                        <option>Dans quelle ville ou village votre mère et votre père se sont-ils rencontré?
-                        </option>
-                        <option>Où étiez-vous quand vous avez eu votre premier baiser?</option>
-                    </select>
-                    {{question3}}
-                </div>
-                <div class="form-group">
-                    <label for="address">Réponse 3</label>
-                    <input type="text" v-model="answer3" name="address" class="form-control">
-                </div>
-                {{answer3}}
                 <div class="form-group">
                     <label for="address">Adresse complète</label>
-                    <input type="text" v-model="fullAddress" name="address" class="form-control">
+                    <input type="text" v-model="address" name="address" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="home-phone">Téléphone fixe</label>
-                    <input id="home-phone" type="tel" v-model="homePhone" name="home-phone" class="form-control">
+                    <label for="landline">Numéro de téléphone à domicile</label>
+                    <input id="landline" type="tel" v-model="landline" name="landline" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="mobile">Téléphone mobile</label>
+                    <label for="mobile">Numéro de téléphone mobile</label>
                     <input id="mobile" type="tel" v-model="mobile" name="mobile" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="email">Courriel</label>
+                    <label for="email">Adresse Courriel</label>
                     <input id="email" type="email" v-model="email" name="email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="mmn">Rôle</label>
+                    <select v-model="role" class="form-control">
+                        <option>admin</option>
+                        <option>client</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="city">Ville</label>
+                    <input id="city" type="text" v-model="city" name="city" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="province">Province</label>
+                    <input id="province" type="text" v-model="province" name="province" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="country">Pays</label>
+                    <input id="country" type="text" v-model="country" name="country" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="zip">Code Postal</label>
+                    <input id="zip" type="zip" v-model="zip" name="zip" class="form-control">
                 </div>
                 <div class="panel-section">
                     <div class="panel-title">Compte bancaire</div>
                     <div class="panel-content">
                         <div class="form-group">
                             <label for="amount-avail">Montant d'argent disponible</label>
-                            <input id="amount-avail" type="text" v-model="amountAvailOfBankAccount" name="amount-avail"
+                            <input id="amount-avail" type="text" v-model="amount" name="amount-avail"
                                    class="form-control">
                         </div>
 
                     </div>
                 </div>
-
                 <div class="panel-section">
                     <div class="panel-title">Compte crédit</div>
                     <div class="panel-content">
+                        <!-- <div class="form-group">
+                             <label for="creditLimit">Limite de crédit</label>
+                             <input
+                                     id="creditLimit"
+                                     type="text"
+                                     v-model="creditLimit"
+                                     name="creditLimit"
+                                     class="form-control"
+                             >
+                         </div>-->
                         <div class="form-group">
-                            <label for="amount-avail">Montant d'argent disponible</label>
+                            <label for="creditbalanceavailable">Crédit disponible</label>
                             <input
+                                    id="creditbalanceavailable"
                                     type="text"
-                                    v-model="limiteCredit"
+                                    v-model="creditbalanceavailable"
                                     name="amount-avail"
                                     class="form-control"
                             >
-                        </div>
-                        <div class="form-group">
-                            <label for="amount-owed">Solde</label>
-                            <input id="amount-owed" type="text" v-model="balance" name="amount-owed"
-                                   class="form-control">
                         </div>
                     </div>
                 </div>
@@ -190,6 +177,7 @@
 
         startTimer();
     }
+
     setup();
 
     function startTimer() {
@@ -206,6 +194,8 @@
     function goInactive() {
         document.location.href = "http://localhost:4200";
         delete localStorage.token
+        delete localStorage.bypass
+        delete localStorage.username
     }
 
     function goActive() {
@@ -220,71 +210,82 @@
         },
         data() {
             return {
+                company: "banque",
                 firstname: '',
                 lastname: '',
                 username: '',
-                password: '',
-                question1: '',
-                question2: '',
-                question3: '',
-                answer1: '',
-                answer2: '',
-                answer3: '',
-                fullAddress: '',
-                homePhone: '',
-                mobile: '',
+                creditLimit: '',
+                amount: '',
+                creditbalanceavailable: '',
+                creditbalanceowned: 0,
                 email: '',
-                chequing: '',
-                saving: '',
-                amountAvailOfBankAccount: '',
-                limiteCredit: '',
-                balance: '',
-                chequingSaving: 'Chequing',
-                submitted: ''
+                role: '',
+                question1: '',
+                answer1: '',
+                question2: '',
+                answer2: '',
+                password: '',
+                address: '',
+                city: '',
+                province: '',
+                zip: '',
+                country: '',
+                mobile: '',
+                landline: '',
+                random_number: Math.floor(Math.random() * (9999 - 1 +1)) + 9999
             }
         },
         methods: {
+
             createUserBtnClicked() {
                 let data = {
+                    company: this.company,
                     firstname: this.firstname,
                     lastname: this.lastname,
-                    username: this.username,
-                    password: this.password,
-                    question1: this.question1,
-                    question2: this.question2,
-                    question3: this.question3,
-                    answer1: this.answer1,
-                    answer2: this.answer2,
-                    answer3: this.answer3,
-                    fullAddress: this.fullAddress,
-                    homePhone: this.homePhone,
-                    mobile: this.mobile,
+                    username: this.firstname + "-" + this.lastname + this.random_number,
+                    creditLimit: this.creditbalanceavailable,
+                    amount: this.amount,
+                    creditbalanceavailable: this.creditbalanceavailable,
+                    creditbalanceowned: this.creditbalanceowned,
                     email: this.email,
-                    chequing: this.chequing,
-                    saving: this.saving,
-                    amountAvailOfBankAccount: this.amountAvailOfBankAccount,
-                    limiteCredit: this.limiteCredit,
-                    balance: this.balance,
-                    chequingSaving: this.chequingSaving
-
+                    role: [this.role],
+                    question1: this.question1,
+                    answer1: this.answer1,
+                    question2: this.question2,
+                    answer2: this.answer2,
+                    password: this.password,
+                    address: this.address,
+                    city: this.city,
+                    province: this.province,
+                    zip: this.zip,
+                    country: this.country,
+                    mobile: this.mobile,
+                    landline: this.landline,
                 }
 
                 http
                 /* eslint-disable no-console */
-                    .post("/user", data)
+                    .post("/auth/signup", data)
                     .then(response => {
                         console.log(response.data);
                         this.$router.push('/homeAdmin');
-
+                        alert("votre nom d'utilisateur est " + data.username)
                     })
                     .catch(e => {
-                        this.$router.push('/errorPage');
+                        alert("Impossible de charger les informations. Un champ obligatoire n'est pas rempli ou est incorrect.");
                         console.log(e);
+                        console.log(e.request)
+                        console.log(e.config)
+                        console.log(e.message)
                     });
-
-                this.submitted = true;
             }
-        }
+        },
+        created() {
+            if (!localStorage.bypass) {
+                alert("Vous devez vous connecter avant d'Accéder a cette page")
+                this.$router.push('/');
+            }
+        },
     };
 </script>
 <style lang="scss" scoped>
@@ -326,4 +327,3 @@
         margin-bottom: 20px;
     }
 </style>
-

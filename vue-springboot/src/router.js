@@ -1,45 +1,26 @@
 import Vue from "vue";
 import Router from "vue-router";
-import CustomersList from "./components/CustomersList.vue";
-import AddCustomer from "./components/AddCustomer.vue";
-import SearchCustomers from "./components/SearchCustomers.vue";
-import Customer from "./components/Customer.vue";
 import Login from "./components/Login.vue";
 import VerifyLogin from "./components/VerifyLogin.vue";
 import LoginAdmin from "./components/LoginAdmin.vue";
 import VerifyLoginAdmin from "./components/VerifyLoginAdmin.vue";
 import HomeAdmin from "./components/HomeAdmin.vue";
 import CreateUser from "./components/CreateUser.vue";
-import ErrorPage from "./components/ErrorPage";
 import AdminCompteClient from "./components/AdminCompteClient.vue";
 import RechercheUserByAdmin from "./components/RechercheUserByAdmin.vue";
 import HomeClient from "./components/HomeClient.vue";
-import ShowTransaction from "./components/ShowTransaction.vue";
+import TransferToOtherAccount from "./components/TransferToOtherAccount";
+import ShowAccountTransactions from "./components/ShowAccountTransactions";
+import ShowAccountTransactionsAdmin from "./components/ShowAccountTransactionsAdmin";
+import ShowCreditTransactions from "./components/ShowCreditTransactions";
+import CreditCardPayment from "./components/CreditCardPayment";
+import CreateCompany from "./components/CreateCompany";
 
 Vue.use(Router);
 
 export default new Router({
   mode: "history",
   routes: [
-    {
-      path: "/h",
-      name: "customers",
-      alias: "/customer",
-      component: CustomersList,
-      children: [
-        {
-          path: "/customer/:id",
-          name: "customer-details",
-          component: Customer,
-          props: true
-        }
-      ]
-    },
-    {
-      path: "/add",
-      name: "add",
-      component: AddCustomer
-    },
     {
       path: "/homeAdmin",
       name: "homeAdmin",
@@ -51,15 +32,16 @@ export default new Router({
           component: AdminCompteClient,
     },
     {
-      path: "/search",
-      name: "search",
-      component: SearchCustomers
+      path: "/ShowAccountTransactionsAdmin/:id",
+      name: "ShowAccountTransactionsAdmin-details",
+      component: ShowAccountTransactionsAdmin,
     },
     {
       path: "/",
       name: "login",
       component: Login
     },
+
     {
       path: "/verifylogin",
       name: "verifylogin",
@@ -74,6 +56,11 @@ export default new Router({
       path: "/HomeClient",
       name: "HomeClient",
       component: HomeClient
+    },
+    {
+      path: "/createCompany",
+      name: "createCompany",
+      component: CreateCompany
     },
     {
       path: "/verifyloginAdmin",
@@ -91,14 +78,24 @@ export default new Router({
       component: RechercheUserByAdmin
     },
     {
-      path: "/ShowTransaction",
-      name: "ShowTransaction",
-      component: ShowTransaction
+      path: "/ShowAccountTransactions",
+      name: "ShowAccountTransactions",
+      component: ShowAccountTransactions
     },
     {
-      path: "/errorPage",
-      name: "errorPage",
-      component: ErrorPage
+      path: "/ShowCreditTransactions",
+      name: "ShowCreditTransactions",
+      component: ShowCreditTransactions
+    },
+    {
+      path: "/TransferToOtherAccount",
+      name: "TransferToOtherAccount",
+      component: TransferToOtherAccount
+    },
+    {
+      path: "/CreditCardPayment",
+      name: "CreditCardPayment",
+      component: CreditCardPayment
     }
   ]
 });

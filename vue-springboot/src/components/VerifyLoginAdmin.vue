@@ -1,27 +1,31 @@
 <template>
-    <div class="container">
-        <div class="app-header">
-            <div class="app-title">Banquo Uno</div>
-            <div class="app-sub-title">Administration</div>
-        </div>
-        <div class="login-container">
-            <div class="main-header">
-                <h2>Vérification de l'accès</h2></div>
-            <div class="form-group">
-                <label>{{this.randomQuestion}}</label>
-                <input
-                        type="text"
-                        v-model="text"
-                        name="text"
-                        class="form-control"
-                        :class="{ 'is-invalid': submitted }"
-                >
-            </div>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="#">Banquo Uno</a>
+        </nav>
 
-            <div class="form-group clearfix">
-                <button class="btn btn-primary btn-common float-right" v-on:click="verify">Vérifier</button>
+        <div class="container">
+            <div class="app-title">Administration</div>
+            <div class="login-container">
+                <div class="main-header">
+                    <h2>Vérification de l'accès</h2></div>
+                <div class="form-group">
+                    <label>{{this.randomQuestion}}</label>
+                    <input @keyup.enter="verify"
+                           type="text"
+                           v-model="text"
+                           name="text"
+                           class="form-control"
+                           :class="{ 'is-invalid': submitted }"
+                    >
+                </div>
+
+                <div class="form-group clearfix">
+                    <button class="btn btn-primary btn-common float-right" v-on:click="verify">Vérifier</button>
+                </div>
             </div>
         </div>
+        <Footer></Footer>
     </div>
 
 </template>
@@ -29,11 +33,13 @@
 <script>
     import NavBar from './NavBarAdmin.vue';
     import http from "../http-common";
+    import Footer from './Footer.vue';
     /* eslint-disable no-console */
     export default {
         name: "VerifyLoginAdmin",
         components: {
-            NavBar: NavBar
+            NavBar: NavBar,
+            Footer: Footer
         },
         data() {
             return {
@@ -54,75 +60,67 @@
                         .post("/auth/verify2", { question2: this.randomQuestion, answer2: this.text })
                         .then(response => {
                             console.log(response.data);
-                            this.$router.push({
-                                path : '/HomeAdmin',
-                                //   query: {username: this.$route.query.username}
-                            })
+                            this.$router.push('/HomeAdmin');
+                            localStorage.bypass = 1
+                            location.reload();
                         })
-                        .catch(e => {
-                            this.$router.push('/errorPage');
-                            console.log(e);
-                        });
+                        .catch(() => this.wrongAnwser())
                 } else {
                     http
                         .post("/auth/verify1", { question1: this.randomQuestion, answer1: this.text })
                         .then(response => {
                             console.log(response.data);
-                            this.$router.push({
-                                path : '/HomeAdmin',
-                                //   query: {username: this.$route.query.username}
-                            })
+                            this.$router.push('/HomeAdmin');
+                            localStorage.bypass = 1
+                            location.reload();
                         })
-                        .catch(e => {
-                            this.$router.push('/errorPage');
-                            console.log(e);
-                        });
+                        .catch(() => this.wrongAnwser())
                 }
 
-            }
+            },
+            wrongAnwser () {
+                alert("Mauvaise réponse entrée, veuillez recommancer")
+            },
+            loading () {
+               location.reload();
+            },
         },
         created() {
-            let data = {
-                username: this.$route.query.username
-            }
-            console.log("bla2")
-            console.log(data)
             http
-                .get("/usersA")
+                .get("/auth/searchusers?search=" + "username" + ":" + "*" + localStorage.username + "*")
                 .then(response => {
-                    this.response = response.data; // JSON are parsed automatically.
+                    this.users = response.data[0]; // JSON are parsed automatically.
+                    this.answer1 = response.data[0].answer1
+                    this.answer2 = response.data[0].answer2
+                    console.log(response.data);
+
+                    if ( response.data[0].roles[0].name === "ROLE_USER") {
+                        alert("Vous etes un client, redirection de page dans la bonne page")
+                        this.$router.push('/VerifyLogin');
+                    }
 
                     let questionMap = new Map();
-                    questionMap.set(response.data.principal.question1, response.data.principal.answer1);
-                    questionMap.set(response.data.principal.question2, response.data.principal.answer2);
-
-                    this.questionMap = questionMap;
+                    questionMap.set(this.users.question1, this.answer1);
+                    questionMap.set(this.users.question2, this.answer2);
 
                     let qustionArray = [
-                        response.data.principal.question1,
-                        response.data.principal.question2,
+                        this.users.question1,
+                        this.users.question2,
                     ];
                     this.qustionArray = qustionArray
 
                     let randomQuestion = qustionArray[Math.floor(Math.random() * qustionArray.length)]
                     this.randomQuestion = randomQuestion;
-
                 })
-                .catch(e => {
-                    this.$router.push('/errorPage');
-                    console.log(e);
-                });
-        }
+                .catch(() => this.loading())
+        },
     }
 </script>
 <style lang="scss" scoped>
     @import "../scss/common.scss";
 
-    .app-header {
-
-        margin-top: 20%;
-
         .app-title {
+            margin-top: 2.8%;
             text-align: center;
             font-size: 40px;
             font-weight: 600;
@@ -140,7 +138,6 @@
             font-family: 'Hind Siliguri', sans-serif;
 
         }
-    }
 
     .login-container {
         border: 1px solid #e8e8e8;

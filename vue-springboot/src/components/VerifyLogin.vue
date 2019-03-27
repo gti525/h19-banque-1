@@ -1,48 +1,60 @@
 <template>
-    <div class="container">
-        <div class="app-title">
-            Banquo Uno
-        </div>
-        <div class="login-container">
-            <div class="main-header">
-                <h2>Vérification de l'accès</h2></div>
-            <div class="form-group">
-                <label>{{this.randomQuestion}}</label>
-                <input
-                        type="text"
-                        v-model="text"
-                        name="text"
-                        class="form-control"
-                        :class="{ 'is-invalid': submitted }"
-                >
-            </div>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="#">Banquo Uno</a>
+        </nav>
 
-            <div class="form-group clearfix">
-                <button class="btn btn-primary btn-common float-right" v-on:click="verify">Vérifier</button>
+
+        <div class="container">
+            <div class="app-title">
+                Connexion Client
+            </div>
+            <div class="login-container">
+                <div class="main-header">
+                    <h2>Vérification de l'accès</h2></div>
+                <div class="form-group">
+                    <label>{{this.randomQuestion}}</label>
+                    <input @keyup.enter="verify"
+                           type="text"
+                           v-model="text"
+                           name="text"
+                           class="form-control"
+                           :class="{ 'is-invalid': submitted }"
+                    >
+                </div>
+
+                <div class="form-group clearfix">
+                    <button class="btn btn-primary btn-common float-right" v-on:click="verify">Vérifier</button>
+                </div>
             </div>
         </div>
+        <Footer></Footer>
     </div>
-
 </template>
 
 <script>
     import NavBar from './NavBarAdmin.vue';
     import http from "../http-common";
+    import Footer from './Footer.vue';
     /* eslint-disable no-console */
     export default {
         name: "VerifyLogin",
         components: {
-            NavBar: NavBar
+            NavBar: NavBar,
+            Footer: Footer
         },
         data() {
             return {
                 question: '',
+                users: '',
                 response: '',
                 text: '',
                 submitted: '',
                 questionMap: '',
                 randomQuestion:'',
                 qustionArray:'',
+                answer1: '',
+                answer2: '',
                 token: ''
             }
         },
@@ -53,66 +65,64 @@
                         .post("/auth/verify2", { question2: this.randomQuestion, answer2: this.text })
                         .then(response => {
                             console.log(response.data);
-                            this.$router.push({
-                                path : '/HomeClient',
-                             //   query: {username: this.$route.query.username}
-                                })
+                            this.$router.push('/HomeClient');
+                            localStorage.bypass = 1
+                            location.reload();
                         })
-                        .catch(e => {
-                            this.$router.push('/errorPage');
-                            console.log(e);
-                        });
+                        .catch(() => this.wrongAnwser())
                 } else {
                     http
                         .post("/auth/verify1", { question1: this.randomQuestion, answer1: this.text })
                         .then(response => {
                             console.log(response.data);
-                            this.$router.push({
-                                path : '/HomeClient',
-                                //   query: {username: this.$route.query.username}
-                            })
+                            this.$router.push('/HomeClient');
+                            localStorage.bypass = 1
+                            location.reload();
                         })
-                        .catch(e => {
-                            this.$router.push('/errorPage');
-                            console.log(e);
-                        });
+                        .catch(() => this.wrongAnwser())
                 }
 
-            }
+            },
+            wrongAnwser () {
+                alert("Mauvaise réponse entrée, veuillez recommancer")
+            },
+            loading () {
+                location.reload();
+            },
         },
         created() {
-            let data = {
-                username: this.$route.query.username
-            }
-            console.log("bla2")
-            console.log(data)
             http
-                .get("/usersU")
+                .get("/auth/searchusers?search=" + "username" + ":" + "*" + localStorage.username + "*")
                 .then(response => {
-                    this.response = response.data; // JSON are parsed automatically.
+                    this.users = response.data[0]; // JSON are parsed automatically.
+                    this.answer1 = response.data[0].answer1
+                    this.answer2 = response.data[0].answer2
+                    console.log(response.data);
+
+                    if ( response.data[0].roles[0].name === "ROLE_ADMIN") {
+                        alert("Vous etes un administrateur, redirection de page dans la bonne page")
+                        this.$router.push('/VerifyLoginAdmin');
+                    }
+
 
                     let questionMap = new Map();
-                    questionMap.set(response.data.principal.question1, response.data.principal.answer1);
-                    questionMap.set(response.data.principal.question2, response.data.principal.answer2);
-
-                    this.questionMap = questionMap;
+                    questionMap.set(this.users.question1, this.answer1);
+                    questionMap.set(this.users.question2, this.answer2);
 
                     let qustionArray = [
-                        response.data.principal.question1,
-                        response.data.principal.question2,
+                        this.users.question1,
+                        this.users.question2,
                     ];
                     this.qustionArray = qustionArray
 
-                    let randomQuestion = qustionArray[Math.floor(Math.random() * qustionArray.length)]
-                    this.randomQuestion = randomQuestion;
+                        let randomQuestion = qustionArray[Math.floor(Math.random() * qustionArray.length)]
+                        this.randomQuestion = randomQuestion;
+                    })
+                .catch(() => this.loading())
+            },
 
-                })
-                .catch(e => {
-                    this.$router.push('/errorPage');
-                    console.log(e);
-                });
         }
-    }
+
 
 
 </script>

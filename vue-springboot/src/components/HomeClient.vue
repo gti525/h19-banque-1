@@ -2,7 +2,7 @@
     <div>
         <nav-bar></nav-bar>
         <div class="container">
-            <div class="app-title">{{ users.principal.name }} {{ users.principal.lastname }}</div>
+            <div class="app-title">{{ this.users.firstname }} {{ this.users.lastname }}</div>
             <div class="login-container">
                 <table class="table">
                     <thead>
@@ -12,16 +12,24 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td><router-link :to="{
-                            name:'homeClient',
-                        }">
-                            Cheque Banque Uno
-                        </router-link></td>
-                        <td>Cheque IDNumber</td>
+                        <td>Cheque Banque Uno</td>
+                        <td>{{ this.accountnoResponse }}</td>
                     </tr>
                     <tr>
                         <td>Solde :</td>
-                        <td>{{ users.amountAvailOfBankAccount }}$</td>
+                        <td>{{ this.amountResponse }}$</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="btn btn-outline-primary btn-common float-left"
+                                    v-on:click="listAccountTransactions()">Liste des transactions
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-outline-primary btn-common float-left"
+                                    v-on:click="transferToOtherAccount()">Transfert de fond à une autre compte
+                            </button>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -35,20 +43,32 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td><router-link :to="{
-                            name:'homeClient',
-                        }">
-                            Credit Banque Uno
-                        </router-link></td>
-                        <td>Cheque IDNumber</td>
+                        <td>Credit Banque Uno</td>
+                        <td>{{ this.creditcardnoResponse }}</td>
                     </tr>
                     <tr>
-                        <td>Solde :</td>
-                        <td>{{ users.balance }}$</td>
+                        <td>Limite de la carte :</td>
+                        <td>{{ this.creditLimitResponse }}$</td>
                     </tr>
                     <tr>
-                        <td>Limite de crédit :</td>
-                        <td>{{ users.limiteCredit }}$</td>
+                        <td>Montant disponible :</td>
+                        <td>{{ this.amountavailableResponse }}$</td>
+                    </tr>
+                    <tr>
+                        <td>Montant à payer :</td>
+                        <td>{{ this.amountownedResponse }}$</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="btn btn-outline-primary btn-common float-left"
+                                    v-on:click="listCreditTransactions()">Liste des transactions
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-outline-primary btn-common float-left"
+                                    v-on:click="creditCardPayment()">Paiement de la carte de crédit
+                            </button>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -63,21 +83,25 @@
                     <tbody>
                     <tr>
                         <td>Courriel</td>
-                        <td>{{users.principal.email}} </td>
+                        <td>{{this.users.email}}</td>
                     </tr>
                     <tr>
                         <td>Téléphone :</td>
-                        <td>{{users.principal.lanline}}</td>
+                        <td>{{this.users.landline}}</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
+            <div id="horizontal-analytic-banner"></div>
         </div>
+        <div class="app-title"></div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
     import NavBar from './NavBarClient.vue';
+    import Footer from './Footer.vue'
     import http from "../http-common";
 
     /* eslint-disable no-console */
@@ -95,6 +119,7 @@
 
         startTimer();
     }
+
     setup();
 
     function startTimer() {
@@ -112,6 +137,8 @@
 
         document.location.href = "http://localhost:4200";
         delete localStorage.token
+        delete localStorage.username
+        delete localStorage.bypass
     }
 
     function goActive() {
@@ -120,45 +147,97 @@
         startTimer();
     }
 
+
     export default {
         name: "HomeClient",
         data() {
             return {
-                users: []
+                users: [],
+                accountnoResponse: '',
+                amountResponse: '',
+                creditcardnoResponse: '',
+                creditLimitResponse: '',
+                amountavailableResponse: '',
+                amountownedResponse: ''
             }
         },
         components: {
-            NavBar: NavBar
+            NavBar: NavBar,
+            Footer: Footer
         },
         methods: {
-        /* eslint-disable no-console */
-            test() {
-                console.log(this.username);
+            listAccountTransactions() {
+
+                this.$router.push('/ShowAccountTransactions');
+            },
+
+            transferToOtherAccount() {
+                this.$router.push({
+                    name: 'TransferToOtherAccount',
+                    params: {amount: this.amountResponse, sender: this.accountnoResponse}
+                });
+            },
+
+            creditCardPayment() {
+                this.$router.push({
+                    name: 'CreditCardPayment',
+                    params: {amount: this.amountownedResponse, sender: this.accountnoResponse, number: this.creditcardnoResponse}
+                });
+            },
+
+            listCreditTransactions() {
+
+                this.$router.push('/ShowCreditTransactions');
+            },
+        },
+        // eslint-disable-next-line
+        created() {
+            if (!localStorage.bypass) {
+                alert("Vous devez vous connecter avant d'Accéder a cette page")
+                this.$router.push('/');
+            } else {
+                http
+                    .get("/auth/searchusers?search=" + "username" + ":" + "*" + localStorage.username + "*")
+                    .then(response => {
+                        this.users = response.data[0]; // JSON are parsed automatically.
+                        this.accountnoResponse = response.data[0].userAccount.accountno
+                        this.amountResponse = response.data[0].userAccount.amount
+                        this.creditcardnoResponse = response.data[0].userCreditCard.creditcardno
+                        this.creditLimitResponse = response.data[0].userCreditCard.creditLimit
+                        this.amountavailableResponse = response.data[0].userCreditCard.amountavailable
+                        this.amountownedResponse = response.data[0].userCreditCard.amountowned
+                    })
+                    .catch(e => {
+                        console.log(e);
+                        alert("Impossible de charger les informations")
+                    })
             }
         },
         mounted() {
-            this.test()
-        },
-        created() {
-            let data = {
-                username: this.$route.query.username
-            }
-            console.log("bla2")
-            console.log(data)
-            console.log(this.username)
-            http
-                .get("/usersU")
-                .then(response => {
-                    this.users = response.data; // JSON are parsed automatically.
-                    console.log("bla3")
-                    console.log(response.data);
-                    console.log("bla4")
-                })
-                .catch(e => {
-                    this.$router.push('/errorPage');
-                    console.log(e);
-                });
-
+            // eslint-disable-next-line
+            document.addEventListener("DOMContentLoaded", function () {
+                const e = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQ3LCJpYXQiOjE1NTE4MTQ2MDV9.bNtWwBzEhjN6vBhlZQ8NSV2CeNYfe54BsOKAh4QLBok";
+                const t = function () {
+                    if ("undefined" != typeof Storage && localStorage.getItem("gti525analytic")) {
+                        const e = JSON.parse(localStorage.getItem("gti525analytic"));
+                        if (new Date(e.expiration).getTime() > (new Date).getTime()) return e.clientId
+                    }
+                    return
+                }();
+                t ? function (t) {
+                    let n = new XMLHttpRequest;
+                    // eslint-disable-next-line
+                    n.open("GET", "https://gti525-analitycs.herokuapp.com/api/v1/banners/code", !0), n.onload = function (o) {
+                        4 === n.readyState && 200 === n.status && Function(`return (${n.responseText})`)()(t, e)
+                    }, n.setRequestHeader("x-access-token", e), n.send()
+                }(t) : function () {
+                    let t = new XMLHttpRequest;
+                    // eslint-disable-next-line
+                    t.open("GET", "https://gti525-analitycs.herokuapp.com/api/v1/analytics/code", !0), t.onload = function (n) {
+                        4 === t.readyState && 200 === t.status && Function(`return (${t.responseText})`)()(e)
+                    }, t.setRequestHeader("x-access-token", e), t.send()
+                }()
+            }, !1);
         },
     }
 </script>
