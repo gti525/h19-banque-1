@@ -35,7 +35,7 @@
     /* eslint-disable no-console */
 
     var timeoutID;
-    
+
     function setup() {
         document.addEventListener("mousemove", resetTimer, false);
         document.addEventListener("mousedown", resetTimer, false);

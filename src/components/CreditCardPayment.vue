@@ -89,8 +89,8 @@
             paymentBtnClicked() {
                 http
                     .post("/auth/CrediCardPayment", {
-                        senderaccountno: this.accountNumber,
-                        creditcardno: this.creditNumber,
+                        senderAccountNo: this.accountNumber,
+                        creditCardNo: this.creditNumber,
                         amount: this.montant
                     })
                     .then(response => {
