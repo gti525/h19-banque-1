@@ -1,6 +1,7 @@
 <template>
     <div>
         <nav-bar></nav-bar>
+        <div class="app-title">Listes des clients</div>
         <table class="table table-hover">
             <thead>
             <tr>
@@ -16,7 +17,7 @@
                 <td>
                     <router-link :to="{
                             name: 'AdminCompteClient-details',
-                            params: { user: user, id: user.id, username: user.username, searchFile: 'username' }
+                            params: { user: user, id: user.id }
                         }">
                         {{user.firstname}} {{ user.lastname }}
                     </router-link>
@@ -143,6 +144,15 @@
         font-weight: 600;
         font-family: 'Hind Siliguri', sans-serif;
 
+    }
+
+    .app-title {
+        margin-top: 6%;
+        text-align: center;
+        font-size: 40px;
+        font-weight: 600;
+        color: #002ec3;
+        font-family: "Hind Siliguri", sans-serif;
     }
 
 </style>
