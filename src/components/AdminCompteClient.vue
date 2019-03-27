@@ -7,76 +7,6 @@
                 <table class="table table-borderless table-condensed table-hover">
                     <thead>
                     <tr>
-                        <th scope="col">Compte courant</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Cheque Banque Uno</td>
-                        <td>{{ this.accountnoResponse }}</td>
-                    </tr>
-                    <tr>
-                        <td>Solde :</td>
-                        <td>{{ this.amountResponse }}$</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button class="btn btn-outline-primary btn-common float-left"
-                                    v-on:click="listAccountTransactions()">Liste des transactions
-                            </button>
-                        </td>
-                        <td>
-                            <button class="btn btn-outline-primary btn-common float-left"
-                                    v-on:click="transferToOtherAccount()">Transfert de fond à une autre compte
-                            </button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="login-container">
-                <table class="table table-borderless table-condensed table-hover ">
-                    <thead>
-                    <tr>
-                        <th scope="col">Compte credit</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Credit Banque Uno</td>
-                        <td>{{ this.creditcardnoResponse }}</td>
-                    </tr>
-                    <tr>
-                        <td>Limite de la carte :</td>
-                        <td>{{ this.creditLimitResponse }}$</td>
-                    </tr>
-                    <tr>
-                        <td>Montant disponible :</td>
-                        <td>{{ this.amountavailableResponse }}$</td>
-                    </tr>
-                    <tr>
-                        <td>Montant à payer :</td>
-                        <td>{{ this.amountownedResponse }}$</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button class="btn btn-outline-primary btn-common float-left"
-                                    v-on:click="listCreditTransactions()">Liste des transactions
-                            </button>
-                        </td>
-                        <td>
-                            <button class="btn btn-outline-primary btn-common float-left"
-                                    v-on:click="creditCardPayment()">Paiement de la carte de crédit
-                            </button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="login-container">
-                <table class="table table-borderless table-condensed table-hover">
-                    <thead>
-                    <tr>
                         <th scope="col">Autres informations</th>
                     </tr>
                     </thead>
@@ -86,8 +16,28 @@
                         <td>{{this.users.email}}</td>
                     </tr>
                     <tr>
-                        <td>Téléphone :</td>
+                        <td>Téléphone de domicile :</td>
                         <td>{{this.users.landline}}</td>
+                    </tr>
+                    <tr>
+                        <td>Téléphone cellulaire :</td>
+                        <td>{{this.users.mobile}}</td>
+                    </tr>
+                    <tr>
+                        <td>Adresse :</td>
+                        <td>{{this.users.address}}</td>
+                    </tr>
+                    <tr>
+                        <td>Ville :</td>
+                        <td>{{this.users.city}}</td>
+                    </tr>
+                    <tr>
+                        <td>Province :</td>
+                        <td>{{this.users.province}}</td>
+                    </tr>
+                    <tr>
+                        <td>Pays :</td>
+                        <td>{{this.users.country}}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -100,9 +50,8 @@
 </template>
 
 <script>
-    import NavBar from './NavBarClient.vue';
+    import NavBar from './NavBarAdmin.vue';
     import Footer from './Footer.vue'
-    import http from "../http-common";
 
     /* eslint-disable no-console */
 
@@ -152,7 +101,7 @@
         name: "HomeClient",
         data() {
             return {
-                users: [],
+                users: '',
                 accountnoResponse: '',
                 amountResponse: '',
                 creditcardnoResponse: '',
@@ -181,7 +130,11 @@
             creditCardPayment() {
                 this.$router.push({
                     name: 'CreditCardPayment',
-                    params: {amount: this.amountownedResponse, sender: this.accountnoResponse, number: this.creditcardnoResponse}
+                    params: {
+                        amount: this.amountownedResponse,
+                        sender: this.accountnoResponse,
+                        number: this.creditcardnoResponse
+                    }
                 });
             },
 
@@ -192,26 +145,14 @@
         },
         // eslint-disable-next-line
         created() {
-            if (!localStorage.bypass) {
-                alert("Vous devez vous connecter avant d'Accéder a cette page")
-                this.$router.push('/');
-            } else {
-                http
-                    .get("/auth/searchusers?search=" + "username" + ":" + "*" + localStorage.username + "*")
-                    .then(response => {
-                        this.users = response.data[0]; // JSON are parsed automatically.
-                        this.accountnoResponse = response.data[0].userAccount.accountno
-                        this.amountResponse = response.data[0].userAccount.amount
-                        this.creditcardnoResponse = response.data[0].userCreditCard.creditcardno
-                        this.creditLimitResponse = response.data[0].userCreditCard.creditLimit
-                        this.amountavailableResponse = response.data[0].userCreditCard.amountavailable
-                        this.amountownedResponse = response.data[0].userCreditCard.amountowned
-                    })
-                    .catch(e => {
-                        console.log(e);
-                        alert("Impossible de charger les informations")
-                    })
-            }
+            this.id = this.$route.params.id;
+            this.username = this.$route.params.username;
+            this.users = this.$route.params.user;
+            console.log(this.$route.params)
+            console.log(this.username)
+            this.amountResponse = this.$route.params.user.userAccount.amount
+            this.amountownedResponse = this.$route.params.user.userCreditCard.amountowned
+
         },
         mounted() {
             // eslint-disable-next-line
