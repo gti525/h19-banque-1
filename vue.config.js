@@ -1,5 +1,5 @@
 module.exports = {
   devServer: {
-    port: 4200
+    port: .listen(process.env.PORT || 4200)
   }
 }
