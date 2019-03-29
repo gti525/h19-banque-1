@@ -19,7 +19,7 @@
 
                 <div class="form-group">
                     <form>
-                        Numéro du compte de destination : <input v-model="receiverAccountNo" type="text" name="usrname" maxlength="8"><br>
+                        Numéro du compte de destination : <input v-model="receiverAccountNo" type="text" name="username" maxlength="8"><br>
                     </form>
                 </div>
                 <div class="form-group">
@@ -112,7 +112,7 @@
                 let digits = Math.floor((Math.log10(this.receiverAccountNo)));
                 let firstdigit = Math.floor((this.receiverAccountNo / (Math.pow(10,digits))));
                 if (Math.floor(firstdigit) == 1) {
-                    alert("Transfert à Banque1")
+                    //alert("Transfert à Banque1")
 
                     http
                         .post("/auth/Transfer", { senderAccountNo: this.senderAccountNo, receiverAccountNo: this.receiverAccountNo, amount: this.montant})
@@ -120,7 +120,7 @@
                             console.log(response.data);
                             alert("Le transfert a été effectué avec succès. ")
                             localStorage.bypass = 1
-                            location.reload();
+                            location.href="homeClient"
                         })
                         .catch(e => {
                             alert("Le transfert a échoué. Veuillez-vous assurer de la validité des informations entrées.")
@@ -130,7 +130,7 @@
                             console.log(e.message)
                         });
                 } else {
-                    alert("Transfert à Banque2 ")
+                    //alert("Transfert à Banque2 ")
 
                     http
                         .post("/auth/OtherBankTransfer", { senderAccountNo: this.senderAccountNo, receiverAccountNo: this.receiverAccountNo, amount: this.montant})
@@ -138,7 +138,7 @@
                             console.log(response.data);
                             alert("Le transfert a été effectué avec succès.")
                             localStorage.bypass = 1
-                            location.reload();
+                            location.href="homeClient"
                         })
                         .catch(e => {
                             alert("Le transfert a échoué. Veuillez-vous assurer de la validité des informations entrées.")
