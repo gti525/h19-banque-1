@@ -19,7 +19,7 @@
                 <td>{{ correctTimeDateFormat(transaction.transdate) }}</td>
                 <td>{{ transaction.description }}</td>
                 <td>{{ correctAmountFormat(transaction.credit, transaction.debit) }}</td>
-                <td>{{ transaction.balance }}</td>
+                <td>{{ transaction.currently_available_funds }}</td>
             </tr>
             </tbody>
         </table>
