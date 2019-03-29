@@ -1,2 +1,1 @@
-web npm run serve
-web: node src/main.js
+web: npm run serve
