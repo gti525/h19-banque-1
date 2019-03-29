@@ -71,7 +71,7 @@
                 console.log(res)
                 this.$router.push({
                     name: 'ResetPassword',
-                    params: {question1: res.data[0].Question1, question2: res.data[0].Question2, username: this.username}
+                    params: {question1: res.data.Question1, question2: res.data.Question2, username: this.username}
                 })
             },
 

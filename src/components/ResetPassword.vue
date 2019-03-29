@@ -8,11 +8,7 @@
                 <div class="form-group">
                     <label>Question 1 : </label>
                     <div>
-                        <table class="table">
-                            <tr>
-                                <td>{{this.question1}}</td>
-                            </tr>
-                        </table>
+                        {{this.question1}}
                     </div>
                 </div>
                 <div class="form-group">
@@ -25,7 +21,9 @@
                     >
                 </div>
                 <div class="form-group">
-                    <label>Question 2 : </label>
+                    <div>
+                        Question 2 : {{this.question2}}
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="answer2">Réponse à la question 2</label>
