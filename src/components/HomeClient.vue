@@ -92,7 +92,7 @@
                     <tr>
                         <td>
                             <router-link :to="{
-                            name:'ModifyPassword'
+                            name:'ResetPassword'
                         }">
                                 Changement de mot de passe
                             </router-link>
