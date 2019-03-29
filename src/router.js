@@ -15,7 +15,8 @@ import ShowAccountTransactionsAdmin from "./components/ShowAccountTransactionsAd
 import ShowCreditTransactions from "./components/ShowCreditTransactions";
 import CreditCardPayment from "./components/CreditCardPayment";
 import CreateCompany from "./components/CreateCompany";
-import ModifyPassword from "./components/ModifyPassword";
+import ResetPassword from "./components/ResetPassword";
+import BeforeResetPassword from "./components/BeforeResetPassword";
 
 Vue.use(Router);
 
@@ -43,9 +44,9 @@ export default new Router({
       component: Login
     },
     {
-      path: "/modifyPassword",
-      name: "ModifyPassword",
-      component: ModifyPassword
+      path: "/resetPassword",
+      name: "ResetPassword",
+      component: ResetPassword
     },
     {
       path: "/verifylogin",
@@ -101,6 +102,11 @@ export default new Router({
       path: "/CreditCardPayment",
       name: "CreditCardPayment",
       component: CreditCardPayment
+    },
+    {
+      path: "/BeforeResetPassword",
+      name: "BeforeResetPassword",
+      component: BeforeResetPassword
     }
   ]
 });
