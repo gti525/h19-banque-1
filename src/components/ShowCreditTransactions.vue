@@ -2,7 +2,6 @@
     <div id="print">
         <nav-bar class="no-print"></nav-bar>
         <h1>Liste des transactions associées au compte crédit</h1>
-        <break></break>
         <table class="table table-hover">
             <thead>
             <tr>
@@ -10,14 +9,16 @@
                 <th scope="col">Date</th>
                 <th scope="col">Action</th>
                 <th scope="col">Montant</th>
+                <th scope="col">Solde</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="(transaction) in transactions" :key="transaction.id">
                 <td>{{ transaction.id }}</td>
-                <td>{{ transaction.transdate }}</td>
+                <td>{{ correctTimeDateFormat(transaction.transdate) }}</td>
                 <td>{{ transaction.description }}</td>
-                <td>{{ transaction.balance }}</td>
+                <td>{{ correctAmountFormat(transaction.credit, transaction.debit) }}</td>
+                <td>{{ transaction.balance + "$"}}</td>
             </tr>
             </tbody>
         </table>
@@ -30,11 +31,11 @@
     import NavBar from './NavBarClient.vue';
     import http from "../http-common";
     import Footer from './Footer.vue'
+    import moment from "moment";
     /* eslint-disable no-console */
 
     var timeoutID;
 
-    // Réference https://jsfiddle.net/jaredwilli/0f7t25q9/
     function setup() {
         document.addEventListener("mousemove", resetTimer, false);
         document.addEventListener("mousedown", resetTimer, false);
@@ -100,6 +101,19 @@
                     .catch(e => {
                         console.log(e);
                     });
+            },
+            correctTimeDateFormat(transactionDate) {
+
+                return moment(transactionDate).format('YYYY-MM-DD HH:mm:ss');
+            },
+
+            correctAmountFormat(transactionCredit, transactionDebit) {
+
+                if (transactionCredit == 0) {
+                    return "-" + transactionDebit + "$"
+                }
+
+                return "+" + transactionCredit
             }
         },
 

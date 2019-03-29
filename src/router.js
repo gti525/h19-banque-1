@@ -15,6 +15,7 @@ import ShowAccountTransactionsAdmin from "./components/ShowAccountTransactionsAd
 import ShowCreditTransactions from "./components/ShowCreditTransactions";
 import CreditCardPayment from "./components/CreditCardPayment";
 import CreateCompany from "./components/CreateCompany";
+import ModifyPassword from "./components/ModifyPassword";
 
 Vue.use(Router);
 
@@ -41,7 +42,11 @@ export default new Router({
       name: "login",
       component: Login
     },
-
+    {
+      path: "/modifyPassword",
+      name: "ModifyPassword",
+      component: ModifyPassword
+    },
     {
       path: "/verifylogin",
       name: "verifylogin",

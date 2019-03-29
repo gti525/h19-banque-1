@@ -104,7 +104,6 @@
                         this.$router.push('/VerifyLoginAdmin');
                     }
 
-
                     let questionMap = new Map();
                     questionMap.set(this.users.question1, this.answer1);
                     questionMap.set(this.users.question2, this.answer2);

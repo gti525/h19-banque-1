@@ -9,14 +9,16 @@
                 <th scope="col">Date</th>
                 <th scope="col">Action</th>
                 <th scope="col">Montant</th>
+                <th scope="col">Solde</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="(transaction) in transactions" :key="transaction.id">
                 <td>{{ transaction.id }}</td>
-                <td>{{ transaction.transdate }}</td>
+                <td>{{ correctTimeDateFormat(transaction.transdate) }}</td>
                 <td>{{ transaction.description }}</td>
-                <td>{{ transaction.balance }}</td>
+                <td>{{ correctAmountFormat(transaction.credit, transaction.debit) }}</td>
+                <td>{{ transaction.balance + "$"}}</td>
             </tr>
             </tbody>
         </table>
@@ -32,6 +34,7 @@
     import NavBar from './NavBarAdmin.vue';
     import http from "../http-common";
     import Footer from './Footer.vue'
+    import moment from "moment";
 
     /* eslint-disable no-console */
 
@@ -124,6 +127,19 @@
                     .catch(e => {
                         console.log(e);
                     });
+            },
+            correctTimeDateFormat(transactionDate) {
+
+                return moment(transactionDate).format('YYYY-MM-DD HH:mm:ss');
+            },
+
+            correctAmountFormat(transactionCredit, transactionDebit) {
+
+                if (transactionCredit == 0) {
+                    return "-" + transactionDebit + "$"
+                }
+
+                return "+" + transactionCredit
             },
             creditData() {
                 console.log("test123" + "  " + this.id)

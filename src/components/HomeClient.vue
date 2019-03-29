@@ -89,6 +89,15 @@
                         <td>Téléphone :</td>
                         <td>{{this.users.landline}}</td>
                     </tr>
+                    <tr>
+                        <td>
+                            <router-link :to="{
+                            name:'ModifyPassword'
+                        }">
+                                Changement de mot de passe
+                            </router-link>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -181,7 +190,11 @@
             creditCardPayment() {
                 this.$router.push({
                     name: 'CreditCardPayment',
-                    params: {amount: this.amountownedResponse, sender: this.accountnoResponse, number: this.creditcardnoResponse}
+                    params: {
+                        amount: this.amountownedResponse,
+                        sender: this.accountnoResponse,
+                        number: this.creditcardnoResponse
+                    }
                 });
             },
 
