@@ -224,15 +224,16 @@
                 country: '',
                 mobile: '',
                 landline: '',
+                random_number: Math.floor(Math.random() * (9999 - 1 +1)) + 9999
             }
         },
         methods: {
             createCompanyBtnClicked() {
                 let data = {
                     company: this.company,
-                    firstname: this.firstname,
+                    firstname: this.company,
                     lastname: this.lastname,
-                    username: this.username,
+                    username: this.company + this.random_number,
                     creditLimit: this.creditLimit,
                     amount: this.amount,
                     creditbalanceavailable: this.creditbalanceavailable,
@@ -258,7 +259,8 @@
                     .post("/auth/signup", data)
                     .then(response => {
                         console.log(response.data);
-                        this.$router.push('/homeAdmin');
+                        this.$router.push('/HomeAdmin');
+                        alert("votre nom d'utilisateur est " + data.username)
 
                     })
                     .catch(e => {

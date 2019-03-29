@@ -242,7 +242,7 @@
                     company: this.company,
                     firstname: this.firstname,
                     lastname: this.lastname,
-                    username: this.firstname + "-" + this.lastname + this.random_number,
+                    username: this.firstname + this.lastname + this.random_number,
                     creditLimit: this.creditbalanceavailable,
                     amount: this.amount,
                     creditbalanceavailable: this.creditbalanceavailable,
@@ -268,7 +268,7 @@
                     .post("/auth/signup", data)
                     .then(response => {
                         console.log(response.data);
-                        this.$router.push('/homeAdmin');
+                        this.$router.push('/HomeAdmin');
                         alert("votre nom d'utilisateur est " + data.username)
                     })
                     .catch(e => {

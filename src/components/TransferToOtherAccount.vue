@@ -120,6 +120,7 @@
                             console.log(response.data);
                             alert("Le transfert a été effectué avec succès. ")
                             localStorage.bypass = 1
+                            this.$router.push('/HomeClient')
                             location.reload();
                         })
                         .catch(e => {
@@ -138,6 +139,7 @@
                             console.log(response.data);
                             alert("Le transfert a été effectué avec succès.")
                             localStorage.bypass = 1
+                            this.$router.push('/HomeClient')
                             location.reload();
                         })
                         .catch(e => {

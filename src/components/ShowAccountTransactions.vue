@@ -19,7 +19,7 @@
                 <td>{{ correctTimeDateFormat(transaction.transdate) }}</td>
                 <td>{{ transaction.description }}</td>
                 <td>{{ correctAmountFormat(transaction.credit, transaction.debit) }}</td>
-                <td>{{ transaction.balance }}</td>
+                <td>{{ transaction.currently_available_funds }}</td>
             </tr>
             </tbody>
         </table>
@@ -83,7 +83,9 @@
 
         data() {
             return {
-                transactions: []
+                sortKey: 'names',
+                transactions: [],
+                column: ['Numéro de transaction', 'Date', 'Action', 'Montant', 'Solde' ]
             }
         },
 
