@@ -3,10 +3,10 @@
     <div>
         <nav-bar></nav-bar>
         <div class="container">
-            <div class="app-title">Changement de mot de passe</div>
-            <div class="modifyPassword-container">
+            <div class="app-title">Questions de sécurité</div>
+            <div class="question-container">
                 <div class="form-group">
-                    <label for="oldPassword">Ancien mot de passe</label>
+                    <label for="question1">Question1</label>
                     <input @keyup.enter="passwordModification"
                            id="oldPassword"
                            type="password"

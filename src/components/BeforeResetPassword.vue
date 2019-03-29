@@ -45,6 +45,8 @@
 </template>
 
 <script>
+    /* eslint-disable no-console */
+    import NavBar from './NavBarClient.vue';
     import http from "../http-common";
     import Footer from './Footer.vue';
 
@@ -54,86 +56,32 @@
             NavBar: NavBar,
             Footer: Footer
         },
-        data() {
-            return {
-                username:'',
-                question1:'',
-                question2:'',
-                answer1:'',
-                answer2:''
-            }
-        },
+
         methods: {
             sendQuestions() {
                 //here should send the request to the backend and get the username's questions
+
                 http
-                    .post("/auth/signin", {username: this.username, password: this.password})
-                    .then(request => this.loginSuccessful(request))
-                    .catch(() => this.loginFailed())
+                    .get("/auth/getQuestions/" + this.username)
+                    .then(response => this.userFound(response))
+                    .catch(() => this.userNotFound())
             },
-           verify() {
-               if (this.qustionArray[1] === this.randomQuestion) {
-                    http
-                        .post("/auth/verify2", { question2: this.randomQuestion, answer2: this.text })
-                        .then(response => {
-                            console.log(response.data);
-                            this.$router.push('/HomeClient');
-                            localStorage.bypass = 1
-                            location.reload();
-                        })
-                        .catch(() => this.wrongAnwser())
-                } else {
-                    http
-                        .post("/auth/verify1", { question1: this.randomQuestion, answer1: this.text })
-                        .then(response => {
-                            console.log(response.data);
-                            this.$router.push('/HomeClient');
-                            localStorage.bypass = 1
-                            location.reload();
-                        })
-                        .catch(() => this.wrongAnwser())
-                }
 
-        },
-        wrongAnwser () {
-            alert("Mauvaise réponse entrée, veuillez recommancer")
-        },
-        loading () {
-            location.reload();
-        },
-    },
-    created() {
-        this.username = this.$route.params.username;
-        http
-            .get("/auth/searchusers?search=" + "username" + ":" + "*" + localStorage.username + "*")
-            .then(response => {
-                this.users = response.data[0]; // JSON are parsed automatically.
-                this.answer1 = response.data[0].answer1
-                this.answer2 = response.data[0].answer2
-                console.log(response.data);
+            userFound (res) {
+                console.log(res)
+                this.$router.push({
+                    name: 'ResetPassword',
+                    params: {question1: res.data[1], question2: res.data[0]}
+                })
+            },
 
-                if ( response.data[0].roles[0].name === "ROLE_ADMIN") {
-                    alert("Vous etes un administrateur, redirection de page dans la bonne page")
-                    this.$router.push('/VerifyLoginAdmin');
-                }
-
-                let questionMap = new Map();
-                questionMap.set(this.users.question1, this.answer1);
-                questionMap.set(this.users.question2, this.answer2);
-
-                let qustionArray = [
-                    this.users.question1,
-                    this.users.question2,
-                ];
-                this.qustionArray = qustionArray
-
-                let randomQuestion = qustionArray[Math.floor(Math.random() * qustionArray.length)]
-                this.randomQuestion = randomQuestion;
-            })
-            .catch(() => this.loading())
-    },
-    }
-</script>
+            userNotFound () {
+                this.$router.push('/errorPage')
+                delete localStorage.token
+            }
+        }
+    };
+  </script>
 
 <style lang="scss" scoped>
     @import "../scss/common.scss";
