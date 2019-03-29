@@ -25,22 +25,5 @@
 <div id="app"></div>
 <!-- built files will be auto injected -->
 
-<script type="text/javascript">
-    new Vue({
-        el: '#app',
-        data: {
-            src: ''
-        },
-        mounted(){
-            var vm = this
-            axios.get('http://localhost:3000/api')
-                .then(data => {
-                    vm.src = JSON.stringify(data.data)
-                })
-        }
-    })
-</script>
-
-
 </body>
 </html>
