@@ -84,7 +84,6 @@
             return {
                 sortKey: 'names',
                 transactions: [],
-                gg: [],
                 column: ['Numéro de transaction', 'Date', 'Action', 'Montant', 'Solde'],
                 people: [
                     {
@@ -124,8 +123,8 @@
                             });
                         }
 
-                        this.gg = this.transactions = sortByKey(this.transactions, 'id')
-                        console.log(this.gg)
+                        this.transactions = sortByKey(this.transactions, 'id')
+
                     })
                     .catch(e => {
                         console.log(e);

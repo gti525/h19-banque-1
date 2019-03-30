@@ -122,7 +122,15 @@
                     .get("/auth/searchusers?search=" + this.textUsername + ":" + "*" + this.username + "*")
                     .then(response => {
                         this.transactions = response.data[0].userAccount.transactions; // JSON are parsed automatically.
-                        console.log(this.transactions)
+                        function sortByKey(array, key) {
+                            return array.sort(function (a, b) {
+                                var x = a[key];
+                                var y = b[key];
+                                return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+                            });
+                        }
+
+                        this.transactions = sortByKey(this.transactions, 'id')
                     })
                     .catch(e => {
                         console.log(e);
