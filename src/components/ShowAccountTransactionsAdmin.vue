@@ -13,7 +13,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(transaction) in transactions" :key="transaction.id">
+            <tr v-for="(transaction) in transactions" :key="transaction.id" v-if="transaction.transstatus !== 'CANCELLED'">
                 <td>{{ transaction.id }}</td>
                 <td>{{ correctTimeDateFormat(transaction.transdate) }}</td>
                 <td>{{ transaction.description }}</td>
@@ -156,6 +156,7 @@
                     .get("/auth/searchusers?search=" + this.textUsername + ":" + "*" + this.username + "*")
                     .then(response => {
                         this.transactions = response.data[0].userCreditCard.transactions; // JSON are parsed automatically.
+                        console.log(this.transactions)
                         function sortByKey(array, key) {
                             return array.sort(function (a, b) {
                                 var x = a[key];

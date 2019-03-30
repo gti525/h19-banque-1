@@ -13,7 +13,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(transaction) in transactions" :key="transaction.id">
+            <tr v-for="(transaction) in transactions" :key="transaction.id" v-if="transaction.transstatus !== 'CANCELLED'">
                 <td>{{ transaction.id }}</td>
                 <td>{{ correctTimeDateFormat(transaction.transdate) }}</td>
                 <td>{{ transaction.description }}</td>
