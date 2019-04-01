@@ -19,17 +19,6 @@
                     >
                 </div>
                 <div class="form-group">
-                    <label for="username">Nom d'utilisateur du compte entreprise</label>
-                    <input
-                            id="username"
-                            type="text"
-                            v-model="username"
-                            name="username"
-                            class="form-control"
-                            :class="{ 'is-invalid': submitted && !username }"
-                    >
-                </div>
-                <div class="form-group">
                     <label for="password">Mot de Passe</label>
                     <input
                             id="password"
@@ -80,12 +69,6 @@
                 <div class="form-group">
                     <label for="email">Adresse Courriel de l'entreprise</label>
                     <input id="email" type="email" v-model="email" name="email" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="mmn">Rôle</label>
-                    <select v-model="role" class="form-control">
-                        <option>company</option>
-                    </select>
                 </div>
                 <div class="form-group">
                     <label for="city">Ville</label>
@@ -211,7 +194,7 @@
                 creditbalanceavailable: '',
                 creditbalanceowned: 0,
                 email: '',
-                role: '',
+                role: 'client',
                 question1: '',
                 answer1: '',
                 question2: '',
@@ -240,7 +223,7 @@
                     firstname: this.company,
                     lastname: this.lastname,
                     username: this.company + this.random_number,
-                    creditLimit: this.creditLimit,
+                    creditLimit: this.creditbalanceavailable,
                     amount: this.amount,
                     creditbalanceavailable: this.creditbalanceavailable,
                     creditbalanceowned: this.creditbalanceowned,

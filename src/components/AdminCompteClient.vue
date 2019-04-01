@@ -20,10 +20,6 @@
                         <td>{{this.users.landline}}</td>
                     </tr>
                     <tr>
-                        <td>Téléphone cellulaire :</td>
-                        <td>{{this.users.mobile}}</td>
-                    </tr>
-                    <tr>
                         <td>Adresse :</td>
                         <td>{{this.users.address}}</td>
                     </tr>
