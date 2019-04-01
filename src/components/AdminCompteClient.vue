@@ -145,14 +145,18 @@
         },
         // eslint-disable-next-line
         created() {
-            this.id = this.$route.params.id;
-            this.username = this.$route.params.username;
-            this.users = this.$route.params.user;
-            console.log(this.$route.params)
-            console.log(this.username)
-            this.amountResponse = this.$route.params.user.userAccount.amount
-            this.amountownedResponse = this.$route.params.user.userCreditCard.amountowned
-
+            if (!localStorage.bypass) {
+                alert("Vous devez vous connecter avant d'Accéder a cette page")
+                this.$router.push('/');
+            } else {
+                this.id = this.$route.params.id;
+                this.username = this.$route.params.username;
+                this.users = this.$route.params.user;
+                console.log(this.$route.params)
+                console.log(this.username)
+                this.amountResponse = this.$route.params.user.userAccount.amount
+                this.amountownedResponse = this.$route.params.user.userCreditCard.amountowned
+            }
         },
         mounted() {
             // eslint-disable-next-line

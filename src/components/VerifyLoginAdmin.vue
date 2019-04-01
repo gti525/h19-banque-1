@@ -48,8 +48,8 @@
                 text: '',
                 submitted: '',
                 questionMap: '',
-                randomQuestion:'',
-                qustionArray:'',
+                randomQuestion: '',
+                qustionArray: '',
                 token: ''
             }
         },
@@ -57,7 +57,7 @@
             verify() {
                 if (this.qustionArray[1] === this.randomQuestion) {
                     http
-                        .post("/auth/verify2", { question2: this.randomQuestion, answer2: this.text })
+                        .post("/auth/verify2", {question2: this.randomQuestion, answer2: this.text})
                         .then(response => {
                             console.log(response.data);
                             this.$router.push('/HomeAdmin');
@@ -67,7 +67,7 @@
                         .catch(() => this.wrongAnwser())
                 } else {
                     http
-                        .post("/auth/verify1", { question1: this.randomQuestion, answer1: this.text })
+                        .post("/auth/verify1", {question1: this.randomQuestion, answer1: this.text})
                         .then(response => {
                             console.log(response.data);
                             this.$router.push('/HomeAdmin');
@@ -78,12 +78,18 @@
                 }
 
             },
-            wrongAnwser () {
+            wrongAnwser() {
                 alert("Mauvaise réponse entrée, veuillez recommancer")
             },
-            loading () {
-               location.reload();
+            loading() {
+                location.reload();
             },
+        },
+        mounted() {
+            if (!localStorage.bypass) {
+                alert("Vous devez vous connecter avant d'Accéder a cette page")
+                this.$router.push('/');
+            }
         },
         created() {
             http
@@ -95,7 +101,7 @@
                     console.log("LLLLLLLLLLLLLLL")
                     console.log(response.data);
 
-                    if ( response.data[0].roles[0].name === "ROLE_USER") {
+                    if (response.data[0].roles[0].name === "ROLE_USER") {
                         alert("Vous etes un client, redirection de page dans la bonne page")
                         this.$router.push('/VerifyLogin');
                     }
@@ -120,25 +126,25 @@
 <style lang="scss" scoped>
     @import "../scss/common.scss";
 
-        .app-title {
-            margin-top: 2.8%;
-            text-align: center;
-            font-size: 40px;
-            font-weight: 600;
-            color: #002ec3;
-            font-family: 'Hind Siliguri', sans-serif;
+    .app-title {
+        margin-top: 2.8%;
+        text-align: center;
+        font-size: 40px;
+        font-weight: 600;
+        color: #002ec3;
+        font-family: 'Hind Siliguri', sans-serif;
 
-        }
+    }
 
-        .app-sub-title {
-            text-align: center;
-            font-size: 16px;
-            text-transform: uppercase;
-            font-weight: 600;
-            color: #d41919;
-            font-family: 'Hind Siliguri', sans-serif;
+    .app-sub-title {
+        text-align: center;
+        font-size: 16px;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: #d41919;
+        font-family: 'Hind Siliguri', sans-serif;
 
-        }
+    }
 
     .login-container {
         border: 1px solid #e8e8e8;

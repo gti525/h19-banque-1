@@ -109,12 +109,16 @@
                     });
             }
         },
-
         created() {
-            this.amount = this.$route.params.amount;
-            this.accountNumber = this.$route.params.sender;
-            this.creditNumber = this.$route.params.number;
-            console.log(this.$route.params)
+            if (!localStorage.bypass) {
+                alert("Vous devez vous connecter avant d'Accéder a cette page")
+                this.$router.push('/');
+            } else {
+                this.amount = this.$route.params.amount;
+                this.accountNumber = this.$route.params.sender;
+                this.creditNumber = this.$route.params.number;
+                console.log(this.$route.params)
+            }
         },
     };
 </script>

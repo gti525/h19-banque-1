@@ -224,7 +224,13 @@
                 country: '',
                 mobile: '',
                 landline: '',
-                random_number: Math.floor(Math.random() * (9999 - 1 +1)) + 9999
+                random_number: Math.floor(Math.random() * (9999 - 1 + 1)) + 9999
+            }
+        },
+        created() {
+            if (!localStorage.bypass) {
+                alert("Vous devez vous connecter avant d'Accéder a cette page")
+                this.$router.push('/');
             }
         },
         methods: {

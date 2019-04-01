@@ -97,6 +97,12 @@
                 location.reload();
             },
         },
+        mounted() {
+            if (!localStorage.bypass) {
+                alert("Vous devez vous connecter avant d'Accéder a cette page")
+                this.$router.push('/');
+            }
+        },
         created() {
             http
                 .get("/auth/searchusers?search=" + "username" + ":" + "*" + localStorage.username + "*")
