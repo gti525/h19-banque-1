@@ -45,7 +45,7 @@
                 http
                     .get("/auth/getQuestions/" + this.username)
                     .then(response => this.userFound(response))
-                    .catch(() => this.userNotFound())
+                    .catch((e) => this.userNotFound(e))
             },
 
             userFound (res) {
@@ -57,8 +57,7 @@
             },
 
             userNotFound () {
-                this.$router.push('/errorPage')
-                delete localStorage.token
+                alert("Le nom d'utilisateur inscrit n'a pas été trouvé. Veuillez vérifier l'exactitude du nom d'utilisateur.")
             }
         }
     };

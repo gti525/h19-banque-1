@@ -19,7 +19,6 @@
                            v-model="text"
                            name="text"
                            class="form-control"
-                           :class="{ 'is-invalid': submitted }"
                     >
                 </div>
 
