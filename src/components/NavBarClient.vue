@@ -16,7 +16,7 @@
                 <form class="form-inline my-2 my-lg-0">
                     <ul class="navbar-nav mr-auto my-2 my-lg-0">
                         <li class="nav-item active">
-                            <a class="nav-link" v-on:click="createUserBtnClicked" href="/"><strong>Logout</strong></a>
+                            <a class="nav-link" v-on:click="createUserBtnClicked" href="/"><strong>Déconnexion</strong></a>
                         </li>
                     </ul>
                 </form>
