@@ -179,7 +179,6 @@
         components: {
             NavBar: NavBar,
             Footer: Footer
-
         },
         data() {
             return {

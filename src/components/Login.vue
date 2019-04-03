@@ -102,7 +102,7 @@
       },
       loginFailed() {
         console.log(this.test)
-        alert("Mauvaise information rentrer")
+        alert("Mauvaise information entrée")
         delete localStorage.token
       },
       adminRedirect() {

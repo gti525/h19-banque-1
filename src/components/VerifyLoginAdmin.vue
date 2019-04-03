@@ -60,7 +60,7 @@
                         localStorage.bypass = 1
                         location.reload();
                     } else {
-                        alert("Mauvaise réponse, veuillez recommancer")
+                        alert("Mauvaise réponse, veuillez recommencer")
                     }
                 } else {
                     if (this.answer1 === this.text) {
@@ -68,12 +68,12 @@
                         localStorage.bypass = 1
                         location.reload();
                     } else {
-                        alert("Mauvaise réponse, veuillez recommancer")
+                        alert("Mauvaise réponse, veuillez recommencer")
                     }
                 }
             },
             wrongAnwser() {
-                alert("Mauvaise réponse entrée, veuillez recommancer")
+                alert("Mauvaise réponse entrée, veuillez recommencer")
             },
             loading() {
                 location.reload();

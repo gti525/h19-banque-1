@@ -94,7 +94,7 @@
         location.reload();
       },
       loginFailed () {
-        alert("Mauvaise information rentrer")
+        alert("Mauvaise information entrée")
         delete localStorage.token
       },
       clientRedirect () {
