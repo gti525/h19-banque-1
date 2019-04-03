@@ -45,6 +45,13 @@
                  class="form-control"
           >
         </div>
+        <div class="form-group">
+          <td>
+            <router-link :to="{ name:'BeforeResetPassword'}">
+              Mot de passe oublié?
+            </router-link>
+          </td>
+        </div>
         <div class="clearfix ">
           <button class="btn btn-primary btn-common float-right" v-on:click="customerLogin">Connexion</button>
         </div>
@@ -88,6 +95,7 @@
         this.error = false
         localStorage.token = req.data.accessToken
         localStorage.username = this.username
+        localStorage.bypass = '0'
         console.log(req)
         this.$router.push('/VerifyLogin')
         location.reload();

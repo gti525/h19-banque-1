@@ -89,14 +89,15 @@
             paymentBtnClicked() {
                 http
                     .post("/auth/CrediCardPayment", {
-                        senderaccountno: this.accountNumber,
-                        creditcardno: this.creditNumber,
+                        senderAccountNo: this.accountNumber,
+                        creditCardNo: this.creditNumber,
                         amount: this.montant
                     })
                     .then(response => {
                         console.log(response.data);
                         alert("Paiement réussi")
                         localStorage.bypass = 1
+                        this.$router.push('/HomeClient')
                         location.reload();
                     })
                     .catch(e => {
@@ -108,12 +109,16 @@
                     });
             }
         },
-
         created() {
-            this.amount = this.$route.params.amount;
-            this.accountNumber = this.$route.params.sender;
-            this.creditNumber = this.$route.params.number;
-            console.log(this.$route.params)
+            if (!localStorage.bypass) {
+                alert("Vous devez vous connecter avant d'Accéder a cette page")
+                this.$router.push('/');
+            } else {
+                this.amount = this.$route.params.amount;
+                this.accountNumber = this.$route.params.sender;
+                this.creditNumber = this.$route.params.number;
+                console.log(this.$route.params)
+            }
         },
     };
 </script>

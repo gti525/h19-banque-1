@@ -2,22 +2,23 @@
     <div id="print">
         <nav-bar class="no-print"></nav-bar>
         <h1>Liste des transactions associées au compte courant</h1>
-        <break></break>
-        <table class="table table-hover">
+        <table id="myTable" class="table table-hover">
             <thead>
             <tr>
                 <th scope="col">Numéro de transaction</th>
                 <th scope="col">Date</th>
                 <th scope="col">Action</th>
                 <th scope="col">Montant</th>
+                <th scope="col">Solde</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="(transaction) in transactions" :key="transaction.id">
                 <td>{{ transaction.id }}</td>
-                <td>{{ transaction.transdate }}</td>
+                <td>{{ correctTimeDateFormat(transaction.transdate) }}</td>
                 <td>{{ transaction.description }}</td>
-                <td>{{ transaction.balance }}</td>
+                <td>{{ correctAmountFormat(transaction.credit, transaction.debit) }}</td>
+                <td>{{ transaction.currently_available_funds }}</td>
             </tr>
             </tbody>
         </table>
@@ -30,6 +31,7 @@
     import NavBar from './NavBarClient.vue';
     import Footer from './Footer.vue'
     import http from "../http-common";
+    import moment from "moment";
     /* eslint-disable no-console */
 
     var timeoutID;
@@ -80,7 +82,25 @@
 
         data() {
             return {
-                transactions: []
+                sortKey: 'names',
+                transactions: [],
+                column: ['Numéro de transaction', 'Date', 'Action', 'Montant', 'Solde'],
+                people: [
+                    {
+                        name: 'a75',
+                        item1: false,
+                        item2: false
+                    },
+                    {
+                        name: 'z32',
+                        item1: true,
+                        item2: false
+                    },
+                    {
+                        name: 'e77',
+                        item1: false,
+                        item2: false
+                    }]
             }
         },
 
@@ -95,11 +115,34 @@
                     .get("/auth/searchusers?search=" + "username" + ":" + "*" + localStorage.username + "*")
                     .then(response => {
                         this.transactions = response.data[0].userAccount.transactions; // JSON are parsed automatically.
-                        console.log(response.data);
+                        function sortByKey(array, key) {
+                            return array.sort(function (a, b) {
+                                var x = a[key];
+                                var y = b[key];
+                                return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+                            });
+                        }
+
+                        this.transactions = sortByKey(this.transactions, 'id')
+
                     })
                     .catch(e => {
                         console.log(e);
                     });
+            },
+
+            correctTimeDateFormat(transactionDate) {
+
+                return moment(transactionDate).format('YYYY-MM-DD HH:mm:ss');
+            },
+
+            correctAmountFormat(transactionCredit, transactionDebit) {
+
+                if (transactionCredit == 0) {
+                    return "-" + transactionDebit
+                }
+
+                return "+" + transactionCredit
             }
         },
         mounted() {
