@@ -55,27 +55,22 @@
         methods: {
             verify() {
                 if (this.qustionArray[1] === this.randomQuestion) {
-                    http
-                        .post("/auth/verify2", {question2: this.randomQuestion, answer2: this.text})
-                        .then(response => {
-                            console.log(response.data);
-                            this.$router.push('/HomeAdmin');
-                            localStorage.bypass = 1
-                            location.reload();
-                        })
-                        .catch(() => this.wrongAnwser())
+                    if (this.answer2 === this.text) {
+                        this.$router.push('/HomeAdmin');
+                        localStorage.bypass = 1
+                        location.reload();
+                    } else {
+                        alert("Mauvaise réponse, veuillez recommancer")
+                    }
                 } else {
-                    http
-                        .post("/auth/verify1", {question1: this.randomQuestion, answer1: this.text})
-                        .then(response => {
-                            console.log(response.data);
-                            this.$router.push('/HomeAdmin');
-                            localStorage.bypass = 1
-                            location.reload();
-                        })
-                        .catch(() => this.wrongAnwser())
+                    if (this.answer1 === this.text) {
+                        this.$router.push('/HomeAdmin');
+                        localStorage.bypass = 1
+                        location.reload();
+                    } else {
+                        alert("Mauvaise réponse, veuillez recommancer")
+                    }
                 }
-
             },
             wrongAnwser() {
                 alert("Mauvaise réponse entrée, veuillez recommancer")
