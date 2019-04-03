@@ -60,32 +60,22 @@
         methods: {
             verify() {
                 if (this.qustionArray[1] === this.randomQuestion) {
-                    http
-                        .post("/auth/verify2", { question2: this.randomQuestion, answer2: this.text })
-                        .then(response => {
-                            console.log(response.data);
-                            console.log(this.randomQuestion);
-                            console.log(this.text);
-                            this.$router.push('/HomeClient');
-                            localStorage.bypass = 1
-                            location.reload();
-                        })
-                        .catch(() => this.wrongAnwser())
+                    if (this.answer2 === this.text) {
+                        this.$router.push('/HomeClient');
+                        localStorage.bypass = 1
+                        location.reload();
+                    } else {
+                        alert("Mauvaise réponse, veuillez recommancer")
+                    }
+                } else {
+                    if (this.answer1 === this.text) {
+                        this.$router.push('/HomeClient');
+                        localStorage.bypass = 1
+                        location.reload();
+                    } else {
+                        alert("Mauvaise réponse, veuillez recommancer")
+                    }
                 }
-                if (this.qustionArray[0] === this.randomQuestion) {
-                    http
-                        .post("/auth/verify1", { question1: this.randomQuestion, answer1: this.text })
-                        .then(response => {
-                            console.log(response.data);
-                            this.$router.push('/HomeClient');
-                            localStorage.bypass = 1
-                            console.log(this.randomQuestion);
-                            console.log(this.text);
-                            location.reload();
-                        })
-                        .catch(() => this.wrongAnwser())
-                }
-
             },
             wrongAnwser () {
                 alert("Mauvaise réponse entrée, veuillez recommancer")
