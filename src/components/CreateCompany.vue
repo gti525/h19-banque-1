@@ -224,6 +224,7 @@
                 country: '',
                 mobile: '',
                 landline: '',
+                random_number: Math.floor(Math.random() * (9999 - 1 +1)) + 9999
             }
         },
         methods: {
@@ -232,7 +233,7 @@
                     company: this.company,
                     firstname: this.firstname,
                     lastname: this.lastname,
-                    username: this.username,
+                    username: this.company + this.random_number,
                     creditLimit: this.creditLimit,
                     amount: this.amount,
                     creditbalanceavailable: this.creditbalanceavailable,
@@ -259,7 +260,7 @@
                     .then(response => {
                         console.log(response.data);
                         this.$router.push('/homeAdmin');
-
+                        alert("votre nom d'utilisateur est " + data.company)
                     })
                     .catch(e => {
                         alert("Impossible de charger les informations. Un champ obligatoire n'est pas rempli ou est incorrect.");
