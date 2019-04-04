@@ -15,7 +15,6 @@
                             v-model="company"
                             name="company"
                             class="form-control"
-                            :class="{ 'is-invalid': submitted && !company }"
                     >
                 </div>
                 <div class="form-group">
@@ -26,7 +25,6 @@
                             v-model="password"
                             name="password"
                             class="form-control"
-                            :class="{ 'is-invalid': submitted && !password }"
                     >
                     {{password}}
                 </div>
@@ -253,7 +251,7 @@
 
                     })
                     .catch(e => {
-                        alert("Impossible de charger les informations. Un champ obligatoire n'est pas rempli ou est incorrect.");
+                        alert("Impossible de charger les informations. Un des champs obligatoires n'est pas rempli ou est incorrect.");
                         console.log(e);
                         console.log(e.request)
                         console.log(e.config)

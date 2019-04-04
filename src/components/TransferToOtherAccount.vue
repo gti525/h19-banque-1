@@ -38,6 +38,7 @@
                 </div>
             </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
@@ -45,6 +46,7 @@
 <script>
     import NavBar from "./NavBarClient.vue";
     import http from "../http-common";
+    import Footer from './Footer.vue';
 
     /* eslint-disable no-console */
 
@@ -90,7 +92,8 @@
     export default {
         name: "TransferToOtherAccount",
         components: {
-            NavBar
+            NavBar: NavBar,
+            Footer: Footer
         },
         data() {
             return {
