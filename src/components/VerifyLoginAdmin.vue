@@ -16,7 +16,6 @@
                            v-model="text"
                            name="text"
                            class="form-control"
-                           :class="{ 'is-invalid': submitted }"
                     >
                 </div>
 
@@ -48,42 +47,43 @@
                 text: '',
                 submitted: '',
                 questionMap: '',
-                randomQuestion:'',
-                qustionArray:'',
+                randomQuestion: '',
+                qustionArray: '',
                 token: ''
             }
         },
         methods: {
             verify() {
                 if (this.qustionArray[1] === this.randomQuestion) {
-                    http
-                        .post("/auth/verify2", { question2: this.randomQuestion, answer2: this.text })
-                        .then(response => {
-                            console.log(response.data);
-                            this.$router.push('/HomeAdmin');
-                            localStorage.bypass = 1
-                            location.reload();
-                        })
-                        .catch(() => this.wrongAnwser())
+                    if (this.answer2 === this.text) {
+                        this.$router.push('/HomeAdmin');
+                        localStorage.bypass = 1
+                        location.reload();
+                    } else {
+                        alert("Mauvaise réponse, veuillez recommencer")
+                    }
                 } else {
-                    http
-                        .post("/auth/verify1", { question1: this.randomQuestion, answer1: this.text })
-                        .then(response => {
-                            console.log(response.data);
-                            this.$router.push('/HomeAdmin');
-                            localStorage.bypass = 1
-                            location.reload();
-                        })
-                        .catch(() => this.wrongAnwser())
+                    if (this.answer1 === this.text) {
+                        this.$router.push('/HomeAdmin');
+                        localStorage.bypass = 1
+                        location.reload();
+                    } else {
+                        alert("Mauvaise réponse, veuillez recommencer")
+                    }
                 }
-
             },
-            wrongAnwser () {
-                alert("Mauvaise réponse entrée, veuillez recommancer")
+            wrongAnwser() {
+                alert("Mauvaise réponse entrée, veuillez recommencer")
             },
-            loading () {
-               location.reload();
+            loading() {
+                location.reload();
             },
+        },
+        mounted() {
+            if (!localStorage.bypass) {
+                alert("Vous devez vous connecter avant d'Accéder a cette page")
+                this.$router.push('/');
+            }
         },
         created() {
             http
@@ -92,10 +92,10 @@
                     this.users = response.data[0]; // JSON are parsed automatically.
                     this.answer1 = response.data[0].answer1
                     this.answer2 = response.data[0].answer2
-                    console.log("LLLLLLLLLLLLLLL")
+                    console.log("")
                     console.log(response.data);
 
-                    if ( response.data[0].roles[0].name === "ROLE_USER") {
+                    if (response.data[0].roles[0].name === "ROLE_USER") {
                         alert("Vous etes un client, redirection de page dans la bonne page")
                         this.$router.push('/VerifyLogin');
                     }
@@ -120,25 +120,25 @@
 <style lang="scss" scoped>
     @import "../scss/common.scss";
 
-        .app-title {
-            margin-top: 2.8%;
-            text-align: center;
-            font-size: 40px;
-            font-weight: 600;
-            color: #002ec3;
-            font-family: 'Hind Siliguri', sans-serif;
+    .app-title {
+        margin-top: 2.8%;
+        text-align: center;
+        font-size: 40px;
+        font-weight: 600;
+        color: #002ec3;
+        font-family: 'Hind Siliguri', sans-serif;
 
-        }
+    }
 
-        .app-sub-title {
-            text-align: center;
-            font-size: 16px;
-            text-transform: uppercase;
-            font-weight: 600;
-            color: #d41919;
-            font-family: 'Hind Siliguri', sans-serif;
+    .app-sub-title {
+        text-align: center;
+        font-size: 16px;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: #d41919;
+        font-family: 'Hind Siliguri', sans-serif;
 
-        }
+    }
 
     .login-container {
         border: 1px solid #e8e8e8;

@@ -34,6 +34,7 @@
                 </div>
             </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
@@ -41,6 +42,7 @@
 <script>
     import NavBar from "./NavBarClient.vue";
     import http from "../http-common";
+    import Footer from './Footer.vue';
 
     /* eslint-disable no-console */
 
@@ -86,7 +88,8 @@
     export default {
         name: "TransferToOtherAccount",
         components: {
-            NavBar
+            NavBar: NavBar,
+            Footer: Footer
         },
         data() {
             return {
@@ -120,6 +123,7 @@
                             console.log(response.data);
                             alert("Le transfert a été effectué avec succès. ")
                             localStorage.bypass = 1
+                            this.$router.push('/HomeClient')
                             location.reload();
                         })
                         .catch(e => {
@@ -138,6 +142,7 @@
                             console.log(response.data);
                             alert("Le transfert a été effectué avec succès.")
                             localStorage.bypass = 1
+                            this.$router.push('/HomeClient')
                             location.reload();
                         })
                         .catch(e => {

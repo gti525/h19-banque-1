@@ -2,7 +2,6 @@
     <div id="print">
         <nav-bar class="no-print"></nav-bar>
         <h1>Liste des transactions associées au compte courant</h1>
-        <break></break>
         <table id="myTable" class="table table-hover">
             <thead>
             <tr>
@@ -19,10 +18,13 @@
                 <td>{{ correctTimeDateFormat(transaction.transdate) }}</td>
                 <td>{{ transaction.description }}</td>
                 <td>{{ correctAmountFormat(transaction.credit, transaction.debit) }}</td>
-                <td>{{ transaction.balance }}</td>
+                <td>{{ transaction.currently_available_funds + " $"}}</td>
             </tr>
             </tbody>
         </table>
+        <div class="btn-group" aria-label="Basic example">
+            <a href="/HomeAdmin" class="btn btn-primary" role="button">Retour</a>
+        </div>
         <Footer></Footer>
     </div>
 </template>
@@ -83,7 +85,25 @@
 
         data() {
             return {
-                transactions: []
+                sortKey: 'names',
+                transactions: [],
+                column: ['Numéro de transaction', 'Date', 'Action', 'Montant', 'Solde'],
+                people: [
+                    {
+                        name: 'a75',
+                        item1: false,
+                        item2: false
+                    },
+                    {
+                        name: 'z32',
+                        item1: true,
+                        item2: false
+                    },
+                    {
+                        name: 'e77',
+                        item1: false,
+                        item2: false
+                    }]
             }
         },
 
@@ -98,7 +118,16 @@
                     .get("/auth/searchusers?search=" + "username" + ":" + "*" + localStorage.username + "*")
                     .then(response => {
                         this.transactions = response.data[0].userAccount.transactions; // JSON are parsed automatically.
-                        console.log(response.data);
+                        function sortByKey(array, key) {
+                            return array.sort(function (a, b) {
+                                var x = a[key];
+                                var y = b[key];
+                                return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+                            });
+                        }
+
+                        this.transactions = sortByKey(this.transactions, 'id')
+
                     })
                     .catch(e => {
                         console.log(e);
@@ -113,10 +142,10 @@
             correctAmountFormat(transactionCredit, transactionDebit) {
 
                 if (transactionCredit == 0) {
-                    return "-" + transactionDebit
+                    return "-" + transactionDebit + " $"
                 }
 
-                return "+" + transactionCredit
+                return "+" + transactionCredit+ " $"
             }
         },
         mounted() {

@@ -15,18 +15,6 @@
                             v-model="company"
                             name="company"
                             class="form-control"
-                            :class="{ 'is-invalid': submitted && !company }"
-                    >
-                </div>
-                <div class="form-group">
-                    <label for="username">Nom d'utilisateur du compte entreprise</label>
-                    <input
-                            id="username"
-                            type="text"
-                            v-model="username"
-                            name="username"
-                            class="form-control"
-                            :class="{ 'is-invalid': submitted && !username }"
                     >
                 </div>
                 <div class="form-group">
@@ -37,7 +25,6 @@
                             v-model="password"
                             name="password"
                             class="form-control"
-                            :class="{ 'is-invalid': submitted && !password }"
                     >
                     {{password}}
                 </div>
@@ -80,12 +67,6 @@
                 <div class="form-group">
                     <label for="email">Adresse Courriel de l'entreprise</label>
                     <input id="email" type="email" v-model="email" name="email" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="mmn">Rôle</label>
-                    <select v-model="role" class="form-control">
-                        <option>company</option>
-                    </select>
                 </div>
                 <div class="form-group">
                     <label for="city">Ville</label>
@@ -211,7 +192,7 @@
                 creditbalanceavailable: '',
                 creditbalanceowned: 0,
                 email: '',
-                role: '',
+                role: 'client',
                 question1: '',
                 answer1: '',
                 question2: '',
@@ -224,17 +205,23 @@
                 country: '',
                 mobile: '',
                 landline: '',
-                random_number: Math.floor(Math.random() * (9999 - 1 +1)) + 9999
+                random_number: Math.floor(Math.random() * (9999 - 1 + 1)) + 9999
+            }
+        },
+        created() {
+            if (!localStorage.bypass) {
+                alert("Vous devez vous connecter avant d'Accéder a cette page")
+                this.$router.push('/');
             }
         },
         methods: {
             createCompanyBtnClicked() {
                 let data = {
                     company: this.company,
-                    firstname: this.firstname,
+                    firstname: this.company,
                     lastname: this.lastname,
                     username: this.company + this.random_number,
-                    creditLimit: this.creditLimit,
+                    creditLimit: this.creditbalanceavailable,
                     amount: this.amount,
                     creditbalanceavailable: this.creditbalanceavailable,
                     creditbalanceowned: this.creditbalanceowned,
@@ -259,11 +246,12 @@
                     .post("/auth/signup", data)
                     .then(response => {
                         console.log(response.data);
-                        this.$router.push('/homeAdmin');
-                        alert("votre nom d'utilisateur est " + data.company)
+                        this.$router.push('/HomeAdmin');
+                        alert("votre nom d'utilisateur est " + data.username)
+
                     })
                     .catch(e => {
-                        alert("Impossible de charger les informations. Un champ obligatoire n'est pas rempli ou est incorrect.");
+                        alert("Impossible de charger les informations. Un des champs obligatoires n'est pas rempli ou est incorrect.");
                         console.log(e);
                         console.log(e.request)
                         console.log(e.config)

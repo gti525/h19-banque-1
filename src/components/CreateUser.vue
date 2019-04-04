@@ -155,12 +155,14 @@
                 </div>
             </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
     import NavBar from "./NavBarAdmin.vue";
     import http from "../http-common";
+    import Footer from './Footer.vue'
 
     /* eslint-disable no-console */
 
@@ -206,7 +208,8 @@
     export default {
         name: "Login",
         components: {
-            NavBar
+            Navbar: NavBar,
+            Footer: Footer
         },
         data() {
             return {
@@ -232,7 +235,7 @@
                 country: '',
                 mobile: '',
                 landline: '',
-                random_number: Math.floor(Math.random() * (9999 - 1 +1)) + 9999
+                random_number: Math.floor(Math.random() * (9999 - 1 +1 )) + 9999
             }
         },
         methods: {
@@ -242,7 +245,7 @@
                     company: this.company,
                     firstname: this.firstname,
                     lastname: this.lastname,
-                    username: this.firstname + "-" + this.lastname + this.random_number,
+                    username: this.firstname + this.lastname + this.random_number,
                     creditLimit: this.creditbalanceavailable,
                     amount: this.amount,
                     creditbalanceavailable: this.creditbalanceavailable,
@@ -268,7 +271,7 @@
                     .post("/auth/signup", data)
                     .then(response => {
                         console.log(response.data);
-                        this.$router.push('/homeAdmin');
+                        this.$router.push('/HomeAdmin');
                         alert("votre nom d'utilisateur est " + data.username)
                     })
                     .catch(e => {
