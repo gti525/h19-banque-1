@@ -9,7 +9,7 @@
                 <th scope="col">Date</th>
                 <th scope="col">Action</th>
                 <th scope="col">Montant</th>
-                <th scope="col">Solde</th>
+                <th scope="col">Balance</th>
             </tr>
             </thead>
             <tbody>

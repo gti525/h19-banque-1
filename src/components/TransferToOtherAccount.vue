@@ -9,23 +9,27 @@
                 </div>
 
                 <div>
-                    <table class="table">
+                    <table class="table table-borderless table-condensed table-hover">
                         <tr>
-                            <td>Votre Solde :</td>
+                            <td>Votre balance :</td>
                             <td> {{this.amount}}$</td>
                         </tr>
                     </table>
                 </div>
 
                 <div class="form-group">
-                    <form>
-                        Numéro du compte de destination : <input v-model="receiverAccountNo" type="text" name="usrname" maxlength="8"><br>
-                    </form>
-                </div>
-                <div class="form-group">
-                    <form>
-                        Montant : <input v-model="montant" type="number" name="montant"><br>
-                    </form>
+                    <table class="table table-borderless table-condensed table-hover">
+                    <tbody>
+                    <tr>
+                        <td> Numéro du compte de destination : </td>
+                        <td> <input v-model="receiverAccountNo" type="text" name="usrname" maxlength="8"></td>
+                    </tr>
+                    <tr>
+                        <td>Montant : </td>
+                        <td> <input v-model="montant" type="number" name="montant" min="0.01"></td>
+                    </tr>
+                    </tbody>
+                    </table>
                 </div>
                 <div class="form-group clearfix">
                     <button v-on:click="transferMoneyBtnClicked" class="btn btn-primary btn-common float-right">
@@ -159,8 +163,6 @@
                 this.$router.push('/');
             }
         },
-
-
     }
     ;
 </script>
@@ -175,16 +177,7 @@
         color: #002ec3;
         font-family: "Hind Siliguri", sans-serif;
     }
-
-    .bob-container {
-        border: 1px solid #e8e8e8;
-        box-shadow: 0px 0px 20px #e6e6e6;
-        padding: 20px 40px;
-        border-radius: 10px;
-        margin-top: 6%;
-        margin-bottom: 60px;
-    }
-
+    
     .main-header {
         margin-top: 20px;
         margin-bottom: 28px;
@@ -202,4 +195,5 @@
         border-radius: 10px;
         margin-bottom: 20px;
     }
+
 </style>
