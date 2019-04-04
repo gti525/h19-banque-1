@@ -187,6 +187,7 @@
 
     .design {
         margin-top: 6%;
+        margin-bottom: 6%;
         text-align: center;
         font-size: 16px;
         font-weight: 600;
