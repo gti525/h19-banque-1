@@ -18,10 +18,13 @@
                 <td>{{ correctTimeDateFormat(transaction.transdate) }}</td>
                 <td>{{ transaction.description }}</td>
                 <td>{{ correctAmountFormat(transaction.credit, transaction.debit) }}</td>
-                <td>{{ transaction.currently_available_funds }}</td>
+                <td>{{ transaction.currently_available_funds + " $"}}</td>
             </tr>
             </tbody>
         </table>
+        <div class="btn-group" aria-label="Basic example">
+            <a href="/HomeAdmin" class="btn btn-primary" role="button">Retour</a>
+        </div>
         <Footer></Footer>
     </div>
 </template>
@@ -139,10 +142,10 @@
             correctAmountFormat(transactionCredit, transactionDebit) {
 
                 if (transactionCredit == 0) {
-                    return "-" + transactionDebit
+                    return "-" + transactionDebit + " $"
                 }
 
-                return "+" + transactionCredit
+                return "+" + transactionCredit+ " $"
             }
         },
         mounted() {
