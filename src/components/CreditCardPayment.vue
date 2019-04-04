@@ -1,12 +1,9 @@
 <template>
     <div>
         <nav-bar></nav-bar>
+        <h2>Paiement de la carte de crédit</h2>
         <div class="container">
-            <div class="app-title">Banquo Uno</div>
             <div class="transfer-container">
-                <div class="main-header">
-                    <h2>Paiement de la carte de crédit</h2>
-                </div>
                 <div>
                     <table class="table">
                         <tr>
