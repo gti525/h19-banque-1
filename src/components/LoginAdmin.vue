@@ -19,7 +19,7 @@
     </nav>
 
     <div class="container">
-      <div class="app-title">Administration</div>
+      <div class="app-title">Connexion page administration</div>
       <div class="login-container">
         <!--<div class="main-header">-->
         <!--<h2>Input Username & Password</h2></div>-->
@@ -94,7 +94,7 @@
         location.reload();
       },
       loginFailed () {
-        alert("Mauvaise information rentrer")
+        alert("Mauvaise information rentrée")
         delete localStorage.token
       },
       clientRedirect () {

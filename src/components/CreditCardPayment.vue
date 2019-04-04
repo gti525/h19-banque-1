@@ -10,7 +10,7 @@
                 <div>
                     <table class="table">
                         <tr>
-                            <td>Vous devez :</td>
+                            <td>Votre balance :</td>
                             <td> {{this.amount}}$</td>
                         </tr>
                     </table>
@@ -95,12 +95,13 @@
                     })
                     .then(response => {
                         console.log(response.data);
-                        alert("Paiement réussi")
+                        alert("Le paeiment a été réussi")
                         localStorage.bypass = 1
+                        this.$router.push('/HomeClient')
                         location.reload();
                     })
                     .catch(e => {
-                        alert("Paiement fail")
+                        alert("Le paiement n'a pas été réussi")
                         console.log(e);
                         console.log(e.request)
                         console.log(e.config)
@@ -108,12 +109,16 @@
                     });
             }
         },
-
         created() {
-            this.amount = this.$route.params.amount;
-            this.accountNumber = this.$route.params.sender;
-            this.creditNumber = this.$route.params.number;
-            console.log(this.$route.params)
+            if (!localStorage.bypass) {
+                alert("Vous devez vous connecter avant d'Accéder a cette page")
+                this.$router.push('/');
+            } else {
+                this.amount = this.$route.params.amount;
+                this.accountNumber = this.$route.params.sender;
+                this.creditNumber = this.$route.params.number;
+                console.log(this.$route.params)
+            }
         },
     };
 </script>

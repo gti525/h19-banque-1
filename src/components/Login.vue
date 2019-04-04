@@ -22,7 +22,7 @@
     </nav>
 
     <div class="container">
-      <div class="app-title">Connexion Client</div>
+      <div class="app-title">Connexion page client</div>
       <div class="login-container">
         <!--<div class="main-header">-->
         <!--<h2>Input Username & Password</h2></div>-->
@@ -51,7 +51,6 @@
               Mot de passe oublié?
             </router-link>
           </td>
-
         </div>
         <div class="clearfix ">
           <button class="btn btn-primary btn-common float-right" v-on:click="customerLogin">Connexion</button>
@@ -103,7 +102,7 @@
       },
       loginFailed() {
         console.log(this.test)
-        alert("Mauvaise information rentrer")
+        alert("Mauvaise information rentrée")
         delete localStorage.token
       },
       adminRedirect() {

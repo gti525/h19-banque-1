@@ -19,7 +19,6 @@
                            v-model="text"
                            name="text"
                            class="form-control"
-                           :class="{ 'is-invalid': submitted }"
                     >
                 </div>
 
@@ -61,34 +60,37 @@
         methods: {
             verify() {
                 if (this.qustionArray[1] === this.randomQuestion) {
-                    http
-                        .post("/auth/verify2", { question2: this.randomQuestion, answer2: this.text })
-                        .then(response => {
-                            console.log(response.data);
-                            this.$router.push('/HomeClient');
-                            localStorage.bypass = 1
-                            location.reload();
-                        })
-                        .catch(() => this.wrongAnwser())
+                    if (this.answer2 === this.text) {
+                        this.$router.push('/HomeClient');
+                        localStorage.bypass = 1
+                        location.reload();
+                    } else {
+                        alert("Mauvaise réponse, veuillez recommencer")
+                    }
                 } else {
-                    http
-                        .post("/auth/verify1", { question1: this.randomQuestion, answer1: this.text })
-                        .then(response => {
-                            console.log(response.data);
-                            this.$router.push('/HomeClient');
-                            localStorage.bypass = 1
-                            location.reload();
-                        })
-                        .catch(() => this.wrongAnwser())
+                    if (this.answer1 === this.text) {
+                        this.$router.push('/HomeClient');
+                        localStorage.bypass = 1
+                        location.reload();
+                    } else {
+                        alert("Mauvaise réponse, veuillez recommencer")
+                    }
                 }
-
             },
             wrongAnwser () {
-                alert("Mauvaise réponse entrée, veuillez recommancer")
+                alert("Mauvaise réponse entrée, veuillez recommencer")
+                console.log(this.randomQuestion + "question");
+                console.log(this.text + "text");
             },
             loading () {
                 location.reload();
             },
+        },
+        mounted() {
+            if (!localStorage.bypass) {
+                alert("Vous devez vous connecter avant d'Accéder a cette page")
+                this.$router.push('/');
+            }
         },
         created() {
             http

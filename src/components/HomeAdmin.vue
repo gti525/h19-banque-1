@@ -105,6 +105,7 @@
                 users: []
             };
         },
+
         methods: {
             /* eslint-disable no-console */
             saveUser() {

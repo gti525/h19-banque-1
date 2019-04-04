@@ -13,17 +13,17 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(transaction) in transactions" :key="transaction.id">
+            <tr v-for="(transaction) in transactions" :key="transaction.id" v-if="transaction.transstatus !== 'CANCELLED'">
                 <td>{{ transaction.id }}</td>
                 <td>{{ correctTimeDateFormat(transaction.transdate) }}</td>
                 <td>{{ transaction.description }}</td>
                 <td>{{ correctAmountFormat(transaction.credit, transaction.debit) }}</td>
-                <td>{{ transaction.balance + "$"}}</td>
+                <td>{{ transaction.currently_available_funds + "$"}}</td>
             </tr>
             </tbody>
         </table>
         <div class="btn-group" aria-label="Basic example">
-            <a href="/homeadmin" class="btn btn-primary" role="button">Retour</a>
+            <a href="/HomeAdmin" class="btn btn-primary" role="button">Retour</a>
         </div>
         <Footer></Footer>
     </div>
@@ -89,7 +89,7 @@
                 username: '',
                 searchFile: '',
                 transactions: [],
-                tt: '',
+                tt: [],
                 dollardCheque: ".00$",
                 dollardCredit: ".00$"
             }
@@ -122,7 +122,15 @@
                     .get("/auth/searchusers?search=" + this.textUsername + ":" + "*" + this.username + "*")
                     .then(response => {
                         this.transactions = response.data[0].userAccount.transactions; // JSON are parsed automatically.
-                        console.log(this.transactions)
+                        function sortByKey(array, key) {
+                            return array.sort(function (a, b) {
+                                var x = a[key];
+                                var y = b[key];
+                                return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+                            });
+                        }
+
+                        this.transactions = sortByKey(this.transactions, 'id')
                     })
                     .catch(e => {
                         console.log(e);
@@ -149,6 +157,15 @@
                     .then(response => {
                         this.transactions = response.data[0].userCreditCard.transactions; // JSON are parsed automatically.
                         console.log(this.transactions)
+                        function sortByKey(array, key) {
+                            return array.sort(function (a, b) {
+                                var x = a[key];
+                                var y = b[key];
+                                return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+                            });
+                        }
+
+                        this.transactions = sortByKey(this.transactions, 'id')
                     })
                     .catch(e => {
                         console.log(e);

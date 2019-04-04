@@ -1,35 +1,12 @@
 <template>
 
     <div>
-
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a class="navbar-brand" href="#">Banquo Uno</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
-                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse float-left text-justify" id="navbarColor01">
-                <ul class="navbar-nav mr-auto float-left">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Page Client <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" v-on:click="adminRedirect">Page Admin</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
         <div class="container">
             <div class="app-title">Réinitialisation du mot de passe</div>
             <div class="login-container">
-                <!--<div class="main-header">-->
-                <!--<h2>Input Username & Password</h2></div>-->
                 <div class="form-group">
-                    <label for="username">Nom d'utilisateur</label>
-                    <input ID="username"
-                           type="text"
+                    <label>Nom d'utilisateur</label>
+                    <input type="text"
                            v-model="username"
                            name="username"
                            class="form-control"
@@ -56,7 +33,11 @@
             NavBar: NavBar,
             Footer: Footer
         },
-
+        data() {
+            return {
+                username: '',
+            }
+        },
         methods: {
             sendQuestions() {
                 //here should send the request to the backend and get the username's questions
@@ -64,7 +45,7 @@
                 http
                     .get("/auth/getQuestions/" + this.username)
                     .then(response => this.userFound(response))
-                    .catch(() => this.userNotFound())
+                    .catch((e) => this.userNotFound(e))
             },
 
             userFound (res) {
@@ -76,12 +57,11 @@
             },
 
             userNotFound () {
-                this.$router.push('/errorPage')
-                delete localStorage.token
+                alert("Le nom d'utilisateur inscrit n'a pas été trouvé. Veuillez vérifier l'exactitude du nom d'utilisateur.")
             }
         }
     };
-  </script>
+</script>
 
 <style lang="scss" scoped>
     @import "../scss/common.scss";

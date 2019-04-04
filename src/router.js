@@ -15,6 +15,7 @@ import ShowAccountTransactionsAdmin from "./components/ShowAccountTransactionsAd
 import ShowCreditTransactions from "./components/ShowCreditTransactions";
 import CreditCardPayment from "./components/CreditCardPayment";
 import CreateCompany from "./components/CreateCompany";
+import ModifyPassword from "./components/ModifyPassword";
 import ResetPassword from "./components/ResetPassword";
 import BeforeResetPassword from "./components/BeforeResetPassword";
 
@@ -39,6 +40,11 @@ export default new Router({
       component: ShowAccountTransactionsAdmin,
     },
     {
+      path: "/BeforeResetPassword",
+      name: "BeforeResetPassword",
+      component: BeforeResetPassword
+    },
+    {
       path: "/",
       name: "login",
       component: Login
@@ -47,6 +53,11 @@ export default new Router({
       path: "/resetPassword",
       name: "ResetPassword",
       component: ResetPassword
+    },
+    {
+      path: "/modifyPassword",
+      name: "ModifyPassword",
+      component: ModifyPassword
     },
     {
       path: "/verifylogin",

@@ -176,11 +176,11 @@
                 if (this.selected == "Pays") {
                     this.bobs = "country"
                 }
-                if (this.selected == "Numéro carte crédit") {
-                    this.bobs = "creditcardno"
+                if (this.selected == "Compagnie") {
+                    this.bobs = "company"
                 }
-                if (this.selected == "Numéro compte") {
-                    this.bobs = "accountno"
+                if (this.selected == "Province") {
+                    this.bobs = "province"
                 }
                 console.log(this.bobs)
                 console.log(this.username + "text")
