@@ -1,7 +1,6 @@
 <template>
 
     <div>
-        <nav-bar></nav-bar>
         <div class="container">
             <div class="app-title">Questions de sécurité pour la réinitialisation du mot de passe</div>
             <div class="resetPassword-container">
@@ -126,6 +125,7 @@
         padding: 20px 40px;
         border-radius: 10px;
         margin-top: 6%;
+        margin-bottom: 6%;
     }
 
     .main-header {
