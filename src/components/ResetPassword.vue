@@ -1,4 +1,4 @@
-<template>
+run <template>
 
     <div>
         <nav-bar></nav-bar>
@@ -36,9 +36,9 @@
                 </div>
                 <div class="form-group">
                     <label for="password">Nouveau mot de passe: </label>
-                    <label for="message">*Ce dernier doit comporter au minimum 8 caractères, 1 majuscule, 1 chiffre et 1 caractère spécial.</label>
+                    <label for="message"> *Ce dernier doit comporter au minimum 8 caractères, 1 majuscule, 1 chiffre et 1 caractère spécial.</label>
                     <input id="password"
-                           type="text"
+                           type="password"
                            v-model="password"
                            name="password"
                            class="form-control"

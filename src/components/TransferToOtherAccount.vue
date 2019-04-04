@@ -180,7 +180,7 @@
         color: #002ec3;
         font-family: "Hind Siliguri", sans-serif;
     }
-    
+
     .main-header {
         margin-top: 20px;
         margin-bottom: 28px;
