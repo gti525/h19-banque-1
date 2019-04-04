@@ -1,13 +1,9 @@
 <template>
     <div>
         <nav-bar></nav-bar>
+        <h1>Transfert de fonds vers un autre compte</h1>
         <div class="container">
-            <div class="app-title">Banquo Uno</div>
             <div>
-                <div>
-                    <h2>Transfert de fonds vers un autre compte</h2>
-                </div>
-
                 <div>
                     <table class="table">
                         <tr>
@@ -19,7 +15,8 @@
 
                 <div class="form-group">
                     <form>
-                        Numéro du compte de destination : <input v-model="receiverAccountNo" type="text" name="usrname" maxlength="8"><br>
+                        Numéro du compte de destination : <input v-model="receiverAccountNo" type="text" name="usrname"
+                                                                 maxlength="8"><br>
                     </form>
                 </div>
                 <div class="form-group">
@@ -98,7 +95,7 @@
         },
 
         /* eslint-disable no-console*/
-        created(){
+        created() {
             this.amount = this.$route.params.amount;
             this.senderAccountNo = this.$route.params.sender;
         },
@@ -110,12 +107,16 @@
 
                 //Vérifie si le compte receiver vient de banque 1 ou 2 et effectue un post à l'API approprié.
                 let digits = Math.floor((Math.log10(this.receiverAccountNo)));
-                let firstdigit = Math.floor((this.receiverAccountNo / (Math.pow(10,digits))));
+                let firstdigit = Math.floor((this.receiverAccountNo / (Math.pow(10, digits))));
                 if (Math.floor(firstdigit) == 1) {
                     alert("Transfert à Banque1")
 
                     http
-                        .post("/auth/Transfer", { senderAccountNo: this.senderAccountNo, receiverAccountNo: this.receiverAccountNo, amount: this.montant})
+                        .post("/auth/Transfer", {
+                            senderAccountNo: this.senderAccountNo,
+                            receiverAccountNo: this.receiverAccountNo,
+                            amount: this.montant
+                        })
                         .then(response => {
                             console.log(response.data);
                             alert("Le transfert a été effectué avec succès.")
@@ -134,7 +135,11 @@
                     alert("Transfert à Banque2 ")
 
                     http
-                        .post("/auth/OtherBankTransfer", { senderAccountNo: this.senderAccountNo, receiverAccountNo: this.receiverAccountNo, amount: this.montant})
+                        .post("/auth/OtherBankTransfer", {
+                            senderAccountNo: this.senderAccountNo,
+                            receiverAccountNo: this.receiverAccountNo,
+                            amount: this.montant
+                        })
                         .then(response => {
                             console.log(response.data);
                             alert("Le transfert a été effectué avec succès.")
