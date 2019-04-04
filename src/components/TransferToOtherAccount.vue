@@ -118,7 +118,7 @@
                         .post("/auth/Transfer", { senderAccountNo: this.senderAccountNo, receiverAccountNo: this.receiverAccountNo, amount: this.montant})
                         .then(response => {
                             console.log(response.data);
-                            alert("Le transfert a été effectué avec succès. ")
+                            alert("Le transfert a été effectué avec succès.")
                             localStorage.bypass = 1
                             this.$router.push('/HomeClient')
                             location.reload();
@@ -155,7 +155,7 @@
 
         mounted() {
             if (!localStorage.bypass) {
-                alert("Vous devez vous connecter avant d'Accéder a cette page")
+                alert("Vous devez vous connecter avant d'accéder à cette page")
                 this.$router.push('/');
             }
         },
