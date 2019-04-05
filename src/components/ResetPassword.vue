@@ -6,9 +6,8 @@
             <div class="app-title">Questions de sécurité pour la réinitialisation du mot de passe</div>
             <div class="resetPassword-container">
                 <div class="form-group">
-                    <label>Question 1 : </label>
                     <div>
-                        {{this.question1}}
+                        Question 1 : {{this.question1}}
                     </div>
                 </div>
                 <div class="form-group">
@@ -35,7 +34,7 @@
                     >
                 </div>
                 <div class="form-group">
-                    <label for="password">Nouveau mot de passe: </label>
+                    <label for="password">Nouveau mot de passe :</label>
                     <tr>
                         <label for="message"> *Ce dernier doit comporter au minimum 8 caractères, 1 majuscule, 1 chiffre et 1 caractère spécial.</label>
                         <input id="password"

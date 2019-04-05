@@ -12,7 +12,7 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>Cheque Banque Uno</td>
+                        <td>Numéro de compte :</td>
                         <td>{{ this.accountnoResponse }}</td>
                     </tr>
                     <tr>
@@ -27,7 +27,7 @@
                         </td>
                         <td>
                             <button class="btn btn-outline-primary btn-common float-left"
-                                    v-on:click="transferToOtherAccount()">Transfert de fond à une autre compte
+                                    v-on:click="transferToOtherAccount()">Transfert de fonds vers un autre compte
                             </button>
                         </td>
                     </tr>
@@ -38,12 +38,12 @@
                 <table class="table table-borderless table-condensed table-hover">
                     <thead>
                     <tr>
-                        <th scope="col">Compte credit</th>
+                        <th scope="col">Compte crédit</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td>Credit Banque Uno</td>
+                        <td>Numéro du compte :</td>
                         <td>{{ this.creditcardnoResponse }}</td>
                     </tr>
                     <tr>
@@ -82,7 +82,7 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>Courriel</td>
+                        <td>Courriel :</td>
                         <td>{{this.users.email}}</td>
                     </tr>
                     <tr>
