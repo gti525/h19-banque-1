@@ -1,6 +1,7 @@
 <template>
 
     <div>
+        <nav-bar></nav-bar>
         <div class="container">
             <div class="app-title">Questions de sécurité pour la réinitialisation du mot de passe</div>
             <div class="resetPassword-container">
@@ -35,14 +36,16 @@
                 </div>
                 <div class="form-group">
                     <label for="password">Nouveau mot de passe: </label>
-                    <label for="message">*Ce dernier doit comporter au minimum 8 caractères, 1 majuscule, 1 chiffre et 1 caractère spécial.</label>
-                    <input id="password"
-                           type="text"
-                           v-model="password"
-                           name="password"
-                           class="form-control"
-                    >
+                    <tr>
+                        <label for="message"> *Ce dernier doit comporter au minimum 8 caractères, 1 majuscule, 1 chiffre et 1 caractère spécial.</label>
+                        <input id="password"
+                               type="password"
+                               v-model="password"
+                               name="password"
+                               class="form-control">
+                    </tr>
                 </div>
+
                 <div class="clearfix ">
                     <button class="btn btn-primary btn-common float-right" v-on:click="resetPassword">Réinitialiser</button>
                 </div>
@@ -125,7 +128,6 @@
         padding: 20px 40px;
         border-radius: 10px;
         margin-top: 6%;
-        margin-bottom: 6%;
     }
 
     .main-header {

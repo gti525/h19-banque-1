@@ -8,7 +8,7 @@
                     <table class="table">
                         <tr>
                             <td>Votre balance :</td>
-                            <td> {{this.amount}}$</td>
+                            <td> {{this.amountResponse}}$</td>
                         </tr>
                     </table>
                 </div>
@@ -57,7 +57,9 @@
                 receiverAccountNo: '',
                 senderAccountNo: '',
                 amount: '',
-                montant: ''
+                montant: '',
+                accountnoResponse: '',
+                amountResponse: '',
             }
         },
 
@@ -65,10 +67,26 @@
         created(){
             this.amount = this.$route.params.amount;
             this.senderAccountNo = this.$route.params.sender;
+            this.bob()
         },
 
 
         methods: {
+            bob () {
+                http
+                    .get("/auth/searchusers?search=" + "username" + ":" + "*" + localStorage.username + "*")
+                    .then(response => {
+                        //this.users = response.data[0]; // JSON are parsed automatically.
+                        this.accountnoResponse = response.data[0].userAccount.accountno
+                        this.amountResponse = response.data[0].userAccount.amount
+
+                    })
+                    .catch(e => {
+                        console.log(e);
+                        alert("Impossible de charger les informations")
+                    })
+
+            },
 
             transferMoneyBtnClicked() {
 
@@ -79,7 +97,7 @@
                     alert("Transfert à Banque1")
 
                     http
-                        .post("/auth/Transfer", { senderAccountNo: this.senderAccountNo, receiverAccountNo: this.receiverAccountNo, amount: this.montant})
+                        .post("/auth/Transfer", { senderAccountNo: this.accountnoResponse, receiverAccountNo: this.receiverAccountNo, amount: this.montant})
                         .then(response => {
                             console.log(response.data);
                             alert("Le transfert a été effectué avec succès. ")

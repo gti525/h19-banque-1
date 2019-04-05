@@ -8,7 +8,7 @@
                     <table class="table">
                         <tr>
                             <td>Votre balance :</td>
-                            <td> {{this.amount}}$</td>
+                            <td> {{this.amountownedResponse}}$</td>
                         </tr>
                     </table>
                 </div>
@@ -39,16 +39,36 @@
             return {
                 amount: '',
                 accountNumber: '',
-                creditNumber: ''
+                creditNumber: '',
+                creditcardnoResponse: '',
+                amountownedResponse: '',
+                accountnoResponse: '',
+                montant: ''
             }
         },
         /* eslint-disable no-console*/
         methods: {
+            bob () {
+                http
+                    .get("/auth/searchusers?search=" + "username" + ":" + "*" + localStorage.username + "*")
+                    .then(response => {
+                        //this.users = response.data[0]; // JSON are parsed automatically.
+                        this.creditcardnoResponse = response.data[0].userCreditCard.creditcardno
+                        this.amountownedResponse = response.data[0].userCreditCard.amountowned
+                        this.accountnoResponse = response.data[0].userAccount.accountno
+
+                    })
+                    .catch(e => {
+                        console.log(e);
+                        alert("Impossible de charger les informations")
+                    })
+
+            },
             paymentBtnClicked() {
                 http
                     .post("/auth/CrediCardPayment", {
-                        senderAccountNo: this.accountNumber,
-                        creditCardNo: this.creditNumber,
+                        senderAccountNo: this.accountnoResponse,
+                        creditCardNo: this.creditcardnoResponse,
                         amount: this.montant
                     })
                     .then(response => {
@@ -72,10 +92,7 @@
                 alert("Vous devez vous connecter avant d'accéder à cette page")
                 this.$router.push('/');
             } else {
-                this.amount = this.$route.params.amount;
-                this.accountNumber = this.$route.params.sender;
-                this.creditNumber = this.$route.params.number;
-                console.log(this.$route.params)
+this.bob()
             }
         },
     };
