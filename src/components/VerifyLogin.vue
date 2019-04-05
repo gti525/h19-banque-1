@@ -88,7 +88,7 @@
         },
         mounted() {
             if (!localStorage.bypass) {
-                alert("Vous devez vous connecter avant d'Accéder a cette page")
+                alert("Vous devez vous connecter avant d'accéder à cette page")
                 this.$router.push('/');
             }
         },
@@ -102,7 +102,7 @@
                     console.log(response.data);
 
                     if ( response.data[0].roles[0].name === "ROLE_ADMIN") {
-                        alert("Vous etes un administrateur, redirection de page dans la bonne page")
+                        alert("Vous êtes un administrateur, redirection vers la bonne page")
                         this.$router.push('/VerifyLoginAdmin');
                     }
 

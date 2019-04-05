@@ -1,13 +1,9 @@
 <template>
     <div>
         <nav-bar></nav-bar>
+        <h1>Transfert de fonds vers un autre compte</h1>
         <div class="container">
-            <div class="app-title">Banquo Uno</div>
             <div>
-                <div>
-                    <h2>Transfert de fonds vers un autre compte</h2>
-                </div>
-
                 <div>
                     <table class="table">
                         <tr>
@@ -162,7 +158,7 @@
 
         mounted() {
             if (!localStorage.bypass) {
-                alert("Vous devez vous connecter avant d'Accéder a cette page")
+                alert("Vous devez vous connecter avant d'accéder à cette page")
                 this.$router.push('/');
             }
         },
