@@ -23,7 +23,7 @@
             </tbody>
         </table>
         <div class="btn-group" aria-label="Basic example">
-            <a href="/HomeAdmin" class="btn btn-primary" role="button">Retour</a>
+            <a href="/HomeClient" class="btn btn-primary" role="button">Retour</a>
         </div>
         <Footer></Footer>
     </div>
@@ -187,6 +187,7 @@
 
     .design {
         margin-top: 6%;
+        margin-bottom: 6%;
         text-align: center;
         font-size: 16px;
         font-weight: 600;
