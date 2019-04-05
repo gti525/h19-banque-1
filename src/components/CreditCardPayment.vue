@@ -58,8 +58,8 @@
                         this.accountnoResponse = response.data[0].userAccount.accountno
 
                     })
-                    .catch(e => {
-                        console.log(e);
+                    .catch(() => {
+                        //console.log(e);
                         alert("Impossible de charger les informations")
                     })
 
@@ -71,8 +71,8 @@
                         creditCardNo: this.creditcardnoResponse,
                         amount: this.montant
                     })
-                    .then(response => {
-                        console.log(response.data);
+                    .then(() => {
+                        //console.log(response.data);
                         alert("Le paeiment a été réussi")
                         localStorage.bypass = 1
                         this.$router.push('/HomeClient')
@@ -80,10 +80,10 @@
                     })
                     .catch(e => {
                         alert("Le paiement n'a pas été réussi")
-                        console.log(e);
-                        console.log(e.request)
-                        console.log(e.config)
-                        console.log(e.message)
+                        //console.log(e);
+                        //console.log(e.request)
+                        //console.log(e.config)
+                        //console.log(e.message)
                     });
             }
         },

@@ -49,7 +49,7 @@
             },
 
             userFound (res) {
-                console.log(res)
+                //console.log(res)
                 this.$router.push({
                     name: 'ResetPassword',
                     params: {question1: res.data.Question1, question2: res.data.Question2, username: this.username}
