@@ -1,4 +1,4 @@
-run <template>
+<template>
 
     <div>
         <nav-bar></nav-bar>
@@ -36,14 +36,16 @@ run <template>
                 </div>
                 <div class="form-group">
                     <label for="password">Nouveau mot de passe: </label>
-                    <label for="message"> *Ce dernier doit comporter au minimum 8 caractères, 1 majuscule, 1 chiffre et 1 caractère spécial.</label>
-                    <input id="password"
-                           type="password"
-                           v-model="password"
-                           name="password"
-                           class="form-control"
-                    >
+                    <tr>
+                        <label for="message"> *Ce dernier doit comporter au minimum 8 caractères, 1 majuscule, 1 chiffre et 1 caractère spécial.</label>
+                        <input id="password"
+                               type="password"
+                               v-model="password"
+                               name="password"
+                               class="form-control">
+                    </tr>
                 </div>
+
                 <div class="clearfix ">
                     <button class="btn btn-primary btn-common float-right" v-on:click="resetPassword">Réinitialiser</button>
                 </div>
