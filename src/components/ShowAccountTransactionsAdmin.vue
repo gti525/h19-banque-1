@@ -23,7 +23,7 @@
             </tbody>
         </table>
         <div class="btn-group" aria-label="Basic example">
-            <a href="/HomeClient" class="btn btn-primary" role="button">Retour</a>
+            <a href="/HomeAdmin" class="btn btn-primary" role="button">Retour</a>
         </div>
         <Footer></Footer>
     </div>
