@@ -79,8 +79,8 @@
             },
             wrongAnwser () {
                 alert("Mauvaise réponse entrée, veuillez recommencer")
-                console.log(this.randomQuestion + "question");
-                console.log(this.text + "text");
+                //console.log(this.randomQuestion + "question");
+                //console.log(this.text + "text");
             },
             loading () {
                 location.reload();
@@ -99,7 +99,7 @@
                     this.users = response.data[0]; // JSON are parsed automatically.
                     this.answer1 = response.data[0].answer1
                     this.answer2 = response.data[0].answer2
-                    console.log(response.data);
+                    //console.log(response.data);
 
                     if ( response.data[0].roles[0].name === "ROLE_ADMIN") {
                         alert("Vous êtes un administrateur, redirection vers la bonne page")

@@ -207,18 +207,18 @@
                 http
                 /* eslint-disable no-console */
                     .post("/auth/signup", data)
-                    .then(response => {
-                        console.log(response.data);
+                    .then(() => {
+                        //console.log(response.data);
                         this.$router.push('/HomeAdmin');
                         alert("votre nom d'utilisateur est " + data.username)
 
                     })
-                    .catch(e => {
+                    .catch(() => {
                         alert("Impossible de charger les informations. Un des champs obligatoires n'est pas rempli ou est incorrect.");
-                        console.log(e);
-                        console.log(e.request)
-                        console.log(e.config)
-                        console.log(e.message)
+                        //console.log(e);
+                        //console.log(e.request)
+                        //console.log(e.config)
+                        //console.log(e.message)
                     });
             }
         }

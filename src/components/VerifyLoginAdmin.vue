@@ -92,8 +92,8 @@
                     this.users = response.data[0]; // JSON are parsed automatically.
                     this.answer1 = response.data[0].answer1
                     this.answer2 = response.data[0].answer2
-                    console.log("")
-                    console.log(response.data);
+                    //console.log("")
+                    //console.log(response.data);
 
                     if (response.data[0].roles[0].name === "ROLE_USER") {
                         alert("Vous êtes un client, redirection vers la bonne page")

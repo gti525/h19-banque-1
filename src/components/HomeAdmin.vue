@@ -113,15 +113,15 @@
                     alert("Vous devez vous connecter avant d'accéder à cette page")
                     this.$router.push('/');
                 } else {
-                    console.log("test")
+                    //console.log("test")
                     http
                         .get("/usersAll")
                         .then(response => {
                             this.users = response.data; // JSON are parsed automatically.
-                            console.log(response.data);
+                            //console.log(response.data);
                         })
-                        .catch(e => {
-                            console.log(e);
+                        .catch(() => {
+                            //console.log(e);
                         });
                 }
             },

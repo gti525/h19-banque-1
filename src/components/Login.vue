@@ -88,7 +88,7 @@
       },
       loginSuccessful(req) {
         if (!req.data.accessToken) {
-          console.log(req)
+          //console.log(req)
           this.loginFailed()
           return
         }
@@ -96,12 +96,12 @@
         localStorage.token = req.data.accessToken
         localStorage.username = this.username
         localStorage.bypass = '0'
-        console.log(req)
+        //console.log(req)
         this.$router.push('/VerifyLogin')
         location.reload();
       },
       loginFailed() {
-        console.log(this.test)
+        //console.log(this.test)
         alert("Mauvaise information rentrée")
         delete localStorage.token
       },

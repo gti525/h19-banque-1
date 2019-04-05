@@ -81,7 +81,7 @@
       },
       loginSuccessful (req) {
         if (!req.data.accessToken) {
-          console.log(req)
+          //console.log(req)
           this.loginFailed()
           return
         }
@@ -89,7 +89,7 @@
         localStorage.token = req.data.accessToken
         localStorage.username = this.username
         localStorage.bypass = '0'
-        console.log(req)
+        //console.log(req)
         this.$router.push('/VerifyLoginAdmin')
         location.reload();
       },

@@ -7,7 +7,7 @@
             <tr>
                 <th scope="col">Numéro de transaction</th>
                 <th scope="col">Date</th>
-                <th scope="col">Action</th>
+                <th scope="col">Description</th>
                 <th scope="col">Montant</th>
                 <th scope="col">Balance</th>
             </tr>
@@ -68,8 +68,8 @@
 
                         this.transactions = sortByKey(this.transactions, 'id')
                     })
-                    .catch(e => {
-                        console.log(e);
+                    .catch(() => {
+                        //console.log(e);
                     });
             },
             correctTimeDateFormat(transactionDate) {

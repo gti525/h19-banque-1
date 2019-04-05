@@ -81,8 +81,8 @@
                         this.amountResponse = response.data[0].userAccount.amount
 
                     })
-                    .catch(e => {
-                        console.log(e);
+                    .catch(() => {
+                        //console.log(e);
                         alert("Impossible de charger les informations")
                     })
 
@@ -98,38 +98,38 @@
 
                     http
                         .post("/auth/Transfer", { senderAccountNo: this.accountnoResponse, receiverAccountNo: this.receiverAccountNo, amount: this.montant})
-                        .then(response => {
-                            console.log(response.data);
+                        .then(() => {
+                            //console.log(response.data);
                             alert("Le transfert a été effectué avec succès. ")
                             localStorage.bypass = 1
                             this.$router.push('/HomeClient')
                             location.reload();
                         })
-                        .catch(e => {
+                        .catch(() => {
                             alert("Le transfert a échoué. Veuillez-vous assurer de la validité des informations entrées.")
-                            console.log(e);
-                            console.log(e.request)
-                            console.log(e.config)
-                            console.log(e.message)
+                            //console.log(e);
+                            //console.log(e.request)
+                            //console.log(e.config)
+                            //console.log(e.message)
                         });
                 } else {
                     alert("Transfert à Banque2 ")
 
                     http
                         .post("/auth/OtherBankTransfer", { senderAccountNo: this.senderAccountNo, receiverAccountNo: this.receiverAccountNo, amount: this.montant})
-                        .then(response => {
-                            console.log(response.data);
+                        .then(() => {
+                            //console.log(response.data);
                             alert("Le transfert a été effectué avec succès.")
                             localStorage.bypass = 1
                             this.$router.push('/HomeClient')
                             location.reload();
                         })
-                        .catch(e => {
+                        .catch(() => {
                             alert("Le transfert a échoué. Veuillez-vous assurer de la validité des informations entrées.")
-                            console.log(e);
-                            console.log(e.request)
-                            console.log(e.config)
-                            console.log(e.message)
+                            //console.log(e);
+                            //console.log(e.request)
+                            //console.log(e.config)
+                            //console.log(e.message)
                         });
                 }
             }

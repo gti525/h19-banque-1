@@ -171,8 +171,8 @@
                         this.amountavailableResponse = response.data[0].userCreditCard.amountavailable
                         this.amountownedResponse = response.data[0].userCreditCard.amountowned
                     })
-                    .catch(e => {
-                        console.log(e);
+                    .catch(() => {
+                        //console.log(e);
                         alert("Impossible de charger les informations")
                     })
             }

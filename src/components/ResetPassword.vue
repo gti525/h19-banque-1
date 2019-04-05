@@ -95,17 +95,17 @@
                     .then(request => this.modificationSuccessful(request))
                     .catch((e) => this.modificationFailed(e))
             },
-            modificationSuccessful (req) {
+            modificationSuccessful () {
                 alert("Le mot de passe a été changé avec succès.")
-                console.log(req)
+                //console.log(req)
                 this.$router.push('/')
             },
-            modificationFailed (e) {
+            modificationFailed () {
                 alert("Une des réponses est éronnée. Veuillez réessayer.")
-                console.log(e);
-                console.log(e.request)
-                console.log(e.config)
-                console.log(e.message)
+                //console.log(e);
+                //console.log(e.request)
+                //console.log(e.config)
+                //console.log(e.message)
             }
         }
     };

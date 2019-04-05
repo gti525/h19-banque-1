@@ -143,8 +143,8 @@
                 if (this.selected == "Province") {
                     this.bobs = "province"
                 }
-                console.log(this.bobs)
-                console.log(this.username + "text")
+                //console.log(this.bobs)
+                //console.log(this.username + "text")
                 this.validation()
             },
             rechercheTout() {
@@ -166,10 +166,10 @@
                     .get("/auth/searchusers?search=" + this.bobs + ":" + "*" + this.username + "*")
                     .then(response => {
                         this.users = response.data; // JSON are parsed automatically.
-                        console.log(response.data);
+                        //console.log(response.data);
                     })
-                    .catch(e => {
-                        console.log(e);
+                    .catch(() => {
+                        //console.log();
                     });
             }
         },

@@ -7,7 +7,7 @@
             <tr>
                 <th scope="col">Numéro de transaction</th>
                 <th scope="col">Date</th>
-                <th scope="col">Action</th>
+                <th scope="col">Description</th>
                 <th scope="col">Montant</th>
                 <th scope="col">Balance</th>
             </tr>
@@ -65,8 +65,8 @@
                 this.username = this.$route.params.username;
                 this.searchFile = this.$route.params.searchFile;
                 this.textUsername = this.$route.params.textUsername;
-                console.log(this.$route.params)
-                console.log(this.username)
+                //console.log(this.$route.params)
+                //console.log(this.username)
                 if (this.searchFile == "userAccount") {
                     this.accountData()
                 } else {
@@ -77,7 +77,7 @@
         methods: {
             /* eslint-disable no-console */
             accountData() {
-                console.log("test123" + "  " + this.id)
+                //console.log("test123" + "  " + this.id)
                 http
                 //.get("/users/" + this.id)
                     .get("/auth/searchusers?search=" + this.textUsername + ":" + "*" + this.username + "*")
@@ -93,8 +93,8 @@
 
                         this.transactions = sortByKey(this.transactions, 'id')
                     })
-                    .catch(e => {
-                        console.log(e);
+                    .catch(() => {
+                        //console.log(e);
                     });
             },
             correctTimeDateFormat(transactionDate) {

@@ -75,8 +75,8 @@
                     .catch(() => this.modificationSuccessful())
                 //inverser les 2 methodes si le post fonctionne
             },
-            modificationSuccessful (req) {
-                console.log(req)
+            modificationSuccessful () {
+                //console.log(req)
                 this.$router.push('/HomeClient')
             },
             modificationFailed () {
