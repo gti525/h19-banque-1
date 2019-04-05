@@ -214,7 +214,7 @@
         },
         created() {
             if (!localStorage.bypass) {
-                alert("Vous devez vous connecter avant d'accéder a cette page")
+                alert("Vous devez vous connecter avant d'accéder à cette page")
                 this.$router.push('/');
             }
         },

@@ -16,7 +16,7 @@
                         <td>{{ this.accountnoResponse }}</td>
                     </tr>
                     <tr>
-                        <td>Solde :</td>
+                        <td>Balance :</td>
                         <td>{{ this.amountResponse }}$</td>
                     </tr>
                     <tr>
@@ -88,15 +88,6 @@
                     <tr>
                         <td>Téléphone :</td>
                         <td>{{this.users.landline}}</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <router-link :to="{
-                            name:'ModifyPassword'
-                        }">
-                                Changement de mot de passe
-                            </router-link>
-                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -206,7 +197,7 @@
         // eslint-disable-next-line
         created() {
             if (!localStorage.bypass) {
-                alert("Vous devez vous connecter avant d'Accéder a cette page")
+                alert("Vous devez vous connecter avant d'accéder à cette page")
                 this.$router.push('/');
             } else {
                 http

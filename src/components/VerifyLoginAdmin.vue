@@ -8,7 +8,7 @@
             <div class="app-title">Administration</div>
             <div class="login-container">
                 <div class="main-header">
-                    <h2>Vérification de l'accès</h2></div>
+                    <h2>Vérification page administration</h2></div>
                 <div class="form-group">
                     <label>{{this.randomQuestion}}</label>
                     <input @keyup.enter="verify"
@@ -81,7 +81,7 @@
         },
         mounted() {
             if (!localStorage.bypass) {
-                alert("Vous devez vous connecter avant d'Accéder a cette page")
+                alert("Vous devez vous connecter avant d'accéder à cette page")
                 this.$router.push('/');
             }
         },
@@ -96,7 +96,7 @@
                     console.log(response.data);
 
                     if (response.data[0].roles[0].name === "ROLE_USER") {
-                        alert("Vous etes un client, redirection de page dans la bonne page")
+                        alert("Vous êtes un client, redirection vers la bonne page")
                         this.$router.push('/VerifyLogin');
                     }
 

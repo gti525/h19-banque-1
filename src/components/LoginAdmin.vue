@@ -108,21 +108,11 @@
 
 
     .app-title {
-      margin-top: 2.8%;
+      margin-top: 5%;
       text-align: center;
       font-size: 40px;
       font-weight: 600;
       color: #002ec3;
-      font-family: 'Hind Siliguri', sans-serif;
-
-    }
-
-    .app-sub-title {
-      text-align: center;
-      font-size: 16px;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: #d41919;
       font-family: 'Hind Siliguri', sans-serif;
 
     }
@@ -136,7 +126,7 @@
   }
 
   .main-header {
-    margin-top: 20px;
+    margin-top: 60px;
     margin-bottom: 28px;
   }
 </style>

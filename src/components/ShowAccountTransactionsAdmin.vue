@@ -9,7 +9,7 @@
                 <th scope="col">Date</th>
                 <th scope="col">Action</th>
                 <th scope="col">Montant</th>
-                <th scope="col">Solde</th>
+                <th scope="col">Balance</th>
             </tr>
             </thead>
             <tbody>
@@ -23,7 +23,7 @@
             </tbody>
         </table>
         <div class="btn-group" aria-label="Basic example">
-            <a href="/HomeAdmin" class="btn btn-primary" role="button">Retour</a>
+            <a href="/HomeClient" class="btn btn-primary" role="button">Retour</a>
         </div>
         <Footer></Footer>
     </div>
@@ -97,7 +97,7 @@
         /* eslint-disable no-console */
         mounted() {
             if (!localStorage.bypass) {
-                alert("Vous devez vous connecter avant d'Accéder a cette page")
+                alert("Vous devez vous connecter avant d'accéder à cette page")
                 this.$router.push('/');
             } else {
                 this.id = this.$route.params.id;
@@ -187,6 +187,7 @@
 
     .design {
         margin-top: 6%;
+        margin-bottom: 6%;
         text-align: center;
         font-size: 16px;
         font-weight: 600;
