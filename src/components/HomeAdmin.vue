@@ -82,7 +82,7 @@
 
     function goInactive() {
 
-        document.location.href = "http://localhost:4200";
+        document.location.href = "https://banque1-frontend-new.herokuapp.com/";
         delete localStorage.token
         delete localStorage.bypass
         delete localStorage.username
