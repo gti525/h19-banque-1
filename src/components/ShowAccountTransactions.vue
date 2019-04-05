@@ -9,7 +9,7 @@
                 <th scope="col">Date</th>
                 <th scope="col">Action</th>
                 <th scope="col">Montant</th>
-                <th scope="col">Solde</th>
+                <th scope="col">Balance</th>
             </tr>
             </thead>
             <tbody>
@@ -23,7 +23,7 @@
             </tbody>
         </table>
         <div class="btn-group" aria-label="Basic example">
-            <a href="/HomeAdmin" class="btn btn-primary" role="button">Retour</a>
+            <a href="/HomeClient" class="btn btn-primary" role="button">Retour</a>
         </div>
         <Footer></Footer>
     </div>

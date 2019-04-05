@@ -8,7 +8,7 @@
             <div class="app-title">Administration</div>
             <div class="login-container">
                 <div class="main-header">
-                    <h2>Vérification de l'accès</h2></div>
+                    <h2>Vérification page administration</h2></div>
                 <div class="form-group">
                     <label>{{this.randomQuestion}}</label>
                     <input @keyup.enter="verify"

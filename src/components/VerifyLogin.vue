@@ -7,7 +7,7 @@
 
         <div class="container">
             <div class="app-title">
-                Connexion Client
+                Vérification page client
             </div>
             <div class="login-container">
                 <div class="main-header">

@@ -16,7 +16,7 @@
                         <td>{{ this.accountnoResponse }}</td>
                     </tr>
                     <tr>
-                        <td>Solde :</td>
+                        <td>Balance :</td>
                         <td>{{ this.amountResponse }}$</td>
                     </tr>
                     <tr>
